@@ -16,26 +16,50 @@ class ProfileView: UIView {
     
     var delegate: signInButtonDelegate?
     
+    let emailTextField: UITextField = {
+        let userEmail = UITextField()
+            userEmail.placeholder = "  Email"
+            userEmail.font = UIFont.boldSystemFont(ofSize: 20)
+            userEmail.backgroundColor = .white
+            userEmail.layer.cornerRadius = 5.0
+        
+        return userEmail
+    }()
+    
+    let passwordTextField: UITextField = {
+        let userPassword = UITextField()
+            userPassword.placeholder = "  Password"
+            userPassword.font = UIFont.boldSystemFont(ofSize: 20)
+            userPassword.backgroundColor = .white
+            userPassword.layer.cornerRadius = 5.0
+        
+        return userPassword
+    }()
     let button: UIButton = {
         let signInButton = UIButton()
-        signInButton.setTitle("Already a member of the VConnect support community? Sign in please....", for: .normal)
-        signInButton.backgroundColor = UIColor.blue.withAlphaComponent(0.4)
-        signInButton.titleLabel?.numberOfLines = 0
-        signInButton.layer.cornerRadius = 10.0
+        signInButton.setTitle("Login", for: .normal)
+        signInButton.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        signInButton.layer.cornerRadius = 5.0
+        signInButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         signInButton.addTarget(self, action: #selector(signInclicked), for: .touchUpInside)
-
+        
         return signInButton
     }()
     
-    let buttonTwo: UIButton = {
-        let signUpButton = UIButton()
-        signUpButton.setTitle("New organization or specialist? Sign up here ....", for: .normal)
-        signUpButton.backgroundColor = UIColor.blue.withAlphaComponent(0.4)
-        signUpButton.titleLabel?.numberOfLines = 0
-        signUpButton.layer.cornerRadius = 10.0
-        return signUpButton
+    let label: UILabel = {
+        let userLabel = UILabel()
+            userLabel.text = "New User?  Sign up"
+            userLabel.textAlignment = .center
+            userLabel.textColor = .white
+            userLabel.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+            userLabel.layer.cornerRadius = 10.0
+            userLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        return userLabel
         
     }()
+    
+    
   
     
     override init(frame: CGRect) {
@@ -61,20 +85,35 @@ class ProfileView: UIView {
     
     private func  setConstrains() {
         
+        addSubview(emailTextField)
+        addSubview(passwordTextField)
         addSubview(button)
-        addSubview(buttonTwo)
+        addSubview(label)
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
-        buttonTwo.translatesAutoresizingMaskIntoConstraints = false
-        button.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
-        button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -700).isActive = true
-      
-        buttonTwo.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 20).isActive = true
-        buttonTwo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        buttonTwo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        buttonTwo.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -630).isActive = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 195).isActive = true
+        emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        emailTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -490).isActive = true
         
+        passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 15).isActive = true
+        passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        passwordTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -425).isActive = true
+        
+        
+        button.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 15).isActive = true
+        button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -360).isActive = true
+        
+        label.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 15).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -295).isActive = true
+    
         
         
         

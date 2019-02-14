@@ -21,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profilepage = OrganizationProfileViewController()
         let resourcesVCNav = UINavigationController.init(rootViewController: resourcesVC)
         let timeLineVCNav = UINavigationController.init(rootViewController: timeLineVC)
+        let profileNav = UINavigationController.init(rootViewController: profilepage)
         let tabBar = UITabBarController()
-        tabBar.viewControllers = [timeLineVCNav,resourcesVCNav,profilepage]
+        
+        tabBar.viewControllers = [timeLineVCNav,resourcesVCNav,profileNav]
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = tabBar

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class TableView: UIView {
     
@@ -15,6 +16,21 @@ class TableView: UIView {
         resourcesTableView.backgroundColor = UIColor.green.withAlphaComponent(0.9)
     
         return resourcesTableView
+    }()
+    
+    
+    let search: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        searchBar.layer.cornerRadius = 5.0
+        return searchBar
+    }()
+    
+    
+    let map:MKMapView = {
+        let mapView = MKMapView()
+            mapView.layer.cornerRadius = 4.0
+        return mapView
     }()
     
     override init(frame: CGRect) {
@@ -34,10 +50,31 @@ class TableView: UIView {
     
     private func setConstrains(){
         addSubview(tableView)
+        addSubview(search)
+        addSubview(map)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-    }
+        search.translatesAutoresizingMaskIntoConstraints = false
+        map.translatesAutoresizingMaskIntoConstraints = false
+        
+        search.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        search.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        search.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        
+        map.topAnchor.constraint(equalTo: search.bottomAnchor).isActive = true
+        map.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        map.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        map.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
+        
+        tableView.topAnchor.constraint(equalTo: map.bottomAnchor, constant: 5).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        
+        
+        
+        
+  
+}
 }
