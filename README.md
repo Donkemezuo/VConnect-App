@@ -15,6 +15,7 @@ NGOs on the other hand can also use this platform to recruit volunteers and also
 
 Features
 Search using current location or preferred location using CoreLocation and MKMapkit
+
 Alert Notification using UNPushNotification
 Real time conversation 
 Alert system to call police and emergency help lines
