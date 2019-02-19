@@ -10,7 +10,7 @@ import UIKit
 
 class ResourcesView: UIView {
     
-        let collectionView: UICollectionView = {
+          public lazy var collectionView: UICollectionView = {
     
         let cellLayout = UICollectionViewFlowLayout()
         cellLayout.scrollDirection = .vertical

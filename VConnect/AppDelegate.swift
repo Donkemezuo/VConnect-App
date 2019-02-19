@@ -16,23 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let timeLineVC = TimeLineViewController()
-        let resourcesVC = ResourcesViewController()
-        let profilepage = OrganizationProfileViewController()
-        let resourcesVCNav = UINavigationController.init(rootViewController: resourcesVC)
-        let timeLineVCNav = UINavigationController.init(rootViewController: timeLineVC)
-        let profileNav = UINavigationController.init(rootViewController: profilepage)
-        let tabBar = UITabBarController()
-        
-        tabBar.viewControllers = [timeLineVCNav,resourcesVCNav,profileNav]
+       let lauchVC = LaunchViewController()
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = tabBar
+        window?.rootViewController = lauchVC
         
-        timeLineVC.tabBarItem = UITabBarItem.init(title: "", image:UIImage.init(named:"icons8-home_filled" ) , selectedImage: UIImage.init(named:"icons8-home_filled" ))
-        resourcesVCNav.tabBarItem = UITabBarItem.init(title: "", image: UIImage.init(named:"icons8-google_sites" ), selectedImage: UIImage.init(named: "icons8-google_sites"))
-        
-        profilepage.tabBarItem = UITabBarItem.init(title: "", image: UIImage.init(named: "icons8-gender_neutral_user_filled"), selectedImage:UIImage.init(named: "icons8-gender_neutral_user_filled"))
     
         
         // Override point for customization after application launch.

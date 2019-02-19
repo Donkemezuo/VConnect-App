@@ -11,30 +11,37 @@ import UIKit
 class TimeLineViewController: UIViewController {
     let timelineView = TimelineView()
     var barButton = UIBarButtonItem()
+    var postVC = PostViewController()
 
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  UIColor.yellow.withAlphaComponent(0.2)
+        view.backgroundColor =  UIColor.yellow
         self.view.addSubview(timelineView)
-        setupNavigationBarItem()
+     
         timelineView.collectionView.delegate = self
         timelineView.collectionView.dataSource = self
+        UserPost()
        
         
-        // Do any additional setup after loading the view.
     }
     
-    private func setupNavigationBarItem(){
-       barButton = UIBarButtonItem.init(barButtonSystemItem: .camera, target: self, action: #selector(cameraButtonPressed))
-        navigationItem.rightBarButtonItem = barButton
+    
+    
+    
+    private func UserPost() {
+        
+        timelineView.postButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    
+    }
+    
+    @objc private func buttonPressed(){
+        
+        navigationController?.pushViewController(postVC, animated: true)
+        
         
     }
     
-    
-    @objc func cameraButtonPressed(){
-        
-    }
     
     
 }
@@ -48,6 +55,8 @@ extension TimeLineViewController: UICollectionViewDataSource, UICollectionViewDe
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewsCell", for: indexPath) as? TimelineCollectionViewCell else {return UICollectionViewCell()}
         
         cell.textView.text = "We Made it here"
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius =  5.0
         
         return cell
     }

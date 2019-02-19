@@ -7,20 +7,28 @@
 //
 
 import UIKit
+import MapKit
 
 class ResourcesTableViewController: UIViewController {
     
     let resourcesTableView = TableView()
     private var nameHolder: String!
+    private var barbuttonItem: UIBarButtonItem!
+     let dummyArray = ["Yap","Kev","DM","Micheal","Greg","KK","Uber","Late","Wild","After","BB","Cutie","Company","Lord","We","Wining","Get","Help","When","You","Can","Else","You","Will","Die","Yes","I","Said","It","Kill","Mo","eee","rrr","yyy","rrr","qqq","uuu","ooo","mmm","sss","zzz","nnn","lll","iii"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(resourcesTableView)
         resourcesTableView.tableView.delegate = self
         resourcesTableView.tableView.dataSource = self
         view.backgroundColor = UIColor.brown.withAlphaComponent(0.9)
-
-        // Do any additional setup after loading the view.
+    configureLongPress()
+        setupShareButton()
     }
+    private var longPress: UILongPressGestureRecognizer!
+    private var annotations = [MKAnnotation]()
+    
+    
     
     
     init(name: String){
@@ -31,6 +39,63 @@ class ResourcesTableViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
+    
+    
+    private func configureLongPress(){
+        longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        longPress.minimumPressDuration = 0.5
+        resourcesTableView.map.addGestureRecognizer(longPress)
+    }
+   
+    
+    private func makeAnnotations(){
+        resourcesTableView.map.removeAnnotations(annotations)
+        for name in dummyArray {
+            let annotation = MKPointAnnotation()
+            annotation.title = name
+            annotations.append(annotation)
+        }
+        
+        resourcesTableView.map.showAnnotations(annotations, animated: true)
+    }
+    
+    
+    @objc private func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer){
+        
+        var isDone = false
+       // let point = gestureRecognizer.location(in: resourcesTableView.map)
+      //  let coordinate = resourcesTableView.map.convert(point, toCoordinateFrom: resourcesTableView.map)
+        
+        
+        if !isDone {
+            switch gestureRecognizer.state {
+            case .began:
+                isDone = true
+            default:
+                break
+            }
+        }
+    }
+    
+    
+    private func setupShareButton(){
+     
+        barbuttonItem = UIBarButtonItem.init(title: "Share", style: .plain, target: self, action: #selector(shareButtonPressed))
+    navigationItem.rightBarButtonItem =  barbuttonItem
+        
+    }
+    
+    
+    @objc private func shareButtonPressed(){
+        let activityVC = UIActivityViewController(activityItems: dummyArray, applicationActivities: nil)
+        
+        self.present(activityVC, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
 }
 
 extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelegate{
@@ -43,7 +108,7 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = nameHolder
         cell.detailTextLabel?.text = "Children"
         cell.textLabel?.textAlignment = .center
-        navigationItem.title = "Organizations in Abuja for homeless"
+        navigationItem.title = "Organization name"
         cell.backgroundColor = UIColor.brown.withAlphaComponent(0.7)
         return cell 
     }
