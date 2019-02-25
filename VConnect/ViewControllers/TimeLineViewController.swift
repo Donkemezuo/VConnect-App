@@ -62,4 +62,11 @@ extension TimeLineViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destination = TimelineDetailViewController()
+        self.navigationController?.pushViewController(destination, animated: true)
+        
+    }
+    
+    
 }

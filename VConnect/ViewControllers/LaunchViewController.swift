@@ -16,7 +16,9 @@ class LaunchViewController: UIViewController {
     let resourcesVC = UINavigationController.init(rootViewController: ResourcesViewController())
     let profilepage = UINavigationController.init(rootViewController: AdminLoginViewController())
     let postVC = UINavigationController.init(rootViewController: PostViewController())
+    let timeDVC = UINavigationController.init(rootViewController: TimelineDetailViewController())
     let tabBar = UITabBarController()
+    
     
     
     private var tapGesture: UITapGestureRecognizer!

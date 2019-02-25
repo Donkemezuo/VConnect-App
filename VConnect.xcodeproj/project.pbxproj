@@ -19,6 +19,8 @@
 		04272D622218C44C00A42EC4 /* signedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D612218C44C00A42EC4 /* signedInViewController.swift */; };
 		04272D642219188900A42EC4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D632219188900A42EC4 /* PostViewController.swift */; };
 		04272D6622191B2900A42EC4 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D6522191B2900A42EC4 /* PostView.swift */; };
+		0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */; };
+		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
 		049D8E8B221A16E200BB2AB4 /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */; };
 		04C68923220CFD690081355C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C68922220CFD690081355C /* AppDelegate.swift */; };
 		04C6892A220CFD6C0081355C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C68929220CFD6C0081355C /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		04272D612218C44C00A42EC4 /* signedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signedInViewController.swift; sourceTree = "<group>"; };
 		04272D632219188900A42EC4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		04272D6522191B2900A42EC4 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDetailViewController.swift; sourceTree = "<group>"; };
+		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
 		049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethods.swift; sourceTree = "<group>"; };
 		04C6891F220CFD690081355C /* VConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04C68922220CFD690081355C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 				04C68996220E35900081355C /* TimeLineViewController.swift */,
 				040337752217B58C0063960B /* LaunchViewController.swift */,
 				04C68998220E35B00081355C /* ResourcesViewController.swift */,
+				0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */,
 				040AC6D82212196100778A5A /* ResourcesTableViewController.swift */,
 				040AC6DA2212284300778A5A /* DetailViewController.swift */,
 				04272D612218C44C00A42EC4 /* signedInViewController.swift */,
@@ -94,6 +99,7 @@
 				040AC6D4221216CA00778A5A /* TableView.swift */,
 				040337772217B6B50063960B /* LauchView.swift */,
 				040AC6DE2212474200778A5A /* TimelineView.swift */,
+				0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */,
 				04C689A2220FE6940081355C /* SignInView.swift */,
 				04C6899C220E3BAE0081355C /* ResourcesView.swift */,
 				04272D6522191B2900A42EC4 /* PostView.swift */,
@@ -226,6 +232,7 @@
 				040AC6D92212196100778A5A /* ResourcesTableViewController.swift in Sources */,
 				04C68999220E35B00081355C /* ResourcesViewController.swift in Sources */,
 				04C68923220CFD690081355C /* AppDelegate.swift in Sources */,
+				0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */,
 				040AC6D72212190900778A5A /* ResourcesTableViewCell.swift in Sources */,
 				04C68997220E35900081355C /* TimeLineViewController.swift in Sources */,
 				04272D622218C44C00A42EC4 /* signedInViewController.swift in Sources */,
@@ -235,6 +242,7 @@
 				04272D642219188900A42EC4 /* PostViewController.swift in Sources */,
 				04C689A1220FDD280081355C /* LoginView.swift in Sources */,
 				04C689A3220FE6940081355C /* SignInView.swift in Sources */,
+				0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */,
 				040337762217B58C0063960B /* LaunchViewController.swift in Sources */,
 				040AC6DB2212284300778A5A /* DetailViewController.swift in Sources */,
 				049D8E8B221A16E200BB2AB4 /* HelperMethods.swift in Sources */,

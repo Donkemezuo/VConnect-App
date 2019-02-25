@@ -17,8 +17,7 @@ class ResourcesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  UIColor.blue
-       
+        view.backgroundColor =  #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         self.view.addSubview(resourcesView)
         resourcesView.collectionView.dataSource = self
         resourcesView.collectionView.delegate = self
