@@ -27,6 +27,7 @@
 		04433A812224F89E009D6646 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04433A802224F89E009D6646 /* ImageHelper.swift */; };
 		0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */; };
 		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
+		0468839B22272F9400FFD91E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0468839A22272F9400FFD91E /* GoogleService-Info.plist */; };
 		0470C6EF22249CCE00FB795C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6EE22249CCE00FB795C /* TabBarViewController.swift */; };
 		0470C6F12224AFF400FB795C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0470C6F02224AFF400FB795C /* Main.storyboard */; };
 		0470C6F32224B1F700FB795C /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */; };
@@ -41,6 +42,7 @@
 		04C6899F220E3D4A0081355C /* ResourcesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6899E220E3D4A0081355C /* ResourcesCollectionViewCell.swift */; };
 		04C689A1220FDD280081355C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C689A0220FDD280081355C /* LoginView.swift */; };
 		04C689A3220FE6940081355C /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C689A2220FE6940081355C /* SignInView.swift */; };
+		6F0B183F2EDAAEEF67D79B95 /* Pods_VConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0D6E904C469BB137D243622 /* Pods_VConnect.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,7 @@
 		04433A802224F89E009D6646 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDetailViewController.swift; sourceTree = "<group>"; };
 		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
+		0468839A22272F9400FFD91E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0470C6EE22249CCE00FB795C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0470C6F02224AFF400FB795C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +83,9 @@
 		04C6899E220E3D4A0081355C /* ResourcesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesCollectionViewCell.swift; sourceTree = "<group>"; };
 		04C689A0220FDD280081355C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		04C689A2220FE6940081355C /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		1517AF616C1DE3D910D4E87A /* Pods-VConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VConnect.release.xcconfig"; path = "Target Support Files/Pods-VConnect/Pods-VConnect.release.xcconfig"; sourceTree = "<group>"; };
+		E050E8B55D5AF4A063B40A22 /* Pods-VConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VConnect.debug.xcconfig"; path = "Target Support Files/Pods-VConnect/Pods-VConnect.debug.xcconfig"; sourceTree = "<group>"; };
+		E0D6E904C469BB137D243622 /* Pods_VConnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VConnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F0B183F2EDAAEEF67D79B95 /* Pods_VConnect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +171,8 @@
 			children = (
 				04C68921220CFD690081355C /* VConnect */,
 				04C68920220CFD690081355C /* Products */,
+				D113C0809B48C66DB567D00D /* Pods */,
+				BA2DDEE80DD2801A144F5259 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,8 +196,27 @@
 				04C68929220CFD6C0081355C /* Assets.xcassets */,
 				04C6892B220CFD6C0081355C /* LaunchScreen.storyboard */,
 				04C6892E220CFD6C0081355C /* Info.plist */,
+				0468839A22272F9400FFD91E /* GoogleService-Info.plist */,
 			);
 			path = VConnect;
+			sourceTree = "<group>";
+		};
+		BA2DDEE80DD2801A144F5259 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0D6E904C469BB137D243622 /* Pods_VConnect.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D113C0809B48C66DB567D00D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E050E8B55D5AF4A063B40A22 /* Pods-VConnect.debug.xcconfig */,
+				1517AF616C1DE3D910D4E87A /* Pods-VConnect.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,9 +226,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04C68931220CFD6C0081355C /* Build configuration list for PBXNativeTarget "VConnect" */;
 			buildPhases = (
+				3A92D8E31105423C3BBD2E57 /* [CP] Check Pods Manifest.lock */,
 				04C6891B220CFD690081355C /* Sources */,
 				04C6891C220CFD690081355C /* Frameworks */,
 				04C6891D220CFD690081355C /* Resources */,
+				C6E77912F7302E4586657239 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -250,12 +280,74 @@
 			buildActionMask = 2147483647;
 			files = (
 				0470C6F12224AFF400FB795C /* Main.storyboard in Resources */,
+				0468839B22272F9400FFD91E /* GoogleService-Info.plist in Resources */,
 				04C6892D220CFD6C0081355C /* LaunchScreen.storyboard in Resources */,
 				04C6892A220CFD6C0081355C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A92D8E31105423C3BBD2E57 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VConnect-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6E77912F7302E4586657239 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VConnect/Pods-VConnect-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VConnect/Pods-VConnect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		04C6891B220CFD690081355C /* Sources */ = {
@@ -428,6 +520,7 @@
 		};
 		04C68932220CFD6C0081355C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E050E8B55D5AF4A063B40A22 /* Pods-VConnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -446,6 +539,7 @@
 		};
 		04C68933220CFD6C0081355C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1517AF616C1DE3D910D4E87A /* Pods-VConnect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

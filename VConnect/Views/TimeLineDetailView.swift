@@ -33,6 +33,7 @@ class TimeLineDetailView: UIView {
         title.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         title.text = "This will be news title"
         title.font = UIFont.boldSystemFont(ofSize: 20)
+        title.numberOfLines = 0
         return title
     }()
     
@@ -60,38 +61,53 @@ class TimeLineDetailView: UIView {
     }
     
     private func  setConstrains() {
-        addSubview(scrollView)
-        scrollView.addSubview(newsImage)
-        scrollView.addSubview(newsTitle)
-        scrollView.addSubview(newsDescription)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        newsImage.translatesAutoresizingMaskIntoConstraints = false
-        newsTitle.translatesAutoresizingMaskIntoConstraints = false
-        newsDescription.translatesAutoresizingMaskIntoConstraints = false
+        setScrollView()
+        setNewsImage()
+        setNewsTitle()
+        setNewsDescription()
         
-        scrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    }
+    
+    
+    private func setScrollView(){
+        addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
-        
+    }
+    
+    private func setNewsImage(){
+        addSubview(newsImage)
+         newsImage.translatesAutoresizingMaskIntoConstraints = false
         newsImage.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         newsImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-         newsImage.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        newsImage.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         newsImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
-        
+    }
+    
+    private func setNewsTitle(){
+        addSubview(newsTitle)
+        newsTitle.translatesAutoresizingMaskIntoConstraints = false
         newsTitle.topAnchor.constraint(equalTo: newsImage.bottomAnchor).isActive = true
         newsTitle.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         newsTitle.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         newsTitle.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.08).isActive = true
-        
+    }
+    
+    private func setNewsDescription(){
+        addSubview(newsDescription)
+        newsDescription.translatesAutoresizingMaskIntoConstraints = false
         newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor).isActive = true
         newsDescription.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         newsDescription.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         newsDescription.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-       
-        
     }
+    
+    
+    
     
 }
 
