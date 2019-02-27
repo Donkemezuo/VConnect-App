@@ -7,19 +7,19 @@
 //
 
 import UIKit
-
 class signedInViewController: UIViewController {
     let signInPage = SignInView()
     private var imagePicker: UIImagePickerController!
     private var barbuttonItem:UIBarButtonItem!
+    private var tap:UITapGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(signInPage)
         view.backgroundColor = UIColor.red
         navigationItem.title = "PROFILE"
         settingButton()
-        
-        
+        setupProfileImage()
     }
 
 
@@ -32,13 +32,19 @@ class signedInViewController: UIViewController {
     
     @objc private func setProfile(){
         
-        navigationController?.pushViewController(ProfileTableViewController(), animated: true)
-        
-        
+        let storybooard = UIStoryboard(name: "Main", bundle: nil)
+        let profileTVC = storybooard.instantiateViewController(withIdentifier: "ProfileTableViewController")
+        navigationController?.pushViewController(profileTVC, animated: true)
+    }
+    
+    private func setupProfileImage(){
+        signInPage.profileImage.isUserInteractionEnabled = true
+        tap = UITapGestureRecognizer(target: self, action: #selector(imageLibrayAccess))
+        signInPage.profileImage.addGestureRecognizer(tap)
     }
     
     
-    func imageLibrayAccess(){
+    @objc private func imageLibrayAccess(){
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         if !UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -47,27 +53,20 @@ class signedInViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
 
-    @objc private func changeImage(){
-
-            let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        let photoAlert = UIAlertAction(title: "Photo Library", style: .default) { (alert: UIAlertAction) in
-
-            self.imageLibrayAccess()
-        }
-
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (alert) in
-            self.dismiss(animated: true, completion: nil)
-        }
-
-        alert.addAction(photoAlert)
-        alert.addAction(cancel)
-
-        present(alert, animated: true , completion: nil)
-
-
-
-    }
-
+//    @objc private func changeImage(){
+//            let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+//        let photoAlert = UIAlertAction(title: "Photo Library", style: .default) { (alert: UIAlertAction) in
+//
+//            //self.imageLibrayAccess()
+//        }
+//
+//        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (alert) in
+//            self.dismiss(animated: true, completion: nil)
+//        }
+//        alert.addAction(photoAlert)
+//        alert.addAction(cancel)
+//        present(alert, animated: true , completion: nil)
+//    }
 }
 
 extension signedInViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -77,7 +76,7 @@ extension signedInViewController: UIImagePickerControllerDelegate, UINavigationC
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-         //  signInPage.profileImage.setBackgroundImage(image, for: .normal)
+       signInPage.profileImage.image = image
         } else {
             print("No image")
         }

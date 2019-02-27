@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+@IBDesignable
 class SignInView: UIView {
 
     public lazy var profileView: UIView = {
@@ -19,15 +19,14 @@ class SignInView: UIView {
     public lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
-        imageView.layer.cornerRadius = imageView.frame.size.width/2
-        clipsToBounds = true
-        imageView.layer.masksToBounds = true
+        //imageView.layer.cornerRadius = imageView.frame.size.width/2
+        //clipsToBounds = true
+        //imageView.layer.masksToBounds = true
         return imageView
     }()
     
     public lazy var organizationName: UILabel = {
         let label = UILabel()
-        label.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.text = "The name of organization goes here"
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.numberOfLines = 0
@@ -45,9 +44,18 @@ class SignInView: UIView {
     
     public lazy var adminActivities: UILabel = {
         let button = UILabel()
+            button.text = "User activities are suppose to be below"
+            button.textAlignment = .center
             button.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
         return button
     }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        profileImage.layer.cornerRadius = profileImage.bounds.width/2
+        profileImage.layer.masksToBounds = true
+        profileImage.clipsToBounds = true
+    }
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -80,12 +88,14 @@ class SignInView: UIView {
     }
     private func setupProfileImage(){
         addSubview(profileImage)
+        
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         
-        profileImage.topAnchor.constraint(equalTo: profileView.topAnchor, constant: 150).isActive = true
-    profileImage.leadingAnchor.constraint(equalTo: profileView.leadingAnchor, constant: 130).isActive = true
-    profileImage.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -130).isActive = true
-    profileImage.bottomAnchor.constraint(equalTo: profileView.bottomAnchor, constant: -85).isActive = true
+        profileImage.topAnchor.constraint(equalTo: topAnchor, constant: 80).isActive = true
+        profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 130).isActive = true
+        //profileImage.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -130).isActive = true
+        profileImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        profileImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
     private func setupOrganizationName(){
         addSubview(organizationName)

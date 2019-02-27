@@ -139,7 +139,7 @@ class LoginView: UIView {
     }
     
     private func setUpAccountStateLabel(){
-        loginCredentialsView.addSubview(newUser)
+        addSubview(newUser)
         newUser.translatesAutoresizingMaskIntoConstraints = false
         newUser.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 5).isActive = true
         newUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
