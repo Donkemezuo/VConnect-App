@@ -12,15 +12,6 @@ class LaunchViewController: UIViewController {
     
     let lauchView = LauchView()
     
-    let timeLineVC = UINavigationController.init(rootViewController: TimeLineViewController())
-    let resourcesVC = UINavigationController.init(rootViewController: ResourcesViewController())
-    let profilepage = UINavigationController.init(rootViewController: AdminLoginViewController())
-    let postVC = UINavigationController.init(rootViewController: PostViewController())
-    let timeDVC = UINavigationController.init(rootViewController: TimelineDetailViewController())
-    let tabBar = UITabBarController()
-    
-    
-    
     private var tapGesture: UITapGestureRecognizer!
 
 
@@ -30,7 +21,6 @@ class LaunchViewController: UIViewController {
         view.backgroundColor = .green
         setUpTabView()
     }
-    
     func setUpTabView() {
       
         lauchView.addminButton.isUserInteractionEnabled = true
@@ -44,24 +34,15 @@ class LaunchViewController: UIViewController {
     }
     
     @objc private func addminButtonPressed(gesture: UITapGestureRecognizer){
-        tabBar.viewControllers = [profilepage,timeLineVC,resourcesVC]
-        tabBar.modalPresentationStyle = .overFullScreen
-       present(tabBar, animated: true)
-        
-        timeLineVC.tabBarItem = UITabBarItem.init(title: "", image:UIImage.init(named:"icons8-home_filled" ) , selectedImage: UIImage.init(named:"icons8-home_filled" ))
-        
-        resourcesVC.tabBarItem = UITabBarItem.init(title: "", image: UIImage.init(named:"icons8-google_sites" ), selectedImage: UIImage.init(named: "icons8-google_sites"))
-        
-        profilepage.tabBarItem = UITabBarItem.init(title: "", image: UIImage.init(named: "icons8-gender_neutral_user_filled"), selectedImage:UIImage.init(named: "icons8-gender_neutral_user_filled"))
+       present(AdminLoginViewController(), animated: true, completion: nil)
+
     }
     
     @objc private func exploreButtonPressed(gesture: UITapGestureRecognizer){
-        tabBar.viewControllers = [timeLineVC,resourcesVC]
-        tabBar.modalPresentationStyle = .overFullScreen
         
-       present(tabBar, animated: true)
-        timeLineVC.tabBarItem = UITabBarItem.init(title: "", image:UIImage.init(named:"icons8-home_filled" ) , selectedImage: UIImage.init(named:"icons8-home_filled" ))
-        resourcesVC.tabBarItem = UITabBarItem.init(title: "", image: UIImage.init(named:"icons8-google_sites" ), selectedImage: UIImage.init(named: "icons8-google_sites"))
+     let exploreTab = TabBarViewController(accountType: AccountType.user)
+      present(exploreTab, animated: true)
+
     }
 
 }

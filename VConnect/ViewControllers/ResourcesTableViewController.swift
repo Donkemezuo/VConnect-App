@@ -77,7 +77,6 @@ class ResourcesTableViewController: UIViewController {
         }
     }
     
-    
     private func setupShareButton(){
      
         barbuttonItem = UIBarButtonItem.init(title: "Share", style: .plain, target: self, action: #selector(shareButtonPressed))
@@ -85,16 +84,12 @@ class ResourcesTableViewController: UIViewController {
         
     }
     
-    
     @objc private func shareButtonPressed(){
         let activityVC = UIActivityViewController(activityItems: dummyArray, applicationActivities: nil)
         
         self.present(activityVC, animated: true, completion: nil)
         
     }
-    
-    
-    
     
 }
 

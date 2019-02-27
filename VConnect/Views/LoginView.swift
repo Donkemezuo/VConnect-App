@@ -17,11 +17,10 @@ class LoginView: UIView {
         let backgroundImageView = UIImageView()
         backgroundImageView.image = UIImage.init(named: "logiin")
         return backgroundImageView
-        
     }()
     
     
-    public lazy var view: UIView = {
+    public lazy var loginCredentialsView: UIView = {
         let loginCredentialsView = UIView()
         return loginCredentialsView
     }()
@@ -33,7 +32,6 @@ class LoginView: UIView {
             userEmail.font = UIFont.boldSystemFont(ofSize: 20)
             userEmail.backgroundColor = .white
             userEmail.layer.cornerRadius = 5.0
-        
         return userEmail
     }()
     
@@ -43,7 +41,6 @@ class LoginView: UIView {
             userPassword.font = UIFont.boldSystemFont(ofSize: 20)
             userPassword.backgroundColor = .white
             userPassword.layer.cornerRadius = 5.0
-        
         return userPassword
     }()
       public lazy var loginButton: UIButton = {
@@ -86,64 +83,69 @@ class LoginView: UIView {
         setConstrains()
     }
     
-    
-        
-    
     private func  setConstrains() {
-        
+        setupImageView()
+        setupLCView()
+        setEmailTextField()
+        setUpPasswordTextField()
+        setUploginButton()
+        setUpAccountStateLabel()
+    }
+    
+    private func setupImageView() {
         addSubview(imageView)
-        addSubview(view)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(loginButton)
-        view.addSubview(newUser)
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        newUser.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
-        view.topAnchor.constraint(equalTo: topAnchor, constant: 425).isActive = true
-        view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
-        
-        
+    }
+    
+    private func setupLCView() {
+        addSubview(loginCredentialsView)
+        loginCredentialsView.translatesAutoresizingMaskIntoConstraints = false
+        loginCredentialsView.topAnchor.constraint(equalTo: topAnchor, constant: 350).isActive = true
+        loginCredentialsView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        loginCredentialsView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        loginCredentialsView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    }
+    
+    private func setEmailTextField(){
+        addSubview(emailTextField)
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         emailTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95).isActive = true
         emailTextField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05).isActive = true
-        
+    }
+    
+    private func setUpPasswordTextField(){
+        addSubview(passwordTextField)
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95).isActive = true
         passwordTextField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.05).isActive = true
         passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        
+    }
+    
+    
+    private func setUploginButton(){
+        addSubview(loginButton)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70).isActive = true
         loginButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.06).isActive = true
-        
+    }
+    
+    private func setUpAccountStateLabel(){
+        loginCredentialsView.addSubview(newUser)
+        newUser.translatesAutoresizingMaskIntoConstraints = false
         newUser.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 5).isActive = true
         newUser.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
         newUser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-        
-        
-        
-        
-        
-        
-
-        
-        
     }
+    
+ 
     
 }

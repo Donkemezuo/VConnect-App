@@ -13,6 +13,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
       public lazy var textView:UITextView = {
         let textView = UITextView()
         textView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1).withAlphaComponent(0.5)
+        textView.font =  UIFont.boldSystemFont(ofSize: 20)
         return textView
     }()
     
@@ -54,18 +55,18 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         poster.translatesAutoresizingMaskIntoConstraints = false
       
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.70).isActive = true
         
         textView.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-        textView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        textView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        textView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        textView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.20).isActive = true
         
         poster.topAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
-        poster.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        poster.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        poster.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
+        poster.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         poster.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
  
     }

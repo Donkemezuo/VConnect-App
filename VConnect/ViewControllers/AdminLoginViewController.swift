@@ -14,38 +14,35 @@ enum AccountloginState {
     case existingAccount
 }
 
-
 protocol LoginViewDelegate: AnyObject {
     func loginButtonPressed( _loginView: AdminLoginViewController, accountState: AccountloginState)
 }
 
 class AdminLoginViewController: UIViewController {
-  
     public var delegate: LoginViewDelegate?
-    
     let profilePage = LoginView()
     private var tapGesture: UITapGestureRecognizer!
     private var loginState = AccountloginState.newAccount
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
          view.backgroundColor =  UIColor.green
         self.view.addSubview(profilePage)
         createAccountClicked()
+        profilePage.emailTextField.isEnabled = true
         profilePage.emailTextField.delegate = self
         profilePage.passwordTextField.delegate = self
-        registerKeyboardNotification()
+        //registerKeyboardNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        registerKeyboardNotification()
+        //registerKeyboardNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        unregisterKeyboardNotification()
+       //unregisterKeyboardNotification()
     }
     deinit {
         
@@ -85,11 +82,9 @@ class AdminLoginViewController: UIViewController {
         
         // TODO:
         // Send the user login credentials for authentification
-        // Send
-        
-        signedInViewController().modalPresentationStyle = .overFullScreen
-        signedInViewController().modalTransitionStyle = .crossDissolve
-        present(signedInViewController(), animated: true, completion: nil)
+       
+        let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
+        present(signedInAdmin, animated: true)
     }
     
     private func registerKeyboardNotification(){
@@ -106,18 +101,20 @@ class AdminLoginViewController: UIViewController {
     @objc private func willShowKeyboard(notification: Notification){
         guard let info = notification.userInfo, let keyboardFrame = info["UIKeyboardFrameEndUserInfoKey"] as? CGRect else {return}
         
-        profilePage.view.transform = CGAffineTransform.init(translationX: 0, y: -keyboardFrame.height/2)
+        profilePage.loginCredentialsView.transform = CGAffineTransform.init(translationX: 0, y: -keyboardFrame.height/2)
     }
     
     @objc private func willHideKeyboard(notification: Notification){
-        profilePage.view.transform = CGAffineTransform.identity
+        profilePage.loginCredentialsView.transform = CGAffineTransform.identity
     }
 }
 
 extension AdminLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        profilePage.emailTextField.resignFirstResponder()
-        profilePage.passwordTextField.resignFirstResponder()
+//        profilePage.emailTextField.resignFirstResponder()
+//        profilePage.passwordTextField.resignFirstResponder()
         return true
     }
 }
+
+
