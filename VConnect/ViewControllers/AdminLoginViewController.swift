@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-
 enum AccountloginState {
     case newAccount
     case existingAccount
@@ -67,7 +65,6 @@ class AdminLoginViewController: UIViewController {
             profilePage.newUser.text = "Don't have an account? Sign up"
         }
     }
-    
     
     @objc func signInButtonClicked() {
         
