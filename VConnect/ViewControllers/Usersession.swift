@@ -13,29 +13,34 @@ protocol UserSessionAccountCreationDelegate: AnyObject {
     func didRecieveErrorCreatingAccount(_ userSession: UserSession, error: Error)
 }
 
+protocol UserSessionSignedDelegate: AnyObject{
+     func didSignInExistingUser(_ usersession: UserSession, user: User)
+    func didRecieveSignInError(_ usersession: UserSession, error: Error)
+}
+
 final class UserSession {
     
-    weak var userSessionAccountDelegate: UserSessionAccountCreationDelegate!
+    weak var userSessionAccountDelegate: UserSessionAccountCreationDelegate?
+    weak var userSessionSignInDelegate: UserSessionSignedDelegate?
     
     
     public func createOrganization(email: String, password: String){
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
-            self.userSessionAccountDelegate.didRecieveErrorCreatingAccount(self, error: error)
+                self.userSessionAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)
             } else if let authResult = authResult {
-                self.userSessionAccountDelegate.didCreateAccount(self, user: authResult.user)
+                self.userSessionAccountDelegate?.didCreateAccount(self, user: authResult.user)
             }
         }
     }
     
     public func signInExistingUser(email: String, password: String){
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
             if let error = error {
-                //self.
+               self.userSessionSignInDelegate?.didRecieveSignInError(self, error: error)
+            } else if let authDataResult = authDataResult {
+                self.userSessionSignInDelegate?.didSignInExistingUser(self, user: authDataResult.user)
             }
         }
     }
-    
-    
-    
 }

@@ -7,11 +7,17 @@
 //
 
 import UIKit
-
-
+enum AccountloginState {
+    case newAccount
+    case existingAccount
+}
+protocol LoginViewDelegate: AnyObject {
+    func loginButtonPressed( _loginView: LoginView, accountState: AccountloginState)
+}
 class LoginView: UIView {
-    
-    
+    public var delegate: LoginViewDelegate?
+    private var tapGesture: UITapGestureRecognizer!
+    private var loginState = AccountloginState.newAccount
     
     public lazy var imageView: UIImageView = {
         let backgroundImageView = UIImageView()
@@ -90,7 +96,31 @@ class LoginView: UIView {
         setUpPasswordTextField()
         setUploginButton()
         setUpAccountStateLabel()
+        createAccountClicked()
     }
+    
+    private func createAccountClicked(){
+        newUser.isUserInteractionEnabled = true
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(gesture:)))
+        newUser.addGestureRecognizer(tapGesture)
+        loginButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func handleTap(gesture: UITapGestureRecognizer){
+        loginState = loginState == .newAccount ? .existingAccount : .newAccount
+        switch loginState {
+        case .newAccount:
+            loginButton.setTitle("Create", for: .normal)
+            newUser.text = "Log into your account"
+        case .existingAccount:
+            loginButton.setTitle("Login", for: .normal)
+            newUser.text = "Don't have an account? Sign up"
+        }
+    }
+    
+    @objc private func signInButtonClicked(){
+    delegate?.loginButtonPressed(_loginView: self, accountState: loginState)
+        }
     
     private func setupImageView() {
         addSubview(imageView)

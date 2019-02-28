@@ -29,6 +29,8 @@
 		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
 		0468839B22272F9400FFD91E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0468839A22272F9400FFD91E /* GoogleService-Info.plist */; };
 		0468839D222741C500FFD91E /* Usersession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839C222741C500FFD91E /* Usersession.swift */; };
+		0468839F22285D7700FFD91E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839E22285D7700FFD91E /* DatabaseManager.swift */; };
+		046883A1222861E400FFD91E /* OrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046883A0222861E400FFD91E /* OrganizationModel.swift */; };
 		0470C6EF22249CCE00FB795C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6EE22249CCE00FB795C /* TabBarViewController.swift */; };
 		0470C6F12224AFF400FB795C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0470C6F02224AFF400FB795C /* Main.storyboard */; };
 		0470C6F32224B1F700FB795C /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */; };
@@ -69,6 +71,8 @@
 		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
 		0468839A22272F9400FFD91E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0468839C222741C500FFD91E /* Usersession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usersession.swift; sourceTree = "<group>"; };
+		0468839E22285D7700FFD91E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		046883A0222861E400FFD91E /* OrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationModel.swift; sourceTree = "<group>"; };
 		0470C6EE22249CCE00FB795C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0470C6F02224AFF400FB795C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				04433A742224E911009D6646 /* GoogleNewsModel.swift */,
+				046883A0222861E400FFD91E /* OrganizationModel.swift */,
 				04433A762224EC66009D6646 /* GlobalNewsAPI.swift */,
 				04433A802224F89E009D6646 /* ImageHelper.swift */,
 				04433A782224EE7B009D6646 /* NetworkHelper.swift */,
@@ -193,6 +198,7 @@
 				049D8E89221A16C100BB2AB4 /* Supporting files */,
 				04C68922220CFD690081355C /* AppDelegate.swift */,
 				049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */,
+				0468839E22285D7700FFD91E /* DatabaseManager.swift */,
 				04433A732224E8DD009D6646 /* Models */,
 				040AC6D22212158E00778A5A /* Views */,
 				040AC6CF2212152700778A5A /* ViewControllers */,
@@ -366,6 +372,7 @@
 				04433A7D2224EEBE009D6646 /* AppErrors.swift in Sources */,
 				04C68923220CFD690081355C /* AppDelegate.swift in Sources */,
 				04433A752224E911009D6646 /* GoogleNewsModel.swift in Sources */,
+				046883A1222861E400FFD91E /* OrganizationModel.swift in Sources */,
 				0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */,
 				040AC6D72212190900778A5A /* ResourcesTableViewCell.swift in Sources */,
 				04C68997220E35900081355C /* TimeLineViewController.swift in Sources */,
@@ -379,6 +386,7 @@
 				04433A772224EC66009D6646 /* GlobalNewsAPI.swift in Sources */,
 				04C689A3220FE6940081355C /* SignInView.swift in Sources */,
 				0470C6EF22249CCE00FB795C /* TabBarViewController.swift in Sources */,
+				0468839F22285D7700FFD91E /* DatabaseManager.swift in Sources */,
 				0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */,
 				040337762217B58C0063960B /* LaunchViewController.swift in Sources */,
 				040AC6DB2212284300778A5A /* DetailViewController.swift in Sources */,
