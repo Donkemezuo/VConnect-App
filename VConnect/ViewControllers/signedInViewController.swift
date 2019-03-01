@@ -13,7 +13,6 @@ class signedInViewController: UIViewController {
     private var imagePicker: UIImagePickerController!
     private var barbuttonItem:UIBarButtonItem!
     private var tap:UITapGestureRecognizer!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(signInPage)
@@ -24,14 +23,13 @@ class signedInViewController: UIViewController {
         usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
         usersession.userSessionSignOutDelegate = self
          logOut()
+        
     }
-
-
+    
     private func settingButton(){
     
         barbuttonItem = UIBarButtonItem.init(image: UIImage.init(named: "icons8-settings"), style: .plain, target: self, action: #selector(setProfile))
         navigationItem.leftBarButtonItem = barbuttonItem
-        
     }
     
     private func logOut(){
@@ -66,20 +64,6 @@ class signedInViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
 
-//    @objc private func changeImage(){
-//            let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-//        let photoAlert = UIAlertAction(title: "Photo Library", style: .default) { (alert: UIAlertAction) in
-//
-//            //self.imageLibrayAccess()
-//        }
-//
-//        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (alert) in
-//            self.dismiss(animated: true, completion: nil)
-//        }
-//        alert.addAction(photoAlert)
-//        alert.addAction(cancel)
-//        present(alert, animated: true , completion: nil)
-//    }
 }
 
 extension signedInViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
