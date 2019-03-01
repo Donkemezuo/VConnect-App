@@ -14,6 +14,13 @@ class ResourcesViewController: UIViewController {
     
     let dummyArray = ["Yap","Kev","DM","Micheal","Greg","KK","Uber","Late","Wild","After","BB","Cutie","Company","Lord","We","Wining","Get","Help","When","You","Can","Else","You","Will","Die","Yes","I","Said","It","Kill","Mo","eee","rrr","yyy","rrr","qqq","uuu","ooo","mmm","sss","zzz","nnn","lll","iii"]
     
+    private var organizations = [Organization](){
+      
+        didSet {
+            
+        }
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +28,32 @@ class ResourcesViewController: UIViewController {
         self.view.addSubview(resourcesView)
         resourcesView.collectionView.dataSource = self
         resourcesView.collectionView.delegate = self
+        getOrganizationData()
         
     }
     
-
+    
+    
+    private func getOrganizationData(){
+        DatabaseManager.firebaseDataBase.collection(DataBaseKeys.organizationCollectionKey).addSnapshotListener(includeMetadataChanges: true) { (querySnapShot, error) in
+            if let snapshot = querySnapShot {
+                var organizations = [Organization]()
+                for document in snapshot.documents {
+                    let organization = Organization.init(dict: document.data())
+                    print(document.data())
+                    organizations.append(organization)
+                }
+                self.organizations = organizations
+                print("Found \(organizations.count) race reviews")
+            }
+        }
+    }
+    
 }
+
+
+
+
 
 extension ResourcesViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -11,14 +11,21 @@ import UIKit
 class ProfileTableViewController: UITableViewController {
     
     private var barButton:UIBarButtonItem!
-    
-    
+    private var jobs = ["Administrator","Volunteer"]
+    private var tap: UITapGestureRecognizer!
+    private var pickerView: UIPickerView!
     // Admin info
     @IBOutlet weak var adminFirstName: UITextView!
     @IBOutlet weak var adminLastName: UITextView!
     @IBOutlet weak var adminJobTitle: UILabel!
     
     
+//    lazy var pickerView:UIPickerView = {
+//        let pickerView = UIPickerView()
+//        pickerView.backgroundColor = .white
+//
+//        return pickerView
+//    }()
     // Organization Info
     @IBOutlet weak var organizationName: UITextView!
     @IBOutlet weak var organizationPhoneNumber: UITextView!
@@ -44,8 +51,10 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1).withAlphaComponent(0.5)
+    //pickerView.delegate = self
+        //pickerView.dataSource = self
         saveButtonSetup()
-       
+        //setupAdminJobTitle()
     }
     
     
@@ -84,6 +93,38 @@ DatabaseManager.createOrganizationToDatabase(organization: organization)
         showAlert(title: "Successfully registered organization", message: "Successfully registered organization")
     }
     
+//
+//    private func setupAdminJobTitle(){
+//        tap = UITapGestureRecognizer(target: self, action: #selector(jobTitletapped))
+//        adminJobTitle.addGestureRecognizer(tap)
+//    }
+//
+//    @objc private func jobTitletapped(){
+//        print("yyyyyyooo")
+//    }
+
+    
 }
+//
+//extension ProfileTableViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return jobs.count
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        adminJobTitle.text = jobs[row]
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return jobs[row]
+//    }
+//
+//
+//}
+
 
 

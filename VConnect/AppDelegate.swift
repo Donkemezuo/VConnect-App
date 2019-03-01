@@ -14,19 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var usersession: UserSession!
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-       let lauchVC = LaunchViewController()
-        window = UIWindow.init(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        window?.rootViewController = lauchVC
         
         FirebaseApp.configure()
         usersession = UserSession()
+       let lauchVC = LaunchViewController()
+        window = UIWindow.init(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
         
-    
+        if let _ = usersession.getCurrentUser() {
+            window?.rootViewController = TabBarViewController(accountType: AccountType.admin )
+        } else {
+            window?.rootViewController = lauchVC
+        }
         
         // Override point for customization after application launch.
         return true

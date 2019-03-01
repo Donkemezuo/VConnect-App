@@ -31,6 +31,7 @@
 		0468839D222741C500FFD91E /* Usersession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839C222741C500FFD91E /* Usersession.swift */; };
 		0468839F22285D7700FFD91E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839E22285D7700FFD91E /* DatabaseManager.swift */; };
 		046883A1222861E400FFD91E /* OrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046883A0222861E400FFD91E /* OrganizationModel.swift */; };
+		046883A32229E4EC00FFD91E /* DataBaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046883A22229E4EC00FFD91E /* DataBaseKeys.swift */; };
 		0470C6EF22249CCE00FB795C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6EE22249CCE00FB795C /* TabBarViewController.swift */; };
 		0470C6F12224AFF400FB795C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0470C6F02224AFF400FB795C /* Main.storyboard */; };
 		0470C6F32224B1F700FB795C /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */; };
@@ -73,6 +74,7 @@
 		0468839C222741C500FFD91E /* Usersession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usersession.swift; sourceTree = "<group>"; };
 		0468839E22285D7700FFD91E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		046883A0222861E400FFD91E /* OrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationModel.swift; sourceTree = "<group>"; };
+		046883A22229E4EC00FFD91E /* DataBaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseKeys.swift; sourceTree = "<group>"; };
 		0470C6EE22249CCE00FB795C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0470C6F02224AFF400FB795C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				04C68922220CFD690081355C /* AppDelegate.swift */,
 				049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */,
 				0468839E22285D7700FFD91E /* DatabaseManager.swift */,
+				046883A22229E4EC00FFD91E /* DataBaseKeys.swift */,
 				04433A732224E8DD009D6646 /* Models */,
 				040AC6D22212158E00778A5A /* Views */,
 				040AC6CF2212152700778A5A /* ViewControllers */,
@@ -387,6 +390,7 @@
 				04C689A3220FE6940081355C /* SignInView.swift in Sources */,
 				0470C6EF22249CCE00FB795C /* TabBarViewController.swift in Sources */,
 				0468839F22285D7700FFD91E /* DatabaseManager.swift in Sources */,
+				046883A32229E4EC00FFD91E /* DataBaseKeys.swift in Sources */,
 				0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */,
 				040337762217B58C0063960B /* LaunchViewController.swift in Sources */,
 				040AC6DB2212284300778A5A /* DetailViewController.swift in Sources */,
