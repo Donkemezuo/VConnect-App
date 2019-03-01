@@ -17,7 +17,7 @@ protocol LoginViewDelegate: AnyObject {
 class LoginView: UIView {
     public var delegate: LoginViewDelegate?
     private var tapGesture: UITapGestureRecognizer!
-    private var loginState = AccountloginState.newAccount
+    private var loginState = AccountloginState.existingAccount
     
     public lazy var imageView: UIImageView = {
         let backgroundImageView = UIImageView()

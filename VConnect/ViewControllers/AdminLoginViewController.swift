@@ -12,10 +12,10 @@ import FirebaseAuth
 class AdminLoginViewController: UIViewController {
     let profilePage = LoginView()
     private var usersession: UserSession!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         view.backgroundColor =  UIColor.green
+        view.backgroundColor =  UIColor.green
         self.view.addSubview(profilePage)
         //createAccountClicked()
         profilePage.emailTextField.isEnabled = true
@@ -23,12 +23,15 @@ class AdminLoginViewController: UIViewController {
         profilePage.passwordTextField.delegate = self
         usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
         usersession.userSessionAccountDelegate = self
+        usersession.userSessionSignInDelegate = self
         profilePage.delegate = self
     }
     
-    
-   
+    func presentInitialTabBarController() {
+        let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
+        present(signedInAdmin, animated: true)
     }
+}
 
 
 
@@ -41,7 +44,6 @@ extension AdminLoginViewController: UITextFieldDelegate {
 
 extension AdminLoginViewController: LoginViewDelegate {
     func loginButtonPressed(_loginView: LoginView, accountState: AccountloginState) {
-        let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
         guard let userEmail = profilePage.emailTextField.text,
             let userPassword = profilePage.passwordTextField.text,
             !userPassword.isEmpty,
@@ -53,11 +55,9 @@ extension AdminLoginViewController: LoginViewDelegate {
         switch accountState {
         case .newAccount:
             usersession.createOrganization(email: userEmail, password: userPassword)
-            present(signedInAdmin, animated: true)
-
+            
         case .existingAccount:
             usersession.signInExistingUser(email: userEmail, password: userPassword)
-            present(signedInAdmin, animated: true)
         }
     }
 }
@@ -70,18 +70,25 @@ extension AdminLoginViewController: UserSessionAccountCreationDelegate{
     func didCreateAccount(_ userSession: UserSession, user: User) {
         if let email = user.email {
             showAlert(title: "Account Created", message: "Account Created using \(email)") { (alertController) in
-                let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
+                let okAction = UIAlertAction(title: "Ok", style: .default) { [unowned self] _ in
+                    self.presentInitialTabBarController()
                 }
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true)
             }
-            
         }
-        
     }
-    
 }
 
+extension AdminLoginViewController: UserSessionSignedDelegate {
+    func didSignInExistingUser(_ usersession: UserSession, user: User) {
+        presentInitialTabBarController()
+    }
+    
+    func didRecieveSignInError(_ usersession: UserSession, error: Error) {
+        showAlert(title: "Login Error", message: "Check email or password")
+    }
+}
 
 
 

@@ -26,7 +26,7 @@ class TabBarViewController: UITabBarController {
         
         switch accountType {
         case .admin:
-            viewControllers = [timeLineVC, resourcesVC,signedInVC]
+            viewControllers = [signedInVC, timeLineVC,resourcesVC]
              timeLineVC.tabBarItem = UITabBarItem.init(title: "TimeLine", image: UIImage.init(named: "icons8-google_sites"), selectedImage: UIImage.init(named: "icons8-google_sites"))
            
             resourcesVC.tabBarItem = UITabBarItem.init(title: "Resources", image: UIImage.init(named: "icons8-home_filled"), selectedImage:  UIImage.init(named: "icons8-home_filled"))

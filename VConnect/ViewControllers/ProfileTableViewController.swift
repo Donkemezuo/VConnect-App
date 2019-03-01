@@ -10,10 +10,14 @@ import UIKit
 
 class ProfileTableViewController: UITableViewController {
     
+    private var barButton:UIBarButtonItem!
+    
+    
     // Admin info
     @IBOutlet weak var adminFirstName: UITextView!
     @IBOutlet weak var adminLastName: UITextView!
-    @IBOutlet weak var adminJobTitle: UIView!
+    @IBOutlet weak var adminJobTitle: UILabel!
+    
     
     // Organization Info
     @IBOutlet weak var organizationName: UITextView!
@@ -27,6 +31,7 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var organizationGeoPoliticalZone: UITextView!
     @IBOutlet weak var organizationWebsite: UITextView!
     @IBOutlet weak var servicesOffered: UITextView!
+    @IBOutlet weak var category: UITextView!
     
     
     // Organization Contact Person Info
@@ -38,7 +43,47 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1).withAlphaComponent(0.5)
+        saveButtonSetup()
+       
     }
+    
+    
+    
+    
 
+    private func saveButtonSetup(){
+        barButton =  UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed))
+        navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc private func saveButtonPressed(){
+       guard let administratorsfirstName = adminFirstName.text,
+        let administratorslastName = adminLastName.text,
+        let organizationName = organizationName.text,
+        let organizationPhoneNumber = organizationPhoneNumber.text,
+        let organizationSecondaryPhoneNumber = organizationSecondaryPhoneNumber.text,
+        let organizationEmailAddress = organizationEmailAddress.text,
+        let organizationStress = organizationStress.text,
+        let organizationCity = organizationCity.text,
+        let organizationZipcode = organizationZipcode.text,
+        let organizationState = organizationState.text,
+        let organizationGeoPoliticalZone = organizationGeoPoliticalZone.text,
+        let organizationWebsite = organizationWebsite.text,
+        let servicesOffered = servicesOffered.text,
+        let organizationContactPersonFirstName = organizationContactPersonFirstName.text,
+        let organizationContactPersonLastName = organizationContactPersonLastName.text,
+        let organizationContactPersonPhoneNumber = organizationContactPersonPhoneNumber.text,
+        let organizationContactPersonEmail = organizationContactPersonEmail.text,
+        let job = adminJobTitle.text,
+        let category = category.text else {return}
+        
+        var data: Data?
+        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: job, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: category, organizationImage: data, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
+DatabaseManager.createOrganizationToDatabase(organization: organization)
+        showAlert(title: "Successfully registered organization", message: "Successfully registered organization")
+    }
+    
 }
+
+

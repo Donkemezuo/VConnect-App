@@ -18,10 +18,16 @@ protocol UserSessionSignedDelegate: AnyObject{
     func didRecieveSignInError(_ usersession: UserSession, error: Error)
 }
 
+protocol UserSessionSignOutDelegate: AnyObject {
+    func didRecieveSignOutError(_ usersession: UserSession, error: Error)
+    func didSignOutUser(_ usersession: UserSession)
+}
+
 final class UserSession {
     
     weak var userSessionAccountDelegate: UserSessionAccountCreationDelegate?
     weak var userSessionSignInDelegate: UserSessionSignedDelegate?
+    weak var userSessionSignOutDelegate: UserSessionSignOutDelegate?
     
     
     public func createOrganization(email: String, password: String){
@@ -43,4 +49,24 @@ final class UserSession {
             }
         }
     }
+    
+    public func getCurrentUser() -> User? {
+        return Auth.auth().currentUser
+    }
+    
+    
+    
+    public func logOut(){
+        guard let _ = getCurrentUser() else {
+            print("no current user logged in")
+            return
+        }
+        do {
+        try Auth.auth().signOut()
+            userSessionSignOutDelegate?.didSignOutUser(self)
+        } catch {
+           userSessionSignOutDelegate?.didRecieveSignOutError(self, error: error)
+        }
+    }
+    
 }

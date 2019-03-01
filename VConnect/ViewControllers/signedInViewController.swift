@@ -9,6 +9,7 @@
 import UIKit
 class signedInViewController: UIViewController {
     let signInPage = SignInView()
+    private var usersession: UserSession!
     private var imagePicker: UIImagePickerController!
     private var barbuttonItem:UIBarButtonItem!
     private var tap:UITapGestureRecognizer!
@@ -20,14 +21,26 @@ class signedInViewController: UIViewController {
         navigationItem.title = "PROFILE"
         settingButton()
         setupProfileImage()
+        usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
+        usersession.userSessionSignOutDelegate = self
+         logOut()
     }
 
 
     private func settingButton(){
     
         barbuttonItem = UIBarButtonItem.init(image: UIImage.init(named: "icons8-settings"), style: .plain, target: self, action: #selector(setProfile))
-        navigationItem.rightBarButtonItem = barbuttonItem
+        navigationItem.leftBarButtonItem = barbuttonItem
         
+    }
+    
+    private func logOut(){
+        barbuttonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOutButtonPressed))
+        navigationItem.rightBarButtonItem = barbuttonItem
+    }
+    
+    @objc private func logOutButtonPressed(){
+        usersession.logOut()
     }
     
     @objc private func setProfile(){
@@ -86,5 +99,19 @@ extension signedInViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 
 
+}
+
+extension signedInViewController: UserSessionSignOutDelegate {
+    func didRecieveSignOutError(_ usersession: UserSession, error: Error) {
+        print("Logout error: \(error)")
+    }
+    
+    func didSignOutUser(_ usersession: UserSession) {
+        let window = (UIApplication.shared.delegate as! AppDelegate).window
+        let launchScreen = LaunchViewController()
+        window?.rootViewController = launchScreen
+    }
+    
+    
 }
 

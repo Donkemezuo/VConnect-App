@@ -19,9 +19,6 @@ class SignInView: UIView {
     public lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
-        //imageView.layer.cornerRadius = imageView.frame.size.width/2
-        //clipsToBounds = true
-        //imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -29,6 +26,7 @@ class SignInView: UIView {
         let label = UILabel()
         label.text = "The name of organization goes here"
         label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -60,7 +58,6 @@ class SignInView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInt()
-
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -84,16 +81,13 @@ class SignInView: UIView {
         profileView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         profileView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         profileView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        profileView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -360).isActive = true
+        profileView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -320).isActive = true
     }
     private func setupProfileImage(){
         addSubview(profileImage)
-        
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        
-        profileImage.topAnchor.constraint(equalTo: topAnchor, constant: 80).isActive = true
+        profileImage.topAnchor.constraint(equalTo: topAnchor, constant: 100).isActive = true
         profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 130).isActive = true
-        //profileImage.trailingAnchor.constraint(equalTo: profileView.trailingAnchor, constant: -130).isActive = true
         profileImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
@@ -122,7 +116,7 @@ class SignInView: UIView {
         adminActivities.topAnchor.constraint(equalTo: adminName.bottomAnchor).isActive = true
         adminActivities.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         adminActivities.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        adminActivities.bottomAnchor.constraint(equalTo: profileView.bottomAnchor).isActive = true
+        adminActivities.bottomAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 0).isActive = true
         
     }
     

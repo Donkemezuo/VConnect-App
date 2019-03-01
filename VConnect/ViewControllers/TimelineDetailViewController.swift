@@ -47,10 +47,10 @@ class TimelineDetailViewController: UIViewController {
     private func setUpDetailView(){
     detailView.newsTitle.text = news.title
     detailView.newsDescription.text = news.content
-        newsImage(imageUrl: news.urlToImage!, imageView: detailView.newsImage)
-        
+        if let imageurl = news.urlToImage {
+              newsImage(imageUrl: imageurl, imageView: detailView.newsImage)
     
-        
+        }
     }
 
     
