@@ -85,7 +85,6 @@ class SignInView: UIView {
         setupAdministratorsAddress()
         setupAboutLabel()
         setupAbout()
-        
 }
     
     private func setupProfileImage(){

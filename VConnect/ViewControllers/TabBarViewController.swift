@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum AccountType {
     case admin
@@ -19,6 +20,8 @@ class TabBarViewController: UITabBarController {
     let timeLineVC = UINavigationController.init(rootViewController: TimeLineViewController())
     let resourcesVC = UINavigationController.init(rootViewController: ResourcesViewController())
     let signedInVC = UINavigationController.init(rootViewController: signedInViewController())
+    
+    let locationManager = CLLocationManager()
     
     convenience init(accountType: AccountType){
         self.init(nibName: nil, bundle: nil)
@@ -38,17 +41,48 @@ class TabBarViewController: UITabBarController {
             timeLineVC.tabBarItem = UITabBarItem.init(title: "TimeLine", image: UIImage.init(named: "icons8-google_sites"), selectedImage: UIImage.init(named: "icons8-google_sites"))
             
             resourcesVC.tabBarItem = UITabBarItem.init(title: "Resources", image: UIImage.init(named: "icons8-home_filled"), selectedImage:  UIImage.init(named: "icons8-home_filled"))
+            locationAuthorization()
     }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkLocationServices()
+        locationManager.delegate = self
     }
     
     
-    
-   
+    private func locationAuthorization(){
+        switch CLLocationManager.authorizationStatus() {
+        
+        case .authorizedWhenInUse:
+            break
+        case .authorizedAlways:
+            break
+        case .denied:
+            break
+        case .restricted:
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        }
     }
+    
+    private func checkLocationServices(){
+        if CLLocationManager.locationServicesEnabled() {
+            locationAuthorization()
+        } else {
+            showAlert(title: "Error", message: "Please enable your location services")
+        }
+    }
+    }
+
+extension TabBarViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationAuthorization()
+    }
+}
     
 
   

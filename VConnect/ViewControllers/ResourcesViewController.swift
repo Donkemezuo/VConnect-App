@@ -12,7 +12,7 @@ class ResourcesViewController: UIViewController {
     
     let resourcesView = ResourcesView()
     
-    let dummyArray = ["Yap","Kev","DM","Micheal","Greg","KK","Uber","Late","Wild","After","BB","Cutie","Company","Lord","We","Wining","Get","Help","When","You","Can","Else","You","Will","Die","Yes","I","Said","It","Kill","Mo","eee","rrr","yyy","rrr","qqq","uuu","ooo","mmm","sss","zzz","nnn","lll","iii"]
+    let categories = ["Children and Women", "Youth Empowerment","Rape","Housing and Homelessness","Legal Aid", "Widow"]
     
     private var organizations = [Organization](){
       
@@ -21,7 +21,6 @@ class ResourcesViewController: UIViewController {
         }
         
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor =  #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
@@ -29,10 +28,8 @@ class ResourcesViewController: UIViewController {
         resourcesView.collectionView.dataSource = self
         resourcesView.collectionView.delegate = self
         getOrganizationData()
-        
+        navigationItem.title = "Categories of Organizations"
     }
-    
-    
     
     private func getOrganizationData(){
         DatabaseManager.firebaseDataBase.collection(DataBaseKeys.organizationCollectionKey).addSnapshotListener(includeMetadataChanges: true) { (querySnapShot, error) in
@@ -44,33 +41,30 @@ class ResourcesViewController: UIViewController {
                     organizations.append(organization)
                 }
                 self.organizations = organizations
-                print("Found \(organizations.count) race reviews")
+                print("Found \(organizations.count) organizations")
             }
         }
     }
     
 }
 
-
-
-
-
 extension ResourcesViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyArray.count
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ResourcesCell", for: indexPath) as? ResourcesCollectionViewCell else {return UICollectionViewCell()}
-        let category = dummyArray[indexPath.row]
+        let category = categories[indexPath.row]
         cell.label.text = category
-        cell.layer.borderWidth = 2
+        cell.label.numberOfLines = 0
+        cell.layer.borderWidth = 1
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCategory =  dummyArray[indexPath.row]
+        let selectedCategory =  categories[indexPath.row]
             let nextTableView = ResourcesTableViewController(name: selectedCategory)
         self.navigationController?.pushViewController(nextTableView, animated: true)
         }

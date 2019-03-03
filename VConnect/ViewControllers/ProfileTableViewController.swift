@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileTableViewController: UITableViewController {
     
+    private var imageData:Data?
+    
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
     private var tap: UITapGestureRecognizer!
@@ -20,13 +22,6 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var adminJobTitle: UILabel!
     
     
-//    lazy var pickerView:UIPickerView = {
-//        let pickerView = UIPickerView()
-//        pickerView.backgroundColor = .white
-//
-//        return pickerView
-//    }()
-    // Organization Info
     @IBOutlet weak var organizationName: UITextView!
     @IBOutlet weak var organizationPhoneNumber: UITextView!
     @IBOutlet weak var organizationSecondaryPhoneNumber: UITextView!
@@ -40,7 +35,6 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var servicesOffered: UITextView!
     @IBOutlet weak var category: UITextView!
     
-    
     // Organization Contact Person Info
     
     @IBOutlet weak var organizationContactPersonFirstName: UITextView!
@@ -51,16 +45,19 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1).withAlphaComponent(0.5)
-    //pickerView.delegate = self
-        //pickerView.dataSource = self
         saveButtonSetup()
-        //setupAdminJobTitle()
     }
     
+    init(imageData: Data, adminName: String){
+        super.init(nibName: nil, bundle: nil)
+        self.imageData = imageData
+        self.adminFirstName.text = adminName
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
-    
-
     private func saveButtonSetup(){
         barButton =  UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonPressed))
         navigationItem.rightBarButtonItem = barButton
@@ -87,44 +84,16 @@ class ProfileTableViewController: UITableViewController {
         let job = adminJobTitle.text,
         let category = category.text else {return}
         
-        var data: Data?
-        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: job, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: category, organizationImage: data, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
-DatabaseManager.createOrganizationToDatabase(organization: organization)
+        //var data: Data?
+        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: job, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: category, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
+        DatabaseManager.createOrganizationToDatabase(organization: organization)
         showAlert(title: "Successfully registered organization", message: "Successfully registered organization")
     }
-    
-//
-//    private func setupAdminJobTitle(){
-//        tap = UITapGestureRecognizer(target: self, action: #selector(jobTitletapped))
-//        adminJobTitle.addGestureRecognizer(tap)
-//    }
-//
-//    @objc private func jobTitletapped(){
-//        print("yyyyyyooo")
-//    }
 
     
 }
-//
-//extension ProfileTableViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return jobs.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        adminJobTitle.text = jobs[row]
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return jobs[row]
-//    }
-//
-//
-//}
+
+
 
 
 

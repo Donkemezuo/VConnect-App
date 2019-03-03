@@ -42,7 +42,6 @@ class signedInViewController: UIViewController {
     }
     
     @objc private func setProfile(){
-        
         let storybooard = UIStoryboard(name: "Main", bundle: nil)
         let profileTVC = storybooard.instantiateViewController(withIdentifier: "ProfileTableViewController")
         navigationController?.pushViewController(profileTVC, animated: true)
@@ -81,7 +80,6 @@ extension signedInViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true, completion: nil)
 
     }
-
 
 }
 

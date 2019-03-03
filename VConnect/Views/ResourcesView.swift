@@ -15,7 +15,7 @@ class ResourcesView: UIView {
         let cellLayout = UICollectionViewFlowLayout()
         cellLayout.scrollDirection = .vertical
         cellLayout.sectionInset = UIEdgeInsets.init(top: 20, left: 10, bottom: 20, right: 10)
-        cellLayout.itemSize = CGSize.init(width: 180, height: 200)
+        cellLayout.itemSize = CGSize.init(width: 400, height: 300)
         let resourcesCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: cellLayout)
         resourcesCollectionView.backgroundColor = UIColor.red.withAlphaComponent(0.2)
         return resourcesCollectionView

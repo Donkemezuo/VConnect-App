@@ -29,6 +29,15 @@ final class DatabaseManager {
                 print("Error: \(error) encountered while creating organization. Please try again")
             } else {
                 print("Created organization using ref: \(ref?.documentID ?? "no organization id")")
+                
+                DatabaseManager.firebaseDataBase.collection(DataBaseKeys.organizationCollectionKey).document(ref!.documentID)
+                    .updateData(["dbReference":ref!.documentID], completion: { (error) in
+                        if let error = error {
+                            print("Error updating fields: \(error)")
+                        } else {
+                            print("fields updated")
+                        }
+                    })
             }
         })
     }
