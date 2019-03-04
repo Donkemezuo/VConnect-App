@@ -10,6 +10,6 @@ import Foundation
 
 
 struct DataBaseKeys {
-    static let organizationCollectionKey = "Organizations"
+    static let organizationCollectionKey = "Organization"
     static let userOrganizations = "userOrganization"
 }

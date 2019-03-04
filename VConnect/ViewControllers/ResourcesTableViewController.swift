@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import FirebaseFirestore
 
 class ResourcesTableViewController: UIViewController {
     
@@ -15,6 +16,14 @@ class ResourcesTableViewController: UIViewController {
     private var nameHolder: String!
     private var barbuttonItem: UIBarButtonItem!
      let dummyArray = ["Yap","Kev","DM","Micheal","Greg","KK","Uber","Late","Wild","After","BB","Cutie","Company","Lord","We","Wining","Get","Help","When","You","Can","Else","You","Will","Die","Yes","I","Said","It","Kill","Mo","eee","rrr","yyy","rrr","qqq","uuu","ooo","mmm","sss","zzz","nnn","lll","iii"]
+    
+    private var organizations = [Organization]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.resourcesTableView.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +41,9 @@ class ResourcesTableViewController: UIViewController {
     
     
     
-    init(name: String){
+    init(organizationsInCategory: [Organization]){
         super.init(nibName: nil, bundle: nil)
-        self.nameHolder = name
+        self.organizations = organizationsInCategory
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,25 +105,26 @@ class ResourcesTableViewController: UIViewController {
 
 extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return organizations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesTableViewCell", for: indexPath) as? ResourcesTableViewCell else {return UITableViewCell()}
-        cell.textLabel?.text = nameHolder
+        cell.textLabel?.text = organizations[indexPath.row].organizationName
         cell.detailTextLabel?.text = "Children"
         cell.textLabel?.textAlignment = .center
-        navigationItem.title = "Organization name"
+        navigationItem.title = organizations[indexPath.row].organizationCategory
         cell.backgroundColor = UIColor.brown.withAlphaComponent(0.7)
         return cell 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailedVC = DetailViewController(name: nameHolder)
+        let organization = organizations[indexPath.row]
+        let detailedVC = DetailViewController(name: organization)
         self.navigationController?.pushViewController(detailedVC, animated: true)
     }
     

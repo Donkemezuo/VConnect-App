@@ -11,15 +11,13 @@ import UIKit
 class DetailViewController: UIViewController {
     
     let detailVC = DetailView()
-    private var organizationName: String!
+    private var organization: Organization!
     private var barbuttonItem: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = .red
         self.view.addSubview(detailVC)
          view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
         donateButton()
-      
     }
     private func donateButton(){
         barbuttonItem = UIBarButtonItem.init(title: "Donate", style: .plain, target: self, action: #selector(donateButtonClicked))
@@ -56,7 +54,7 @@ class DetailViewController: UIViewController {
     }
     
     
-    init(name: String){
+    init(name: Organization){
         super.init(nibName: nil, bundle: nil)
           setupDetailVC()
     }
@@ -65,10 +63,22 @@ class DetailViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    func setupDetailVC(){
-        detailVC.imageView.image = UIImage.init(named: "HoldHands")
-        
+   private func setupDetailVC(){
+    detailVC.contactPhoneNumber.text =  organization.contactPersonPhoneNumber
+    detailVC.organizationAddress.text = """
+    \(organization.organizationStreetAddress)
+    \(organization.organizationZipCode)
+    \(organization.organizationState)
+    \(organization.organizationCity)
+    
+    """
+    
+    detailVC.organizationWebsite.text = organization.organizationWebsite
+    
+    }
+    
+    
     }
     
 
-}
+

@@ -28,17 +28,17 @@
 		0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */; };
 		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
 		04567EBC222CF60C0075A928 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EBB222CF60C0075A928 /* UIView+Extension.swift */; };
+		04567EBE222DD92E0075A928 /* Assets 17-03-51-755.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04567EBD222DD92E0075A928 /* Assets 17-03-51-755.xcassets */; };
 		0468839B22272F9400FFD91E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0468839A22272F9400FFD91E /* GoogleService-Info.plist */; };
 		0468839D222741C500FFD91E /* Usersession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839C222741C500FFD91E /* Usersession.swift */; };
 		0468839F22285D7700FFD91E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839E22285D7700FFD91E /* DatabaseManager.swift */; };
-		046883A1222861E400FFD91E /* OrganizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046883A0222861E400FFD91E /* OrganizationModel.swift */; };
+		046883A1222861E400FFD91E /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046883A0222861E400FFD91E /* Organization.swift */; };
 		046883A32229E4EC00FFD91E /* DataBaseKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046883A22229E4EC00FFD91E /* DataBaseKeys.swift */; };
 		0470C6EF22249CCE00FB795C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6EE22249CCE00FB795C /* TabBarViewController.swift */; };
 		0470C6F12224AFF400FB795C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0470C6F02224AFF400FB795C /* Main.storyboard */; };
 		0470C6F32224B1F700FB795C /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */; };
 		049D8E8B221A16E200BB2AB4 /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */; };
 		04C68923220CFD690081355C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C68922220CFD690081355C /* AppDelegate.swift */; };
-		04C6892A220CFD6C0081355C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C68929220CFD6C0081355C /* Assets.xcassets */; };
 		04C6892D220CFD6C0081355C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04C6892B220CFD6C0081355C /* LaunchScreen.storyboard */; };
 		04C68997220E35900081355C /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C68996220E35900081355C /* TimeLineViewController.swift */; };
 		04C68999220E35B00081355C /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C68998220E35B00081355C /* ResourcesViewController.swift */; };
@@ -72,10 +72,11 @@
 		0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDetailViewController.swift; sourceTree = "<group>"; };
 		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
 		04567EBB222CF60C0075A928 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		04567EBD222DD92E0075A928 /* Assets 17-03-51-755.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 17-03-51-755.xcassets"; sourceTree = "<group>"; };
 		0468839A22272F9400FFD91E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0468839C222741C500FFD91E /* Usersession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usersession.swift; sourceTree = "<group>"; };
 		0468839E22285D7700FFD91E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		046883A0222861E400FFD91E /* OrganizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationModel.swift; sourceTree = "<group>"; };
+		046883A0222861E400FFD91E /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		046883A22229E4EC00FFD91E /* DataBaseKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseKeys.swift; sourceTree = "<group>"; };
 		0470C6EE22249CCE00FB795C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0470C6F02224AFF400FB795C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -83,7 +84,6 @@
 		049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethods.swift; sourceTree = "<group>"; };
 		04C6891F220CFD690081355C /* VConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04C68922220CFD690081355C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04C68929220CFD6C0081355C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04C6892C220CFD6C0081355C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04C6892E220CFD6C0081355C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04C68996220E35900081355C /* TimeLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				04433A742224E911009D6646 /* GoogleNewsModel.swift */,
-				046883A0222861E400FFD91E /* OrganizationModel.swift */,
+				046883A0222861E400FFD91E /* Organization.swift */,
 				04433A762224EC66009D6646 /* GlobalNewsAPI.swift */,
 				04433A802224F89E009D6646 /* ImageHelper.swift */,
 				04433A782224EE7B009D6646 /* NetworkHelper.swift */,
@@ -186,6 +186,7 @@
 				04C68920220CFD690081355C /* Products */,
 				D113C0809B48C66DB567D00D /* Pods */,
 				BA2DDEE80DD2801A144F5259 /* Frameworks */,
+				04567EBD222DD92E0075A928 /* Assets 17-03-51-755.xcassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,7 +209,6 @@
 				04433A732224E8DD009D6646 /* Models */,
 				040AC6D22212158E00778A5A /* Views */,
 				040AC6CF2212152700778A5A /* ViewControllers */,
-				04C68929220CFD6C0081355C /* Assets.xcassets */,
 				04C6892B220CFD6C0081355C /* LaunchScreen.storyboard */,
 				04C6892E220CFD6C0081355C /* Info.plist */,
 				0468839A22272F9400FFD91E /* GoogleService-Info.plist */,
@@ -293,10 +293,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04567EBE222DD92E0075A928 /* Assets 17-03-51-755.xcassets in Resources */,
 				0470C6F12224AFF400FB795C /* Main.storyboard in Resources */,
 				0468839B22272F9400FFD91E /* GoogleService-Info.plist in Resources */,
 				04C6892D220CFD6C0081355C /* LaunchScreen.storyboard in Resources */,
-				04C6892A220CFD6C0081355C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +378,7 @@
 				04433A7D2224EEBE009D6646 /* AppErrors.swift in Sources */,
 				04C68923220CFD690081355C /* AppDelegate.swift in Sources */,
 				04433A752224E911009D6646 /* GoogleNewsModel.swift in Sources */,
-				046883A1222861E400FFD91E /* OrganizationModel.swift in Sources */,
+				046883A1222861E400FFD91E /* Organization.swift in Sources */,
 				0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */,
 				040AC6D72212190900778A5A /* ResourcesTableViewCell.swift in Sources */,
 				04C68997220E35900081355C /* TimeLineViewController.swift in Sources */,

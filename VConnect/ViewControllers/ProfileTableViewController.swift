@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import Firebase
 @IBDesignable
 
 class ProfileTableViewController: UITableViewController {
     
     private var imageData:Data?
-    
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
      private var categories = ["Children and Women", "Youth Empowerment","Rape","Housing and Homelessness","Legal Aid", "Widow"]

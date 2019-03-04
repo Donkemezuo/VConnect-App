@@ -18,7 +18,7 @@ final class DatabaseManager {
     static let firebaseDataBase: Firestore = {
         let dataBase = Firestore.firestore()
         let settings = dataBase.settings
-    settings.areTimestampsInSnapshotsEnabled = true
+    //settings.areTimestampsInSnapshotsEnabled = true
         dataBase.settings = settings
         return dataBase
     }()
