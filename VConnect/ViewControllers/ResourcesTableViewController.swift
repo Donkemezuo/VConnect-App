@@ -21,7 +21,8 @@ class ResourcesTableViewController: UIViewController {
         self.view.addSubview(resourcesTableView)
         resourcesTableView.tableView.delegate = self
         resourcesTableView.tableView.dataSource = self
-        view.backgroundColor = UIColor.brown.withAlphaComponent(0.9)
+       // view.backgroundColor = UIColor.brown.withAlphaComponent(0.9)
+         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
     configureLongPress()
         setupShareButton()
     }

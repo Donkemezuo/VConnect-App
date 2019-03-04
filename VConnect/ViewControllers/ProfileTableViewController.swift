@@ -7,6 +7,7 @@
 //
 
 import UIKit
+@IBDesignable
 
 class ProfileTableViewController: UITableViewController {
     
@@ -14,13 +15,18 @@ class ProfileTableViewController: UITableViewController {
     
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
+     private var categories = ["Children and Women", "Youth Empowerment","Rape","Housing and Homelessness","Legal Aid", "Widow"]
     private var tap: UITapGestureRecognizer!
     private var pickerView: UIPickerView!
+    private var imagePicker: UIImagePickerController!
+    @IBOutlet weak var jobTitlePickerView: UIPickerView!
+    @IBOutlet weak var organizationCategoryPickerView: UIPickerView!
     // Admin info
     @IBOutlet weak var adminFirstName: UITextView!
     @IBOutlet weak var adminLastName: UITextView!
-    @IBOutlet weak var adminJobTitle: UILabel!
-    
+    @IBOutlet weak var imageView: UIImageView!
+    private var adminJobTitle = ""
+    private var organizationCategory = ""
     
     @IBOutlet weak var organizationName: UITextView!
     @IBOutlet weak var organizationPhoneNumber: UITextView!
@@ -33,7 +39,7 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var organizationGeoPoliticalZone: UITextView!
     @IBOutlet weak var organizationWebsite: UITextView!
     @IBOutlet weak var servicesOffered: UITextView!
-    @IBOutlet weak var category: UITextView!
+   
     
     // Organization Contact Person Info
     
@@ -44,18 +50,35 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1).withAlphaComponent(0.5)
         saveButtonSetup()
+        setProfilePicture()
+        //setImageViewLayOut()
+        imageView.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1).withAlphaComponent(0.5)
+        jobTitlePickerView.delegate = self
+        jobTitlePickerView.dataSource = self
+        
+        organizationCategoryPickerView.delegate = self
+        organizationCategoryPickerView.dataSource = self
     }
     
-    init(imageData: Data, adminName: String){
-        super.init(nibName: nil, bundle: nil)
-        self.imageData = imageData
-        self.adminFirstName.text = adminName
+    private func setImageViewLayOut(){
+        imageView.layer.cornerRadius = imageView.bounds.width/2
+        imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
+    }
+    private func setProfilePicture(){
+        imageView.isUserInteractionEnabled = true
+        tap = UITapGestureRecognizer(target: self, action: #selector(imageLibraryAccess))
+         imageView.addGestureRecognizer(tap)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    @objc private func imageLibraryAccess(){
+       imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+        }
+        present(imagePicker, animated: true, completion: nil)
     }
     
     private func saveButtonSetup(){
@@ -80,18 +103,85 @@ class ProfileTableViewController: UITableViewController {
         let organizationContactPersonFirstName = organizationContactPersonFirstName.text,
         let organizationContactPersonLastName = organizationContactPersonLastName.text,
         let organizationContactPersonPhoneNumber = organizationContactPersonPhoneNumber.text,
-        let organizationContactPersonEmail = organizationContactPersonEmail.text,
-        let job = adminJobTitle.text,
-        let category = category.text else {return}
+        let organizationContactPersonEmail = organizationContactPersonEmail.text
+        else {return}
         
         //var data: Data?
-        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: job, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: category, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
+        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: adminJobTitle, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: organizationCategory, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
         DatabaseManager.createOrganizationToDatabase(organization: organization)
         showAlert(title: "Successfully registered organization", message: "Successfully registered organization")
     }
 
     
 }
+
+extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageView.image = image
+        } else {
+            print("No image")
+        }
+        dismiss(animated: true, completion: nil)
+        
+    }
+}
+
+extension ProfileTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1 {
+            return jobs.count
+        } else {
+            if pickerView.tag == 2 {
+                
+            return categories.count
+            }
+        
+        }
+        
+        return jobs.count
+    
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if pickerView.tag == 1 {
+            return jobs[row]
+        } else {
+            if pickerView.tag == 2 {
+                
+                return categories[row]
+            }
+        }
+        return ""
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if pickerView.tag == 1 {
+            adminJobTitle = jobs[row]
+        } else {
+            if pickerView.tag == 2 {
+                
+                organizationCategory = categories[row]
+            }
+            
+        }
+    }
+}
+
+//extension ProfileTableViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+//
+//}
+
 
 
 

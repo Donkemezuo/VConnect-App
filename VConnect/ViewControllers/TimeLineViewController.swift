@@ -19,7 +19,6 @@ class TimeLineViewController: UIViewController {
                 self.timelineView.collectionView.reloadData()
             }
         }
-        
     }
    
     override func viewDidLoad() {

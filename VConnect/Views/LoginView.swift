@@ -47,6 +47,7 @@ class LoginView: UIView {
             userPassword.font = UIFont.boldSystemFont(ofSize: 20)
             userPassword.backgroundColor = .white
             userPassword.layer.cornerRadius = 5.0
+            userPassword.isSecureTextEntry = true 
         return userPassword
     }()
       public lazy var loginButton: UIButton = {
@@ -106,8 +107,8 @@ class LoginView: UIView {
         loginButton.addTarget(self, action: #selector(signInButtonClicked), for: .touchUpInside)
     }
     
-    @objc func handleTap(gesture: UITapGestureRecognizer){
-        loginState = loginState == .newAccount ? .existingAccount : .newAccount
+    @objc func handleTap(gesture: UITapGestureRecognizer) {
+    loginState = loginState == .newAccount ? .existingAccount : .newAccount
         switch loginState {
         case .newAccount:
             loginButton.setTitle("Create", for: .normal)
@@ -177,5 +178,5 @@ class LoginView: UIView {
     }
     
  
-    
 }
+

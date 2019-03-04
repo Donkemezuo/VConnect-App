@@ -15,7 +15,7 @@ class AdminLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  UIColor.green
+        //view.backgroundColor =  UIColor.green
         self.view.addSubview(profilePage)
         //createAccountClicked()
         profilePage.emailTextField.isEnabled = true
@@ -25,6 +25,7 @@ class AdminLoginViewController: UIViewController {
         usersession.userSessionAccountDelegate = self
         usersession.userSessionSignInDelegate = self
         profilePage.delegate = self
+         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
     }
     
     func presentInitialTabBarController() {
@@ -40,7 +41,6 @@ extension AdminLoginViewController: UITextFieldDelegate {
         return true
     }
 }
-
 
 extension AdminLoginViewController: LoginViewDelegate {
     func loginButtonPressed(_loginView: LoginView, accountState: AccountloginState) {
@@ -58,6 +58,7 @@ extension AdminLoginViewController: LoginViewDelegate {
             
         case .existingAccount:
             usersession.signInExistingUser(email: userEmail, password: userPassword)
+            
         }
     }
 }

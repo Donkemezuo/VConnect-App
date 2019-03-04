@@ -12,6 +12,7 @@ import FirebaseFirestore
 
 
 final class DatabaseManager {
+    let usersession = UserSession()
     private init(){}
     
     static let firebaseDataBase: Firestore = {
@@ -24,12 +25,14 @@ final class DatabaseManager {
     
     static func createOrganizationToDatabase(organization: Organization) {
         var ref: DocumentReference? = nil
-        ref = firebaseDataBase.collection("Organization").addDocument(data: ["organizationName": organization.organizationName,"organizationPhoneNumber": organization.organizationPhoneNumber, "organizationSecondaryPhoneNumber": organization.organizationSecondaryPhoneNumber, "organizationEmail": organization.organizationEmail, "organizationStreetAddress": organization.organizationStreetAddress, "organizationCity": organization.organizationCity, "organizationZipCode": organization.organizationZipCode, "organizationState": organization.organizationState, "organizationGeoPoliticalZone": organization.organizationGeoPoliticalZone, "organizationWebsite": organization.organizationWebsite, "organizationServices": organization.organizationServices, "organizationCategory": organization.organizationCategory, "organizationImage":organization.organizationImage, "contactPersonFirstName":organization.contactPersonFirstName, "contactPersonLastName":organization.contactPersonLastName,"contactPersonPhoneNumber":organization.contactPersonPhoneNumber,"contactPersonEmail":organization.contactPersonEmail, "adminFirstName":organization.adminFirstName, "adminLastame":organization.adminLastame, "whoAreYou":organization.whoAreYou], completion: { (error) in
+        
+        ref = firebaseDataBase.collection("Organization").document((UserSession.init().getCurrentUser()?.uid)!)
+        ref?.setData(["organizationName": organization.organizationName,"organizationPhoneNumber": organization.organizationPhoneNumber, "organizationSecondaryPhoneNumber": organization.organizationSecondaryPhoneNumber, "organizationEmail": organization.organizationEmail, "organizationStreetAddress": organization.organizationStreetAddress, "organizationCity": organization.organizationCity, "organizationZipCode": organization.organizationZipCode, "organizationState": organization.organizationState, "organizationGeoPoliticalZone": organization.organizationGeoPoliticalZone, "organizationWebsite": organization.organizationWebsite, "organizationServices": organization.organizationServices, "organizationCategory": organization.organizationCategory, "organizationImage":organization.organizationImage, "contactPersonFirstName":organization.contactPersonFirstName, "contactPersonLastName":organization.contactPersonLastName,"contactPersonPhoneNumber":organization.contactPersonPhoneNumber,"contactPersonEmail":organization.contactPersonEmail, "adminFirstName":organization.adminFirstName, "adminLastame":organization.adminLastame, "whoAreYou":organization.whoAreYou], completion: { (error) in
             if let error = error {
                 print("Error: \(error) encountered while creating organization. Please try again")
             } else {
                 print("Created organization using ref: \(ref?.documentID ?? "no organization id")")
-                
+            
                 DatabaseManager.firebaseDataBase.collection(DataBaseKeys.organizationCollectionKey).document(ref!.documentID)
                     .updateData(["dbReference":ref!.documentID], completion: { (error) in
                         if let error = error {
@@ -39,7 +42,11 @@ final class DatabaseManager {
                         }
                     })
             }
+            
         })
+        
+        
+        }
     }
     
-}
+

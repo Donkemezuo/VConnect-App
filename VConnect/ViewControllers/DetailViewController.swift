@@ -15,8 +15,9 @@ class DetailViewController: UIViewController {
     private var barbuttonItem: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        //view.backgroundColor = .red
         self.view.addSubview(detailVC)
+         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
         donateButton()
       
     }

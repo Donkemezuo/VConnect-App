@@ -23,12 +23,13 @@ class ResourcesViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+       // view.backgroundColor =  #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         self.view.addSubview(resourcesView)
         resourcesView.collectionView.dataSource = self
         resourcesView.collectionView.delegate = self
         getOrganizationData()
         navigationItem.title = "Categories of Organizations"
+         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
     }
     
     private func getOrganizationData(){
