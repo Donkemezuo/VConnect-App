@@ -65,7 +65,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.20).isActive = true
         
         poster.topAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
-        poster.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 11).isActive = true
+        poster.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         poster.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         poster.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
  
