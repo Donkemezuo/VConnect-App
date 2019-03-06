@@ -12,7 +12,6 @@ import Firebase
 @IBDesignable
 
 class ProfileTableViewController: UITableViewController {
-    
     private var imageData:Data?
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
@@ -53,11 +52,10 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         saveButtonSetup()
         setProfilePicture()
-        //setImageViewLayOut()
+        setImageViewLayOut()
         imageView.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1).withAlphaComponent(0.5)
         jobTitlePickerView.delegate = self
         jobTitlePickerView.dataSource = self
-        
         organizationCategoryPickerView.delegate = self
         organizationCategoryPickerView.dataSource = self
     }
@@ -87,6 +85,10 @@ class ProfileTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = barButton
     }
     
+    @IBAction func LocationButtonPressed(_ sender: UIButton) {
+      let mapView = MapViewController()
+        navigationController?.pushViewController(mapView, animated: true)
+    }
     @objc private func saveButtonPressed(){
        guard let administratorsfirstName = adminFirstName.text,
         let administratorslastName = adminLastName.text,
@@ -112,8 +114,6 @@ class ProfileTableViewController: UITableViewController {
         DatabaseManager.createOrganizationToDatabase(organization: organization)
         showAlert(title: "Successfully registered organization", message: "Successfully registered organization")
     }
-
-    
 }
 
 extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -129,7 +129,6 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
             print("No image")
         }
         dismiss(animated: true, completion: nil)
-        
     }
 }
 
@@ -146,11 +145,8 @@ extension ProfileTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
                 
             return categories.count
             }
-        
         }
-        
         return jobs.count
-    
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
@@ -179,9 +175,6 @@ extension ProfileTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
 }
 
-//extension ProfileTableViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-//
-//}
 
 
 

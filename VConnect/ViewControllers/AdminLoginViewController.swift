@@ -15,9 +15,7 @@ class AdminLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor =  UIColor.green
         self.view.addSubview(profilePage)
-        //createAccountClicked()
         profilePage.emailTextField.isEnabled = true
         profilePage.emailTextField.delegate = self
         profilePage.passwordTextField.delegate = self
@@ -27,21 +25,16 @@ class AdminLoginViewController: UIViewController {
         profilePage.delegate = self
          view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
     }
-    
-    func presentInitialTabBarController() {
+   private func presentInitialTabBarController() {
         let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
         present(signedInAdmin, animated: true)
-    }
 }
-
-
-
+}
 extension AdminLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
 }
-
 extension AdminLoginViewController: LoginViewDelegate {
     func loginButtonPressed(_loginView: LoginView, accountState: AccountloginState) {
         guard let userEmail = profilePage.emailTextField.text,
@@ -51,14 +44,11 @@ extension AdminLoginViewController: LoginViewDelegate {
                 showAlert(title: "Missing Required Fields", message: "Email and password required")
                 return
         }
-        
         switch accountState {
         case .newAccount:
             usersession.createOrganization(email: userEmail, password: userPassword)
-            
         case .existingAccount:
             usersession.signInExistingUser(email: userEmail, password: userPassword)
-            
         }
     }
 }

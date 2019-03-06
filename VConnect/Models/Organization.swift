@@ -28,8 +28,17 @@ struct Organization {
     let contactPersonLastName: String
     let contactPersonPhoneNumber: String
     let contactPersonEmail: String
-
-    
+    var formattedAddress:String {
+        let address = """
+        
+        \(organizationStreetAddress)
+        \(organizationCity)
+        \(organizationZipCode)
+        \(organizationState)
+        
+        """
+        return address
+    }
     init(adminFirstName: String, adminLastame: String, whoAreYou: String,organizationName: String,organizationPhoneNumber: String,organizationSecondaryPhoneNumber: String, organizationEmail: String, organizationStreetAddress: String, organizationCity: String,organizationZipCode: String, organizationState: String, organizationGeoPoliticalZone: String, organizationWebsite: String, organizationServices: String,organizationCategory: String, organizationImage: Data?,contactPersonFirstName: String,contactPersonLastName: String, contactPersonPhoneNumber: String, contactPersonEmail: String) {
         self.adminFirstName = adminFirstName
         self.adminLastame = adminLastame
@@ -51,7 +60,6 @@ struct Organization {
         self.contactPersonLastName = contactPersonLastName
         self.contactPersonPhoneNumber = contactPersonPhoneNumber
         self.contactPersonEmail = contactPersonEmail
-    
     }
     
     init(dict: [String: Any]) {

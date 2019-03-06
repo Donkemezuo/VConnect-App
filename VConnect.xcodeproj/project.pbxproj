@@ -29,6 +29,9 @@
 		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
 		04567EBC222CF60C0075A928 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EBB222CF60C0075A928 /* UIView+Extension.swift */; };
 		04567EBE222DD92E0075A928 /* Assets 17-03-51-755.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04567EBD222DD92E0075A928 /* Assets 17-03-51-755.xcassets */; };
+		04567EC0222E2B200075A928 /* ZipCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EBF222E2B200075A928 /* ZipCodeHelper.swift */; };
+		04567EC6222F15490075A928 /* MapviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EC5222F15490075A928 /* MapviewView.swift */; };
+		04567EC8222F15760075A928 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EC7222F15760075A928 /* MapViewController.swift */; };
 		0468839B22272F9400FFD91E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0468839A22272F9400FFD91E /* GoogleService-Info.plist */; };
 		0468839D222741C500FFD91E /* Usersession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839C222741C500FFD91E /* Usersession.swift */; };
 		0468839F22285D7700FFD91E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468839E22285D7700FFD91E /* DatabaseManager.swift */; };
@@ -73,6 +76,9 @@
 		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
 		04567EBB222CF60C0075A928 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		04567EBD222DD92E0075A928 /* Assets 17-03-51-755.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 17-03-51-755.xcassets"; sourceTree = "<group>"; };
+		04567EBF222E2B200075A928 /* ZipCodeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipCodeHelper.swift; sourceTree = "<group>"; };
+		04567EC5222F15490075A928 /* MapviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapviewView.swift; sourceTree = "<group>"; };
+		04567EC7222F15760075A928 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0468839A22272F9400FFD91E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0468839C222741C500FFD91E /* Usersession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usersession.swift; sourceTree = "<group>"; };
 		0468839E22285D7700FFD91E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			children = (
 				040AC6D32212161700778A5A /* Cell */,
 				04C68996220E35900081355C /* TimeLineViewController.swift */,
+				04567EC7222F15760075A928 /* MapViewController.swift */,
 				0470C6EE22249CCE00FB795C /* TabBarViewController.swift */,
 				0470C6F22224B1F700FB795C /* ProfileTableViewController.swift */,
 				040337752217B58C0063960B /* LaunchViewController.swift */,
@@ -135,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				04C689A0220FDD280081355C /* LoginView.swift */,
+				04567EC5222F15490075A928 /* MapviewView.swift */,
 				040AC6D4221216CA00778A5A /* TableView.swift */,
 				040337772217B6B50063960B /* LauchView.swift */,
 				040AC6DE2212474200778A5A /* TimelineView.swift */,
@@ -206,6 +214,7 @@
 				049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */,
 				0468839E22285D7700FFD91E /* DatabaseManager.swift */,
 				046883A22229E4EC00FFD91E /* DataBaseKeys.swift */,
+				04567EBF222E2B200075A928 /* ZipCodeHelper.swift */,
 				04433A732224E8DD009D6646 /* Models */,
 				040AC6D22212158E00778A5A /* Views */,
 				040AC6CF2212152700778A5A /* ViewControllers */,
@@ -371,6 +380,7 @@
 				04433A792224EE7B009D6646 /* NetworkHelper.swift in Sources */,
 				040AC6D5221216CA00778A5A /* TableView.swift in Sources */,
 				0470C6F32224B1F700FB795C /* ProfileTableViewController.swift in Sources */,
+				04567EC0222E2B200075A928 /* ZipCodeHelper.swift in Sources */,
 				040337782217B6B50063960B /* LauchView.swift in Sources */,
 				04C6899F220E3D4A0081355C /* ResourcesCollectionViewCell.swift in Sources */,
 				040AC6D92212196100778A5A /* ResourcesTableViewController.swift in Sources */,
@@ -382,9 +392,11 @@
 				0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */,
 				040AC6D72212190900778A5A /* ResourcesTableViewCell.swift in Sources */,
 				04C68997220E35900081355C /* TimeLineViewController.swift in Sources */,
+				04567EC6222F15490075A928 /* MapviewView.swift in Sources */,
 				04272D622218C44C00A42EC4 /* signedInViewController.swift in Sources */,
 				040AC6E122125F5600778A5A /* TimelineCollectionViewCell.swift in Sources */,
 				0468839D222741C500FFD91E /* Usersession.swift in Sources */,
+				04567EC8222F15760075A928 /* MapViewController.swift in Sources */,
 				04C6899B220E39C00081355C /* AdminLoginViewController.swift in Sources */,
 				040AC6DD2212286300778A5A /* DetailView.swift in Sources */,
 				04272D642219188900A42EC4 /* PostViewController.swift in Sources */,

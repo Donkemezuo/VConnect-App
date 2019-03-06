@@ -15,14 +15,12 @@ enum AccountType {
 }
 
 class TabBarViewController: UITabBarController {
-    
     private var accountType = AccountType.admin
     let timeLineVC = UINavigationController.init(rootViewController: TimeLineViewController())
     let resourcesVC = UINavigationController.init(rootViewController: ResourcesViewController())
     let signedInVC = UINavigationController.init(rootViewController: signedInViewController())
     
     let locationManager = CLLocationManager()
-    
     convenience init(accountType: AccountType){
         self.init(nibName: nil, bundle: nil)
         self.accountType = accountType

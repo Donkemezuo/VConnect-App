@@ -13,34 +13,37 @@ import FirebaseFirestore
 class ResourcesTableViewController: UIViewController {
     
     let resourcesTableView = TableView()
-    private var nameHolder: String!
     private var barbuttonItem: UIBarButtonItem!
-     let dummyArray = ["Yap","Kev","DM","Micheal","Greg","KK","Uber","Late","Wild","After","BB","Cutie","Company","Lord","We","Wining","Get","Help","When","You","Can","Else","You","Will","Die","Yes","I","Said","It","Kill","Mo","eee","rrr","yyy","rrr","qqq","uuu","ooo","mmm","sss","zzz","nnn","lll","iii"]
-    
+    private var locationManager = CLLocationManager()
+    private var coordinateToSearch = CLLocationCoordinate2D(latitude: 9.072264, longitude: 7.491302)
+    private var geocoder = CLGeocoder()
+    private var annotations = [MKAnnotation]()
     private var organizations = [Organization]() {
         didSet {
             DispatchQueue.main.async {
+                self.makeAnnotations()
                 self.resourcesTableView.tableView.reloadData()
             }
         }
     }
-    
+    private var myCurrentRegion = MKCoordinateRegion()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(resourcesTableView)
         resourcesTableView.tableView.delegate = self
         resourcesTableView.tableView.dataSource = self
-       // view.backgroundColor = UIColor.brown.withAlphaComponent(0.9)
-         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
-    configureLongPress()
+        resourcesTableView.map.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        resourcesTableView.map.showsUserLocation = true
+        view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
+        configureLongPress()
         setupShareButton()
+        makeAnnotations()
     }
+    
     private var longPress: UILongPressGestureRecognizer!
-    private var annotations = [MKAnnotation]()
-    
-    
-    
-    
+  
     init(organizationsInCategory: [Organization]){
         super.init(nibName: nil, bundle: nil)
         self.organizations = organizationsInCategory
@@ -49,37 +52,44 @@ class ResourcesTableViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
-    
-    
     private func configureLongPress(){
         longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPress.minimumPressDuration = 0.5
         resourcesTableView.map.addGestureRecognizer(longPress)
     }
    
-    
     private func makeAnnotations(){
         resourcesTableView.map.removeAnnotations(annotations)
-        for name in dummyArray {
+        for organization in organizations {
             let annotation = MKPointAnnotation()
-            annotation.title = name
+            
+            annotation.title = organization.organizationName
+            geocoder.geocodeAddressString(organization.organizationCity) { (placemarks, error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                } else {
+                    if let placemark = placemarks?.first {
+                        let lat = placemark.location?.coordinate.latitude
+                        let long = placemark.location?.coordinate.longitude
+        
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0)
+                    }
+                }
+            }
             annotations.append(annotation)
         }
-        
         resourcesTableView.map.showAnnotations(annotations, animated: true)
     }
     
-    
     @objc private func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer){
-        
         var isDone = false
-       // let point = gestureRecognizer.location(in: resourcesTableView.map)
-      //  let coordinate = resourcesTableView.map.convert(point, toCoordinateFrom: resourcesTableView.map)
-        
-        
+        let point = gestureRecognizer.location(in: resourcesTableView.map)
+        let coordinate = resourcesTableView.map.convert(point, toCoordinateFrom: resourcesTableView.map)
+        print(coordinate)
         if !isDone {
             switch gestureRecognizer.state {
             case .began:
+                
                 isDone = true
             default:
                 break
@@ -88,36 +98,27 @@ class ResourcesTableViewController: UIViewController {
     }
     
     private func setupShareButton(){
-     
-        barbuttonItem = UIBarButtonItem.init(title: "Share", style: .plain, target: self, action: #selector(shareButtonPressed))
+    barbuttonItem = UIBarButtonItem.init(title: "Share", style: .plain, target: self, action: #selector(shareButtonPressed))
     navigationItem.rightBarButtonItem =  barbuttonItem
-        
     }
-    
     @objc private func shareButtonPressed(){
-        let activityVC = UIActivityViewController(activityItems: dummyArray, applicationActivities: nil)
-        
+        let activityVC = UIActivityViewController(activityItems: organizations, applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
-        
     }
-    
 }
 
 extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return organizations.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesTableViewCell", for: indexPath) as? ResourcesTableViewCell else {return UITableViewCell()}
         cell.textLabel?.text = organizations[indexPath.row].organizationName
-        cell.detailTextLabel?.text = "Children"
         cell.textLabel?.textAlignment = .center
         navigationItem.title = organizations[indexPath.row].organizationCategory
         cell.backgroundColor = UIColor.brown.withAlphaComponent(0.7)
         return cell 
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
@@ -127,6 +128,40 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
         let detailedVC = DetailViewController(name: organization)
         self.navigationController?.pushViewController(detailedVC, animated: true)
     }
+}
+extension ResourcesTableViewController: CLLocationManagerDelegate {
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            coordinateToSearch = myCurrentRegion.center
+        }
+        let currentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
+        resourcesTableView.map.setRegion(currentRegion, animated: true)
+    }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        myCurrentRegion = MKCoordinateRegion()
+        if let currentLocation = locations.last {
+            myCurrentRegion = MKCoordinateRegion(center: currentLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        } else {
+            myCurrentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
+        }
+    }
+    
+}
+
+extension ResourcesTableViewController:MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {return nil}
+        
+        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "MapView") as? MKMarkerAnnotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
+            annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        return annotationView
+    }
 }
