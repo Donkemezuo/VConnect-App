@@ -22,7 +22,6 @@ class LaunchViewController: UIViewController {
         setUpTabView()
     }
     func setUpTabView() {
-      
         lauchView.addminButton.isUserInteractionEnabled = true
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(addminButtonPressed(gesture:)))
         lauchView.addminButton.addGestureRecognizer(tapGesture)
@@ -34,8 +33,10 @@ class LaunchViewController: UIViewController {
     }
     
     @objc private func addminButtonPressed(gesture: UITapGestureRecognizer){
-       present(AdminLoginViewController(), animated: true, completion: nil)
-
+       //present(AdminLoginViewController(), animated: true, completion: nil)
+        let destinationVC = UINavigationController.init(rootViewController: AdminLoginViewController())
+       // navigationController?.pushViewController(destinationVC, animated: true)
+        present(destinationVC, animated: true, completion: nil)
     }
     
     @objc private func exploreButtonPressed(gesture: UITapGestureRecognizer){

@@ -664,6 +664,24 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z2G-R9-cLn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="4148" y="-87.706146926536732"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aOI-9W-ELe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="leH-fI-dPK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nYg-iC-T2v">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jVE-r2-uUJ" kind="relationship" relationship="rootViewController" id="YNq-Lf-cY3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dl4-X8-lLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="3208.8000000000002" y="-87.706146926536732"/>
         </scene>
     </scenes>

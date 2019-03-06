@@ -138,7 +138,6 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
         let currentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
         resourcesTableView.map.setRegion(currentRegion, animated: true)
     }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         myCurrentRegion = MKCoordinateRegion()
         if let currentLocation = locations.last {
@@ -147,7 +146,6 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
             myCurrentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
         }
     }
-    
 }
 
 extension ResourcesTableViewController:MKMapViewDelegate {

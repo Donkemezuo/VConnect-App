@@ -10,7 +10,7 @@ import UIKit
 class signedInViewController: UIViewController {
     let signInPage = SignInView()
     private var usersession: UserSession!
-    private var barbuttonItem:UIBarButtonItem!
+    private var barbuttonItem:UIBarButtonItem!    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(signInPage)
@@ -18,11 +18,12 @@ class signedInViewController: UIViewController {
         settingButton()
         usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
         usersession.userSessionSignOutDelegate = self
+        
          logOut()
          view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
         
     }
-    
+
     private func settingButton(){
     
         barbuttonItem = UIBarButtonItem.init(image: UIImage.init(named: "icons8-settings"), style: .plain, target: self, action: #selector(setProfile))
@@ -41,6 +42,7 @@ class signedInViewController: UIViewController {
     @objc private func setProfile(){
         let storybooard = UIStoryboard(name: "Main", bundle: nil)
         let profileTVC = storybooard.instantiateViewController(withIdentifier: "ProfileTableViewController")
+
         navigationController?.pushViewController(profileTVC, animated: true)
     }
 }
@@ -59,3 +61,13 @@ extension signedInViewController: UserSessionSignOutDelegate {
     
 }
 
+extension signedInViewController: ProfileInformationDelegate {
+    func AdminBasicInformation(lastname: String, firstName: String, locationCity: String, imageData: Data) {
+        signInPage.adminName.text = "\(lastname)  \(firstName)"
+        signInPage.profileImage.image  = UIImage.init(data: imageData)
+        signInPage.adminAddress.text = locationCity
+
+    }
+
+
+}
