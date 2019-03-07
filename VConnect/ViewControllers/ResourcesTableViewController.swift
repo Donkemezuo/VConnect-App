@@ -15,9 +15,11 @@ class ResourcesTableViewController: UIViewController {
     let resourcesTableView = TableView()
     private var barbuttonItem: UIBarButtonItem!
     private var locationManager = CLLocationManager()
-    private var coordinateToSearch = CLLocationCoordinate2D(latitude: 9.072264, longitude: 7.491302)
+    //private var coordinateToSearch = CLLocationCoordinate2D(latitude: 9.072264, longitude: 7.491302)
     private var geocoder = CLGeocoder()
     private var annotations = [MKAnnotation]()
+    
+    private var defaultCoordinate = CLLocationCoordinate2DMake(9.0765, 7.3986)
     
     private var organizations = [Organization]() {
         didSet {
@@ -35,8 +37,6 @@ class ResourcesTableViewController: UIViewController {
         resourcesTableView.tableView.delegate = self
         resourcesTableView.tableView.dataSource = self
         resourcesTableView.map.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
         resourcesTableView.map.showsUserLocation = true
         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
         configureLongPress()
@@ -54,6 +54,50 @@ class ResourcesTableViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
+    
+    private func centerViewonMap(){
+        
+    }
+    
+    
+    private func locationAuthorizationStatus(){
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            resourcesTableView.map.showsUserLocation = true
+            break
+        case .denied:
+            showAlert(title: "Cancel", message: "Please authorize location access") { (alert) in
+                //
+            }
+        case .authorizedAlways:
+            break
+        case .restricted:
+            showAlert(title: "Cancel", message: "Please authorize location access") { (alert) in
+                //
+            }
+        case .notDetermined:
+            showAlert(title: "Cancel", message: "Please authorize location access") { (alert) in
+                self.locationManager.requestAlwaysAuthorization()
+            }
+        }
+    }
+    
+    private func setupLocationManager(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    
+    private func checkLocationServices(){
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            locationAuthorizationStatus()
+        } else {
+            showAlert(title: "Needed", message: "Please Authorize location services")
+        }
+    }
+    
+    
     private func configureLongPress(){
         longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPress.minimumPressDuration = 0.5
@@ -64,21 +108,16 @@ class ResourcesTableViewController: UIViewController {
         resourcesTableView.map.removeAnnotations(annotations)
         for organization in organizations {
             let annotation = MKPointAnnotation()
-            
-            annotation.title = organization.organizationName
-            geocoder.geocodeAddressString(organization.organizationCity) { (placemarks, error) in
-                if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
-                } else {
-                    if let placemark = placemarks?.first {
-                        let lat = placemark.location?.coordinate.latitude
-                        let long = placemark.location?.coordinate.longitude
-        
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: lat ?? 0.0, longitude: long ?? 0.0)
-                    }
-                }
+            guard let lat = organization.lat, let long = organization.long else {return}
+            if lat.isZero == true || long.isZero == true {
+                annotation.coordinate = defaultCoordinate
+            } else {
+                annotation.coordinate = CLLocationCoordinate2DMake(lat, long)
+
             }
+            annotation.title = organization.organizationName
             annotations.append(annotation)
+        
         }
         resourcesTableView.map.showAnnotations(annotations, animated: true)
     }
@@ -133,34 +172,39 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
 }
 extension ResourcesTableViewController: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            coordinateToSearch = myCurrentRegion.center
-        }
-        let currentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
-        resourcesTableView.map.setRegion(currentRegion, animated: true)
-    }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        myCurrentRegion = MKCoordinateRegion()
-        if let currentLocation = locations.last {
-            myCurrentRegion = MKCoordinateRegion(center: currentLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        } else {
-            myCurrentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .authorizedWhenInUse {
+//            coordinateToSearch = myCurrentRegion.center
+//        }
+//        let currentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
+//        resourcesTableView.map.setRegion(currentRegion, animated: true)
+//    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        myCurrentRegion = MKCoordinateRegion()
+//        if let currentLocation = locations.last {
+//            myCurrentRegion = MKCoordinateRegion(center: currentLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+//        } else {
+//            myCurrentRegion = MKCoordinateRegion(center: coordinateToSearch, latitudinalMeters: 500, longitudinalMeters: 500)
+//        }
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//    }
+    
 }
 
 extension ResourcesTableViewController:MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation {return nil}
-        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "MapView") as? MKMarkerAnnotationView
-        if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
-            annotationView?.canShowCallout = true
-            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
-        } else {
-            annotationView?.annotation = annotation
-        }
-        return annotationView
-    }
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if annotation is MKUserLocation {return nil}
+//        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "MapView") as? MKMarkerAnnotationView
+//        if annotationView == nil {
+//            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
+//            annotationView?.canShowCallout = true
+//            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
+//        } else {
+//            annotationView?.annotation = annotation
+//        }
+//        return annotationView
+//    }
 }

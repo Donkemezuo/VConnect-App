@@ -20,7 +20,7 @@ import Firebase
     private var imagePicker: UIImagePickerController!
     @IBOutlet weak var jobTitlePickerView: UIPickerView!
     @IBOutlet weak var organizationCategoryPickerView: UIPickerView!
-    // Admin info
+   
     @IBOutlet weak var adminFirstName: UITextView!
     @IBOutlet weak var adminLastName: UITextView!
     @IBOutlet weak var imageView: UIImageView!
@@ -38,7 +38,7 @@ import Firebase
     @IBOutlet weak var organizationGeoPoliticalZone: UITextView!
     @IBOutlet weak var organizationWebsite: UITextView!
     @IBOutlet weak var servicesOffered: UITextView!
-    // Organization Contact Person Info
+    
     @IBOutlet weak var organizationContactPersonFirstName: UITextView!
     @IBOutlet weak var organizationContactPersonLastName: UITextView!
     @IBOutlet weak var organizationContactPersonPhoneNumber: UITextView!
