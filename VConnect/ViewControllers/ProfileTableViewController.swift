@@ -10,14 +10,7 @@ import UIKit
 import FirebaseFirestore
 import Firebase
 
-
-
-protocol ProfileInformationDelegate: AnyObject {
-    func AdminBasicInformation(lastname: String, firstName: String, locationCity: String, imageData: Data)
-}
-
     class ProfileTableViewController: UITableViewController {
-    weak var delegate: ProfileInformationDelegate?
     private var imageData:Data?
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
@@ -118,18 +111,12 @@ protocol ProfileInformationDelegate: AnyObject {
             return
             
         }
-
         
-        delegate?.AdminBasicInformation(lastname: administratorslastName, firstName: administratorsfirstName, locationCity: organizationCity, imageData:imageData)
-        
-        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: adminJobTitle, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: organizationCategory, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
+        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: adminJobTitle, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: organizationCategory, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail, lat: LatAndLongDataManager.coordinate.lat, long: LatAndLongDataManager.coordinate.long)
         DatabaseManager.createOrganizationToDatabase(organization: organization)
         showAlert(title: "Successfully registered organization", message: "Successfully registered organization") { (alert) in
            self.signedIn()
         }
-        
-        print("Pressed")
-        
         
     }
     }

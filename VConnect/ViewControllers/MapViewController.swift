@@ -22,7 +22,32 @@ let locationManager = CLLocationManager()
         locationManager.startUpdatingLocation()
         locationMapView.mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        configureLongPress()
+        
     }
+    
+    private func configureLongPress(){
+        longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        longPress.minimumPressDuration = 0.5
+        locationMapView.mapView.addGestureRecognizer(longPress)
+    }
+    
+    @objc private func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        var isDone = false
+        let point = gestureRecognizer.location(in: locationMapView.mapView)
+        let coordinate = locationMapView.mapView.convert(point, toCoordinateFrom: locationMapView.mapView)
+        if !isDone {
+            switch gestureRecognizer.state {
+            case .began:
+                LatAndLongDataManager.coordinate.lat = coordinate.latitude
+                LatAndLongDataManager.coordinate.long = coordinate.longitude
+                isDone = true
+            default:
+                break
+            }
+        }
+    }
+    
 }
 
 extension MapViewController: UISearchBarDelegate {
@@ -57,19 +82,14 @@ extension MapViewController: UISearchBarDelegate {
                     self.locationMapView.mapView.addAnnotation(annotation)
                     
                     let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-                    let zoom = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-                    let region = MKCoordinateRegion.init(center: coordinate, span:zoom)
-                    self.locationMapView.mapView.setRegion(region, animated: true)
+                    let regionInmeters = MKCoordinateRegion.init(center: coordinate, latitudinalMeters: 9000, longitudinalMeters: 9000)
+                    self.locationMapView.mapView.setRegion(regionInmeters, animated: true)
                 }
             }
         }
-        
     }
-    
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
-    
     
 }

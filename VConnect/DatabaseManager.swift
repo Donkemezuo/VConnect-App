@@ -18,7 +18,6 @@ final class DatabaseManager {
     static let firebaseDataBase: Firestore = {
         let dataBase = Firestore.firestore()
         let settings = dataBase.settings
-    //settings.areTimestampsInSnapshotsEnabled = true
         dataBase.settings = settings
         return dataBase
     }()
@@ -27,7 +26,7 @@ final class DatabaseManager {
         var ref: DocumentReference? = nil
         
         ref = firebaseDataBase.collection("Organization").document((UserSession.init().getCurrentUser()?.uid)!)
-        ref?.setData(["organizationName": organization.organizationName,"organizationPhoneNumber": organization.organizationPhoneNumber, "organizationSecondaryPhoneNumber": organization.organizationSecondaryPhoneNumber, "organizationEmail": organization.organizationEmail, "organizationStreetAddress": organization.organizationStreetAddress, "organizationCity": organization.organizationCity, "organizationZipCode": organization.organizationZipCode, "organizationState": organization.organizationState, "organizationGeoPoliticalZone": organization.organizationGeoPoliticalZone, "organizationWebsite": organization.organizationWebsite, "organizationServices": organization.organizationServices, "organizationCategory": organization.organizationCategory, "organizationImage":organization.organizationImage, "contactPersonFirstName":organization.contactPersonFirstName, "contactPersonLastName":organization.contactPersonLastName,"contactPersonPhoneNumber":organization.contactPersonPhoneNumber,"contactPersonEmail":organization.contactPersonEmail, "adminFirstName":organization.adminFirstName, "adminLastame":organization.adminLastame, "whoAreYou":organization.whoAreYou], completion: { (error) in
+        ref?.setData(["organizationName": organization.organizationName,"organizationPhoneNumber": organization.organizationPhoneNumber, "organizationSecondaryPhoneNumber": organization.organizationSecondaryPhoneNumber, "organizationEmail": organization.organizationEmail, "organizationStreetAddress": organization.organizationStreetAddress, "organizationCity": organization.organizationCity, "organizationZipCode": organization.organizationZipCode, "organizationState": organization.organizationState, "organizationGeoPoliticalZone": organization.organizationGeoPoliticalZone, "organizationWebsite": organization.organizationWebsite, "organizationServices": organization.organizationServices, "organizationCategory": organization.organizationCategory, "organizationImage":organization.organizationImage, "contactPersonFirstName":organization.contactPersonFirstName, "contactPersonLastName":organization.contactPersonLastName,"contactPersonPhoneNumber":organization.contactPersonPhoneNumber,"contactPersonEmail":organization.contactPersonEmail, "adminFirstName":organization.adminFirstName, "adminLastame":organization.adminLastame, "whoAreYou":organization.whoAreYou, "lat": organization.lat, "long":organization.long], completion: { (error) in
             if let error = error {
                 print("Error: \(error) encountered while creating organization. Please try again")
             } else {
@@ -45,8 +44,9 @@ final class DatabaseManager {
             
         })
         
-        
         }
+    
+    
     }
     
 

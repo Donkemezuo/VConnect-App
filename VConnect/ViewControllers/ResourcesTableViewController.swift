@@ -18,6 +18,7 @@ class ResourcesTableViewController: UIViewController {
     private var coordinateToSearch = CLLocationCoordinate2D(latitude: 9.072264, longitude: 7.491302)
     private var geocoder = CLGeocoder()
     private var annotations = [MKAnnotation]()
+    
     private var organizations = [Organization]() {
         didSet {
             DispatchQueue.main.async {
@@ -26,6 +27,7 @@ class ResourcesTableViewController: UIViewController {
             }
         }
     }
+    
     private var myCurrentRegion = MKCoordinateRegion()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,7 +153,6 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
 extension ResourcesTableViewController:MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {return nil}
-        
         var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "MapView") as? MKMarkerAnnotationView
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MapView")

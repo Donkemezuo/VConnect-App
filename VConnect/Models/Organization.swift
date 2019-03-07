@@ -28,9 +28,10 @@ struct Organization {
     let contactPersonLastName: String
     let contactPersonPhoneNumber: String
     let contactPersonEmail: String
+    let lat: Double?
+    let long: Double?
     var formattedAddress:String {
-        let address = """
-        
+    let address = """
         \(organizationStreetAddress)
         \(organizationCity)
         \(organizationZipCode)
@@ -39,7 +40,7 @@ struct Organization {
         """
         return address
     }
-    init(adminFirstName: String, adminLastame: String, whoAreYou: String,organizationName: String,organizationPhoneNumber: String,organizationSecondaryPhoneNumber: String, organizationEmail: String, organizationStreetAddress: String, organizationCity: String,organizationZipCode: String, organizationState: String, organizationGeoPoliticalZone: String, organizationWebsite: String, organizationServices: String,organizationCategory: String, organizationImage: Data?,contactPersonFirstName: String,contactPersonLastName: String, contactPersonPhoneNumber: String, contactPersonEmail: String) {
+    init(adminFirstName: String, adminLastame: String, whoAreYou: String,organizationName: String,organizationPhoneNumber: String,organizationSecondaryPhoneNumber: String, organizationEmail: String, organizationStreetAddress: String, organizationCity: String,organizationZipCode: String, organizationState: String, organizationGeoPoliticalZone: String, organizationWebsite: String, organizationServices: String,organizationCategory: String, organizationImage: Data?,contactPersonFirstName: String,contactPersonLastName: String, contactPersonPhoneNumber: String, contactPersonEmail: String, lat: Double, long: Double) {
         self.adminFirstName = adminFirstName
         self.adminLastame = adminLastame
         self.whoAreYou = whoAreYou
@@ -60,6 +61,8 @@ struct Organization {
         self.contactPersonLastName = contactPersonLastName
         self.contactPersonPhoneNumber = contactPersonPhoneNumber
         self.contactPersonEmail = contactPersonEmail
+        self.lat = lat
+        self.long = long
     }
     
     init(dict: [String: Any]) {
@@ -83,6 +86,8 @@ struct Organization {
         self.contactPersonFirstName = dict["contactPersonFirstName"] as? String ?? "no contact person's first name"
         self.contactPersonLastName = dict["contactPersonLastName"] as? String ?? "no contact person's last name"
         self.contactPersonPhoneNumber = dict["contactPersonPhoneNumber"] as? String ?? "no contact person's phone number"
+        self.lat = dict["lat"] as? Double ?? 0.0
+        self.long = dict["long"] as? Double ?? 0.0
         
     }
     

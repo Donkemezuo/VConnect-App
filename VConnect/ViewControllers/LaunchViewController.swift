@@ -33,9 +33,7 @@ class LaunchViewController: UIViewController {
     }
     
     @objc private func addminButtonPressed(gesture: UITapGestureRecognizer){
-       //present(AdminLoginViewController(), animated: true, completion: nil)
         let destinationVC = UINavigationController.init(rootViewController: AdminLoginViewController())
-       // navigationController?.pushViewController(destinationVC, animated: true)
         present(destinationVC, animated: true, completion: nil)
     }
     
