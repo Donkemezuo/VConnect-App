@@ -9,9 +9,8 @@
 import UIKit
 import FirebaseFirestore
 import Firebase
-@IBDesignable
 
-class ProfileTableViewController: UITableViewController {
+    class ProfileTableViewController: UITableViewController {
     private var imageData:Data?
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
@@ -21,7 +20,7 @@ class ProfileTableViewController: UITableViewController {
     private var imagePicker: UIImagePickerController!
     @IBOutlet weak var jobTitlePickerView: UIPickerView!
     @IBOutlet weak var organizationCategoryPickerView: UIPickerView!
-    // Admin info
+   
     @IBOutlet weak var adminFirstName: UITextView!
     @IBOutlet weak var adminLastName: UITextView!
     @IBOutlet weak var imageView: UIImageView!
@@ -39,9 +38,6 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var organizationGeoPoliticalZone: UITextView!
     @IBOutlet weak var organizationWebsite: UITextView!
     @IBOutlet weak var servicesOffered: UITextView!
-   
-    
-    // Organization Contact Person Info
     
     @IBOutlet weak var organizationContactPersonFirstName: UITextView!
     @IBOutlet weak var organizationContactPersonLastName: UITextView!
@@ -52,7 +48,6 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         saveButtonSetup()
         setProfilePicture()
-        setImageViewLayOut()
         imageView.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1).withAlphaComponent(0.5)
         jobTitlePickerView.delegate = self
         jobTitlePickerView.dataSource = self
@@ -60,11 +55,8 @@ class ProfileTableViewController: UITableViewController {
         organizationCategoryPickerView.dataSource = self
     }
     
-    private func setImageViewLayOut(){
-        imageView.layer.cornerRadius = imageView.bounds.width/2
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-    }
+ 
+    
     private func setProfilePicture(){
         imageView.isUserInteractionEnabled = true
         tap = UITapGestureRecognizer(target: self, action: #selector(imageLibraryAccess))
@@ -89,7 +81,14 @@ class ProfileTableViewController: UITableViewController {
       let mapView = MapViewController()
         navigationController?.pushViewController(mapView, animated: true)
     }
+    
+    private func signedIn(){
+        let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
+        present(signedInAdmin, animated: true)
+    }
+    
     @objc private func saveButtonPressed(){
+        
        guard let administratorsfirstName = adminFirstName.text,
         let administratorslastName = adminLastName.text,
         let organizationName = organizationName.text,
@@ -106,17 +105,22 @@ class ProfileTableViewController: UITableViewController {
         let organizationContactPersonFirstName = organizationContactPersonFirstName.text,
         let organizationContactPersonLastName = organizationContactPersonLastName.text,
         let organizationContactPersonPhoneNumber = organizationContactPersonPhoneNumber.text,
-        let organizationContactPersonEmail = organizationContactPersonEmail.text
-        else {return}
+        let organizationContactPersonEmail = organizationContactPersonEmail.text, let imageData = imageView.image?.jpegData(compressionQuality: 0.5)
+        else {
+            
+            return
+            
+        }
         
-        //var data: Data?
-        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: adminJobTitle, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: organizationCategory, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail)
+        let organization = Organization.init(adminFirstName: administratorsfirstName, adminLastame: administratorslastName, whoAreYou: adminJobTitle, organizationName: organizationName, organizationPhoneNumber: organizationPhoneNumber, organizationSecondaryPhoneNumber: organizationSecondaryPhoneNumber, organizationEmail: organizationEmailAddress, organizationStreetAddress: organizationStress, organizationCity: organizationCity, organizationZipCode: organizationZipcode, organizationState: organizationState, organizationGeoPoliticalZone: organizationGeoPoliticalZone, organizationWebsite: organizationWebsite, organizationServices: servicesOffered, organizationCategory: organizationCategory, organizationImage: imageData, contactPersonFirstName: organizationContactPersonFirstName, contactPersonLastName: organizationContactPersonLastName, contactPersonPhoneNumber: organizationContactPersonPhoneNumber, contactPersonEmail: organizationContactPersonEmail, lat: LatAndLongDataManager.coordinate.lat, long: LatAndLongDataManager.coordinate.long)
         DatabaseManager.createOrganizationToDatabase(organization: organization)
-        showAlert(title: "Successfully registered organization", message: "Successfully registered organization")
+        showAlert(title: "Successfully registered organization", message: "Successfully registered organization") { (alert) in
+           self.signedIn()
+        }
+        
     }
-}
-
-extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    }
+    extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -130,13 +134,12 @@ extension ProfileTableViewController: UIImagePickerControllerDelegate, UINavigat
         }
         dismiss(animated: true, completion: nil)
     }
-}
+    }
 
-extension ProfileTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    extension ProfileTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
             return jobs.count
@@ -154,28 +157,23 @@ extension ProfileTableViewController: UIPickerViewDelegate, UIPickerViewDataSour
             return jobs[row]
         } else {
             if pickerView.tag == 2 {
-                
                 return categories[row]
             }
         }
         return ""
     }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         if pickerView.tag == 1 {
             adminJobTitle = jobs[row]
         } else {
             if pickerView.tag == 2 {
-                
                 organizationCategory = categories[row]
             }
-            
         }
     }
-}
-
-
+    }
+    
+    
 
 
 

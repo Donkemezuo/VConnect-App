@@ -29,6 +29,13 @@ class AdminLoginViewController: UIViewController {
         let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
         present(signedInAdmin, animated: true)
 }
+
+    private func segue(){
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let destination = storyboard.instantiateViewController(withIdentifier: "ProfileTableViewController")
+        let nav = UINavigationController(rootViewController: destination)
+        navigationController?.present(nav, animated: true, completion: nil)
+    }
 }
 extension AdminLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -62,7 +69,7 @@ extension AdminLoginViewController: UserSessionAccountCreationDelegate{
         if let email = user.email {
             showAlert(title: "Account Created", message: "Account Created using \(email)") { (alertController) in
                 let okAction = UIAlertAction(title: "Ok", style: .default) { [unowned self] _ in
-                    self.presentInitialTabBarController()
+                    self.segue()
                 }
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true)

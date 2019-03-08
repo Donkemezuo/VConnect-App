@@ -91,7 +91,7 @@ class SignInView: UIView {
         addSubview(profileImage)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: topAnchor, constant: 120).isActive = true
-        profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120).isActive = true
+        profileImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 95).isActive = true
         profileImage.heightAnchor.constraint(equalToConstant: 180).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 180).isActive = true
     }

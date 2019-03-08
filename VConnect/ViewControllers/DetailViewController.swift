@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
         self.view.addSubview(detailVC)
          view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
         donateButton()
+        setupDetailVC()
     }
     private func donateButton(){
         barbuttonItem = UIBarButtonItem.init(title: "Donate", style: .plain, target: self, action: #selector(donateButtonClicked))
@@ -54,9 +55,9 @@ class DetailViewController: UIViewController {
     }
     
     
-    init(name: Organization){
+    init(organizationDetails: Organization){
         super.init(nibName: nil, bundle: nil)
-          setupDetailVC()
+        self.organization = organizationDetails
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,17 +65,17 @@ class DetailViewController: UIViewController {
     }
     
    private func setupDetailVC(){
-    detailVC.contactPhoneNumber.text =  organization.contactPersonPhoneNumber
-    detailVC.organizationAddress.text = """
-    \(organization.organizationStreetAddress)
-    \(organization.organizationZipCode)
-    \(organization.organizationState)
-    \(organization.organizationCity)
-    
-    """
-    
+  
+    detailVC.contactEmail.text = organization.contactPersonEmail
+    detailVC.contactPhoneNumber.text = organization.contactPersonPhoneNumber
+    if let imageData = organization.organizationImage {
+        
+        detailVC.imageView.image = UIImage.init(data: imageData)
+
+    }
+    detailVC.organizationAddress.text = organization.formattedAddress
+    detailVC.organizationDescription.text = organization.organizationServices
     detailVC.organizationWebsite.text = organization.organizationWebsite
-    
     }
     
     
