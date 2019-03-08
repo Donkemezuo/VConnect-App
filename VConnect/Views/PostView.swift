@@ -9,7 +9,15 @@
 import UIKit
 
 class PostView: UIView {
-
+    
+    public lazy var postTitle:UITextField = {
+        let postTitle = UITextField()
+            postTitle.placeholder = "Please enter title"
+            postTitle.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+            postTitle.font = UIFont.boldSystemFont(ofSize: 20)
+            postTitle.textColor = .black
+        return postTitle
+    }()
     public lazy var postView: UITextView = {
         let postView = UITextView()
         postView.text = "Write a post"
@@ -19,7 +27,6 @@ class PostView: UIView {
         return postView
         
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -37,14 +44,26 @@ class PostView: UIView {
     }
     
     private func setConstrains(){
+        setupTitleLabel()
+        setupPostView()
+    }
+    
+    private func setupTitleLabel(){
+        addSubview(postTitle)
+        postTitle.translatesAutoresizingMaskIntoConstraints = false
+        postTitle.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        postTitle.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        postTitle.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        postTitle.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.06).isActive = true
+    }
+
+    private func setupPostView(){
         addSubview(postView)
-        
         postView.translatesAutoresizingMaskIntoConstraints = false
-        postView.topAnchor.constraint(lessThanOrEqualTo: topAnchor).isActive = true
-        postView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        postView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        postView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+        postView.topAnchor.constraint(equalTo:postTitle.bottomAnchor, constant: 0.5).isActive = true
+            postView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            postView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            postView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
 

@@ -12,4 +12,5 @@ import Foundation
 struct DataBaseKeys {
     static let organizationCollectionKey = "Organization"
     static let userOrganizations = "userOrganization"
+    static let postCollectionKey = "Post"
 }
