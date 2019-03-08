@@ -19,59 +19,64 @@ class DetailView: UIView {
     
 
     
-    public lazy var organizationAddress: UITextView = {
-        let address = UITextView()
+    public lazy var organizationAddress: UILabel = {
+        let address = UILabel()
             address.font = UIFont.boldSystemFont(ofSize: 14)
             address.textAlignment = .left
             address.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
-            address.dataDetectorTypes = .address
+            //address.dataDetectorTypes = .address
             address.layer.cornerRadius = 5.0
+            address.numberOfLines = 0
             address.text = "Address: 1710 Popham avenue, Bronx, New York 10453"
         
         return address
     }()
     
-    public lazy var contactEmail: UITextView = {
-        let email = UITextView()
+    public lazy var contactEmail: UILabel = {
+        let email = UILabel()
             email.font = UIFont.boldSystemFont(ofSize: 14)
             email.textAlignment = .left
             email.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
-            email.dataDetectorTypes = .all
+           // email.dataDetectorTypes = .all
             email.text = "Email: raymonddonkemezuo@pursuit.org"
             email.layer.cornerRadius = 5.0
+            email.numberOfLines = 0
         return email
         
     }()
     
-    public lazy var contactPhoneNumber: UITextView = {
-        let phoneNumber = UITextView()
+    public lazy var contactPhoneNumber: UILabel = {
+        let phoneNumber = UILabel()
             phoneNumber.font = UIFont.boldSystemFont(ofSize: 14)
             phoneNumber.textAlignment = .left
             phoneNumber.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
-            phoneNumber.dataDetectorTypes = .phoneNumber
+           // phoneNumber.dataDetectorTypes = .phoneNumber
             phoneNumber.text = "Phone Number: 3129376040"
             phoneNumber.layer.cornerRadius = 5.0
+            phoneNumber.numberOfLines = 0
         return phoneNumber
         
     }()
     
     
-    public lazy var organizationDescription:UITextView = {
-        let description = UITextView()
+    public lazy var organizationDescription:UILabel = {
+        let description = UILabel()
         description.backgroundColor = UIColor.green.withAlphaComponent(0.5)
         description.font = UIFont.boldSystemFont(ofSize: 14)
         description.text = "Organization description and services offered goes here"
         description.layer.cornerRadius = 5.0
+        description.numberOfLines = 0
         return description
         
     }()
     
-    public lazy var organizationWebsite:UITextView = {
-        let website = UITextView()
+    public lazy var organizationWebsite:UILabel = {
+        let website = UILabel()
         website.text = "website: www.website.com"
         website.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
         website.layer.cornerRadius = 5.0
         website.font = UIFont.boldSystemFont(ofSize: 14)
+        website.numberOfLines = 0
         return website
     }()
     
@@ -107,32 +112,32 @@ class DetailView: UIView {
         imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -550).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -460).isActive = true
     
         organizationDescription.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
-        organizationDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        organizationDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        organizationDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        organizationDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
         organizationDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -300).isActive = true
         
         organizationAddress.topAnchor.constraint(equalTo: organizationDescription.bottomAnchor, constant: 5).isActive = true
         organizationAddress.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         organizationAddress.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-        organizationAddress.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -260).isActive = true
+        organizationAddress.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -220).isActive = true
         
         contactPhoneNumber.topAnchor.constraint(equalTo: organizationAddress.bottomAnchor, constant: 5).isActive = true
         contactPhoneNumber.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        contactPhoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        contactPhoneNumber.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -220).isActive = true
+        contactPhoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        contactPhoneNumber.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -180).isActive = true
         
         contactEmail.topAnchor.constraint(equalTo: contactPhoneNumber.bottomAnchor, constant: 5).isActive = true
         contactEmail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        contactEmail.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        contactEmail.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -180).isActive = true
+        contactEmail.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        contactEmail.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -140).isActive = true
         
         organizationWebsite.topAnchor.constraint(equalTo: contactEmail.bottomAnchor, constant: 5).isActive = true
         organizationWebsite.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
-        organizationWebsite.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        organizationWebsite.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -140).isActive = true
+        organizationWebsite.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        organizationWebsite.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100).isActive = true
         
     }
     

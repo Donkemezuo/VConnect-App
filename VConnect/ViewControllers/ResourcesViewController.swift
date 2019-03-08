@@ -74,15 +74,19 @@ extension ResourcesViewController: UICollectionViewDataSource, UICollectionViewD
         cell.layer.borderWidth = 1
         return cell
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCategory =  categories[indexPath.row]
-        if let organizationsInSelectedCategory = organizationDict[selectedCategory] {
-            let nextTableView = ResourcesTableViewController(organizationsInCategory:organizationsInSelectedCategory)
-            
-            self.navigationController?.pushViewController(nextTableView, animated: true)
-        }
+        //let selectedCategory =  categories[indexPath.row]
+        
+//        if let organizationsInSelectedCategory = organizationDict[selectedCategory] {
+//            let nextTableView = ResourcesTableViewController(organizationsInCategory:organizationsInSelectedCategory)
+//
+//            self.navigationController?.pushViewController(nextTableView, animated: true)
+//        }
+        
+        let selectedCategory = categories[indexPath.row]
+        let organizationsToSet = organizations.filter {$0.organizationCategory == selectedCategory}
+        let nextTV = ResourcesTableViewController(organizationsInCategory: organizationsToSet)
+        self.navigationController?.pushViewController(nextTV, animated: true)
         
         }
         

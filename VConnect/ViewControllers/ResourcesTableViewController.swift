@@ -166,7 +166,7 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let organization = organizations[indexPath.row]
-        let detailedVC = DetailViewController(name: organization)
+        let detailedVC = DetailViewController(organizationDetails: organization)
         self.navigationController?.pushViewController(detailedVC, animated: true)
     }
 }
