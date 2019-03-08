@@ -10,9 +10,9 @@ import UIKit
 
 class TimeLineViewController: UIViewController {
     let timelineView = TimelineView()
-    var barButton = UIBarButtonItem()
-    var postVC = PostViewController()
-    
+    private var barButton = UIBarButtonItem()
+    private var postVC = PostViewController()
+    private var tapGesture: UITapGestureRecognizer!
     private var news = [ArticleInfo](){
         didSet {
             DispatchQueue.main.async {
@@ -30,8 +30,20 @@ class TimeLineViewController: UIViewController {
         timelineView.collectionView.dataSource = self
         UserPost()
        newsSetup()
-        
+        setupBarButtonItem()
     }
+    
+   
+    private func setupBarButtonItem(){
+        barButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed))
+        navigationItem.leftBarButtonItem =  barButton
+    }
+    
+    @objc private func cancelButtonPressed(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     private func newsSetup(){
         GlobalNewsAPIClient.globalNewsAPIClient { (error, news) in
@@ -46,13 +58,15 @@ class TimeLineViewController: UIViewController {
     }
     private func UserPost() {
         
-        timelineView.postButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        timelineView.postButton.isUserInteractionEnabled = true
+        tapGesture = UITapGestureRecognizer(target: self, action:#selector(buttonPressed))
+        timelineView.postButton.addGestureRecognizer(tapGesture)
     
     }
     
     @objc private func buttonPressed(){
-        
         navigationController?.pushViewController(postVC, animated: true)
+        //navigationController?.present(postVC, animated: true, completion: nil)
         
         
     }

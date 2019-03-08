@@ -12,6 +12,7 @@ import FirebaseAuth
 class AdminLoginViewController: UIViewController {
     let profilePage = LoginView()
     private var usersession: UserSession!
+    private var barbuttonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class AdminLoginViewController: UIViewController {
         usersession.userSessionSignInDelegate = self
         profilePage.delegate = self
          view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
+        setupBarButtonItem()
     }
    private func presentInitialTabBarController() {
         let signedInAdmin = TabBarViewController(accountType: AccountType.admin)
@@ -36,6 +38,16 @@ class AdminLoginViewController: UIViewController {
         let nav = UINavigationController(rootViewController: destination)
         navigationController?.present(nav, animated: true, completion: nil)
     }
+    
+    private func setupBarButtonItem(){
+        barbuttonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed))
+        navigationItem.leftBarButtonItem =  barbuttonItem
+    }
+
+    @objc private func cancelButtonPressed(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 extension AdminLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

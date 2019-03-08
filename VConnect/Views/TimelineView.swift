@@ -10,11 +10,12 @@ import UIKit
 
 class TimelineView: UIView {
 
-      public lazy var postButton:UIButton = {
-        let postButton = UIButton()
-            postButton.setTitle("Write a post", for: .normal)
+      public lazy var postButton:UILabel = {
+        let postButton = UILabel()
+            postButton.text = "Write a post"
             postButton.backgroundColor = .white
-            postButton.titleLabel?.textColor = .red
+            postButton.textColor = .gray
+            postButton.textAlignment = .center
             postButton.layer.cornerRadius = 10.0
         
         return postButton

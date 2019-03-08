@@ -11,6 +11,10 @@ import UIKit
 class PostViewController: UIViewController {
     let postView = PostView()
     var barButton = UIBarButtonItem()
+   // private var  usersession: UserSession!
+    
+    private let usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
+   // private var imageData: Data?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,26 +22,35 @@ class PostViewController: UIViewController {
         view.backgroundColor = .green
         setupNavigationBarItem()
     }
-
+    
     private func setupNavigationBarItem(){
-        barButton = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(cameraButtonPressed))
+        barButton = UIBarButtonItem.init(title: "Post", style: .done, target: self, action: #selector(PostButtonPressed))
         navigationItem.rightBarButtonItem = barButton
-        barButton.isEnabled = false
-        
-        
+        barButton.isEnabled = true
        barButton = UIBarButtonItem.init(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed))
        navigationItem.leftBarButtonItem = barButton
     }
-
     
-    @objc private func cameraButtonPressed(){
-        // TODO:
-        // implement data passage to the timeline through the database
-        
-        if !postView.postView.text.isEmpty == true {
-            barButton.isEnabled = true
+    @objc private func PostButtonPressed(){
+     
+        guard let title = postView.postTitle.text, let postDetails = postView.postView.text,
+            !title.isEmpty,
+            !postDetails.isEmpty
+            else {
+                showAlert(title: "Missing Fields", message: "Cannot post to timeline without title or post details")
+                return
+                
         }
-    
+        
+        guard let currentUser = usersession?.getCurrentUser(), let postersName = currentUser.displayName else {return}
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.date(from: "dd.MM.yyyy")
+        let postedDate = formatter.string(from: date)
+        let adMinPost = Post.init(poster: postersName, storyTitle: title, storyDetails: postDetails, postedDate: postedDate)
+        print(" Posted date is = \(postedDate)")
+        DatabaseManager.createApostToDatabase(Post: adMinPost)
+        showAlert(title: "Success", message: "Successfully created post to the timeline")
     }
     
     @objc private func cancelButtonPressed(){

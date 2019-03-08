@@ -43,6 +43,8 @@ import Firebase
     @IBOutlet weak var organizationContactPersonLastName: UITextView!
     @IBOutlet weak var organizationContactPersonPhoneNumber: UITextView!
     @IBOutlet weak var organizationContactPersonEmail: UITextView!
+        
+        private let usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +90,16 @@ import Firebase
     }
     
     @objc private func saveButtonPressed(){
+        
+        let displayName = adminFirstName.text + " " + adminLastName.text
+        let user = usersession?.getCurrentUser()
+        let request = user?.createProfileChangeRequest()
+        request?.displayName = displayName
+        request?.commitChanges(completion: { (error) in
+            if let error = error {
+                print("updated user error: \(error.localizedDescription)")
+            }
+        })
         
        guard let administratorsfirstName = adminFirstName.text,
         let administratorslastName = adminLastName.text,

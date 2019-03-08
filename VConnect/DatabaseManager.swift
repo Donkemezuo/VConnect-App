@@ -46,6 +46,27 @@ final class DatabaseManager {
         
         }
     
+    static func createApostToDatabase(Post: Post) {
+        var ref: DocumentReference? = nil
+        ref = firebaseDataBase.collection("Post").document((UserSession.init().getCurrentUser()?.uid)!)
+        ref?.setData(["poster": Post.postedBy, "storyTitle": Post.storyTitle, "storyDetails":Post.storyDetails, "postedDate":Post.postedDate], completion: { (error) in
+            if let error = error {
+                print("Error: \(error) encountered while trying to post story. Please try again")
+            
+            } else {
+                print("Story posted using ref: \(ref?.documentID ?? "no user id")")
+                DatabaseManager.firebaseDataBase.collection(DataBaseKeys.postCollectionKey).document((ref?.documentID)!).updateData(["dbReference": ref?.documentID], completion: { (error) in
+                    if let error = error {
+                        print("Error updating fields: \(error)")
+                    } else {
+                        print("fields updated")
+                    }
+                })
+            }
+        })
+    }
+    
+    
     
     }
     

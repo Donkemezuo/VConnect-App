@@ -11,8 +11,6 @@ import Foundation
 final class GlobalNewsAPIClient {
 
     static func globalNewsAPIClient(completionHandler: @escaping(Error?,[ArticleInfo]?) -> Void) {
-        
-       // let endpointUrl = "https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=\(Secretkeys.newsAPIKey)"
         let endpointUrl = "https://newsapi.org/v2/everything?q=world&from=2019-02-17&sortBy=publishedAt&apiKey=\(Secretkeys.newsAPIKey)"
         
         NetworkHelper.shared.performDataTask(endpointURLString: endpointUrl) { (error, data) in

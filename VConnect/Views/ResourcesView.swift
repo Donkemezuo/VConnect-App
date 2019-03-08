@@ -17,16 +17,14 @@ class ResourcesView: UIView {
         cellLayout.sectionInset = UIEdgeInsets.init(top: 20, left: 10, bottom: 20, right: 10)
         cellLayout.itemSize = CGSize.init(width: 400, height: 300)
         let resourcesCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: cellLayout)
-        resourcesCollectionView.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+       resourcesCollectionView.backgroundColor = UIColor.red.withAlphaComponent(0.2)
         return resourcesCollectionView
     }()
-   
         override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInt()
         self.collectionView.register(ResourcesCollectionViewCell.self, forCellWithReuseIdentifier: "ResourcesCell")
     }
-    
         required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInt()
@@ -42,5 +40,4 @@ class ResourcesView: UIView {
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
     }
-    
 }

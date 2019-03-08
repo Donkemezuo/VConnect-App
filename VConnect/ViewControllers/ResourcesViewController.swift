@@ -35,6 +35,7 @@ class ResourcesViewController: UIViewController {
         getOrganizationData()
         navigationItem.title = "Categories of Organizations"
          view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
+        //view.setColorGradients(view: resourcesView.collectionView)
     }
     
     private func getOrganizationData(){
