@@ -13,8 +13,8 @@ class TableView: UIView {
     
       public lazy var tableView: UITableView = {
         let resourcesTableView = UITableView()
-        resourcesTableView.backgroundColor = UIColor.green.withAlphaComponent(0.9)
-        
+        //resourcesTableView.backgroundColor = UIColor.green.withAlphaComponent(0.9)
+        resourcesTableView.backgroundColor = .red
         return resourcesTableView
     }()
     

@@ -50,11 +50,20 @@ import Firebase
         super.viewDidLoad()
         saveButtonSetup()
         setProfilePicture()
-        imageView.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1).withAlphaComponent(0.5)
+        //imageView.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1).withAlphaComponent(0.5)
         jobTitlePickerView.delegate = self
         jobTitlePickerView.dataSource = self
         organizationCategoryPickerView.delegate = self
         organizationCategoryPickerView.dataSource = self
+        
+        var gradient: CAGradientLayer!
+        
+        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
+        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
+        gradient = CAGradientLayer()
+        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
+        gradient.frame = view.bounds
+        view.layer.insertSublayer(gradient, at: 0)
     }
     
  

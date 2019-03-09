@@ -21,5 +21,7 @@ extension UIViewController {
     func showAlert(title: String, message: String, handler: @escaping (UIAlertController) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         handler(alertController)
+        
+       // present(alertController, animated: true, completion: nil)
     }
 }

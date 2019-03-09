@@ -11,7 +11,9 @@ import UIKit
 class SignInView: UIView {
     public lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+        imageView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        imageView.layer.borderWidth = 5
+        imageView.layer.borderColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
         return imageView
     }()
     

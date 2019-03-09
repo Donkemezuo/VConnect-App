@@ -34,8 +34,17 @@ class ResourcesViewController: UIViewController {
         resourcesView.collectionView.delegate = self
         getOrganizationData()
         navigationItem.title = "Categories of Organizations"
-         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
-        //view.setColorGradients(view: resourcesView.collectionView)
+        var gradient: CAGradientLayer!
+        
+        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
+        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
+//        gradient = CAGradientLayer()
+//        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
+//        gradient.frame = view.bounds
+//        view.layer.insertSublayer(gradient, at: 0)
+//        view.backgroundColor = .green
+//        resourcesView.collectionView.layer.insertSublayer(gradient, at: 1)
+        view.backgroundColor = secondColor
     }
     
     private func getOrganizationData(){
@@ -73,17 +82,10 @@ extension ResourcesViewController: UICollectionViewDataSource, UICollectionViewD
         cell.label.text = category
         cell.label.numberOfLines = 0
         cell.layer.borderWidth = 1
+        cell.backgroundColor = .white
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let selectedCategory =  categories[indexPath.row]
-        
-//        if let organizationsInSelectedCategory = organizationDict[selectedCategory] {
-//            let nextTableView = ResourcesTableViewController(organizationsInCategory:organizationsInSelectedCategory)
-//
-//            self.navigationController?.pushViewController(nextTableView, animated: true)
-//        }
-        
         let selectedCategory = categories[indexPath.row]
         let organizationsToSet = organizations.filter {$0.organizationCategory == selectedCategory}
         let nextTV = ResourcesTableViewController(organizationsInCategory: organizationsToSet)
