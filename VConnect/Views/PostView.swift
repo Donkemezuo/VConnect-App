@@ -13,17 +13,17 @@ class PostView: UIView {
     public lazy var postTitle:UITextField = {
         let postTitle = UITextField()
             postTitle.placeholder = "Please enter title"
-            postTitle.backgroundColor = UIColor.red.withAlphaComponent(0.7)
             postTitle.font = UIFont.boldSystemFont(ofSize: 20)
             postTitle.textColor = .black
+            postTitle.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         return postTitle
     }()
     public lazy var postView: UITextView = {
         let postView = UITextView()
         postView.text = "Write a post"
         postView.textColor = .black
-        postView.backgroundColor = UIColor.red.withAlphaComponent(0.7)
         postView.font = UIFont.boldSystemFont(ofSize: 20)
+        postView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         return postView
         
     }()

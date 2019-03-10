@@ -12,25 +12,28 @@ class TimelineCollectionViewCell: UICollectionViewCell {
     
     public lazy var textView:UILabel = {
         let textView = UILabel()
-        textView.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1).withAlphaComponent(0.5)
+        textView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         textView.font =  UIFont.boldSystemFont(ofSize: 20)
         textView.numberOfLines = 0
+        textView.layer.borderWidth = 0.5
         return textView
     }()
     
     public lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-            imageView.backgroundColor = #colorLiteral(red: 0.4397589564, green: 0, blue: 0.04436910897, alpha: 0.5391427654).withAlphaComponent(0.5)
+            imageView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             imageView.image = UIImage.init(named: "newsLogo")
+            imageView.layer.borderWidth = 0.5
         return imageView
         
     }()
     
       public lazy var poster:UILabel = {
         let label = UILabel()
-        label.backgroundColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1).withAlphaComponent(0.5)
+        label.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         label.text = "Source"
         label.sizeToFit()
+        label.layer.borderWidth = 0.5
         return label
     }()
     
@@ -61,13 +64,13 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.70).isActive = true
         
         textView.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-        textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.20).isActive = true
         
         poster.topAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
-        poster.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        poster.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -10).isActive = true
+        poster.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        poster.trailingAnchor.constraint(equalTo: trailingAnchor,constant: 0).isActive = true
         poster.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
  
     }

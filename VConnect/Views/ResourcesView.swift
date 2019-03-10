@@ -17,7 +17,7 @@ class ResourcesView: UIView {
         cellLayout.sectionInset = UIEdgeInsets.init(top: 20, left: 10, bottom: 20, right: 10)
         cellLayout.itemSize = CGSize.init(width: 400, height: 300)
         let resourcesCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: cellLayout)
-
+            resourcesCollectionView.backgroundColor = .white
         return resourcesCollectionView
     }()
         override init(frame: CGRect) {
