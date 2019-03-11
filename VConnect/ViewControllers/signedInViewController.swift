@@ -26,8 +26,6 @@ class signedInViewController: UIViewController {
         usersession.userSessionSignOutDelegate = self
          logOut()
         getCurrentUserInfo()
-       // BackgroundColorManager.setColorGradients(view: signInPage)
-    
         var gradient: CAGradientLayer!
         
         let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
@@ -44,7 +42,7 @@ class signedInViewController: UIViewController {
             if let organizationInfo = snapshot?.data() {
              let adminInfo = Organization.init(dict: organizationInfo)
                 self?.signInPage.adminName.text = "\(adminInfo.adminFirstName) \(adminInfo.adminLastame)"
-                self?.signInPage.organizationName.text = adminInfo.organizationName
+                self?.signInPage.organizationName.text = "Organization Name: \( adminInfo.organizationName)"
                 self?.signInPage.adminAddress.text = "📍Location: \(adminInfo.organizationCity)"
                 self?.signInPage.profileImage.image = UIImage.init(data: adminInfo.organizationImage!)
                 

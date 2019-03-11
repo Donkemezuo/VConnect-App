@@ -10,20 +10,42 @@ import UIKit
 
 class PostViewController: UIViewController {
     let postView = PostView()
-    var barButton = UIBarButtonItem()
-    private let usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
+    var postBarbuttonItem = UIBarButtonItem()
+    var cameraBarButtonItem = UIBarButtonItem()
+    private var usersession: UserSession!
+    
+    private var placeholderText = "Write a post"
   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(postView)
-        setupNavigationBarItem()
+        setupNavigationBarItems()
         view.backgroundColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).withAlphaComponent(0.5)
+        postView.postView.delegate = self
+        usersession = (UIApplication.shared.delegate as!
+            AppDelegate).usersession
+        setupCameraButton()
+        setupPostBarButtonItem()
+        
     }
     
-    private func setupNavigationBarItem(){
-        barButton = UIBarButtonItem.init(title: "Post", style: .done, target: self, action: #selector(PostButtonPressed))
-        navigationItem.rightBarButtonItem = barButton
-        barButton.isEnabled = true
+    private func setupCameraButton(){
+        cameraBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .camera, target: self, action: #selector(cameraButtonPressed))
+    }
+    
+    @objc private func cameraButtonPressed(){
+        
+    }
+    
+    private func setupPostBarButtonItem(){
+         postBarbuttonItem = UIBarButtonItem.init(title: "Post", style: .done, target: self, action: #selector(PostButtonPressed))
+        postBarbuttonItem.isEnabled = true
+
+    }
+    
+    private func setupNavigationBarItems(){
+        //self.navigationItem.rightBarButtonItems = [postBarbuttonItem, cameraBarButtonItem]
+        self.navigationItem.setRightBarButtonItems([postBarbuttonItem, cameraBarButtonItem], animated: true)
     }
     
     @objc private func PostButtonPressed(){
@@ -58,7 +80,16 @@ extension PostViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         postView.postView.becomeFirstResponder()
-        barButton.isEnabled = true
+        if postView.postView.text == placeholderText {
+            postView.postView.textColor = .black
+            postView.postView.text = ""
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if postView.postView.text == "" {
+            postView.postView.textColor = .lightGray
+            postView.postView.text = placeholderText
+        }
     }
 }
 

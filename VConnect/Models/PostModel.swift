@@ -12,11 +12,9 @@ struct Post {
     let postedBy: String
     let storyTitle: String
     let storyDetails: String
-    //let image: Data?
     let postedDate: String?
     
     init(postedBy: String, storyTitle: String, storyDetails: String,postedDate: String) {
-        //self.image = image
         self.postedDate = postedDate
         self.postedBy = postedBy
         self.storyDetails = storyDetails
@@ -27,7 +25,7 @@ struct Post {
         self.postedBy = dict["postedBy"] as? String ?? "no poster name"
         self.storyDetails = dict["storyDetails"] as? String ?? "No story details"
         self.storyTitle = dict["storyTitle"] as? String ?? "No story title"
-        self.postedDate = dict["postedDate"] as! String ?? "No date"
+        self.postedDate = dict["postedDate"] as? String
       
         
     }

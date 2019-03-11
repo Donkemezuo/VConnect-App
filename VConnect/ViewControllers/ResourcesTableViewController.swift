@@ -19,6 +19,7 @@ class ResourcesTableViewController: UIViewController {
     private var annotations = [MKAnnotation]()
     private var longPress: UILongPressGestureRecognizer!
     private var defaultCoordinate = CLLocationCoordinate2DMake(9.0765, 7.3986)
+    private var directionsArray = [MKDirections]()
     private var isSearching = false
     private var organizations = [Organization]() {
         didSet {
@@ -54,7 +55,9 @@ class ResourcesTableViewController: UIViewController {
         setupShareButton()
         makeAnnotations()
         view.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
-   
+        checkLocationServices()
+        getDirection()
+        
     }
     
     private func setbackgroundColor(){
@@ -112,6 +115,51 @@ class ResourcesTableViewController: UIViewController {
             showAlert(title: "Needed", message: "Please Authorize location services")
         }
     }
+    
+    private func getLocation(on map: MKMapView) -> CLLocation {
+        let latitude = resourcesTableView.map.centerCoordinate.latitude
+       
+        let longitude = resourcesTableView.map.centerCoordinate.longitude
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+        let destinationCoordination = getLocation(on: resourcesTableView.map).coordinate
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordination)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        return request
+    }
+
+    
+    private func getDirection(){
+        guard let location = locationManager.location?.coordinate else {
+            showAlert(title: "Location Access needed", message: "Please Authorize location services")
+            return
+        }
+        let request = createDirectionsRequest(from: location)
+        let directions = MKDirections(request: request)
+        resetMapView(withNew: directions)
+        directions.calculate { [unowned self](response, error) in
+            guard let response = response else {return}
+            for route in response.routes {
+                self.resourcesTableView.map.addOverlay(route.polyline)
+                self.resourcesTableView.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+    }
+    
+    private func resetMapView(withNew directions: MKDirections) {
+        _ = directionsArray.map {$0.cancel()}
+         resourcesTableView.map.removeOverlays(resourcesTableView.map.overlays)
+        directionsArray.append(directions)
+    }
+    
     
     
     private func configureLongPress(){
@@ -231,16 +279,40 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
 }
 
 extension ResourcesTableViewController:MKMapViewDelegate {
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is MKUserLocation {return nil}
-//        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "MapView") as? MKMarkerAnnotationView
-//        if annotationView == nil {
-//            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
-//            annotationView?.canShowCallout = true
-//            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
-//        } else {
-//            annotationView?.annotation = annotation
-//        }
-//        return annotationView
-//    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.yellow.withAlphaComponent(0.2)
+        return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {return nil}
+        
+        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "Callouts") as? MKMarkerAnnotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Callouts")
+            annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
+            
+        } else {
+            annotationView?.annotation = annotation
+        }
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let calloutClicked = view.annotation else {return}
+        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
+               getDirection()
+        }
+        if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
+            self.getDirection()
+        }
+        
+        
+     
+    }
+    
+    
 }

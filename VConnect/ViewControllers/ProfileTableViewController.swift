@@ -11,7 +11,7 @@ import FirebaseFirestore
 import Firebase
 
     class ProfileTableViewController: UITableViewController {
-    private var imageData:Data?
+    //private var imageData:Data?
     private var barButton:UIBarButtonItem!
     private var jobs = ["Administrator","Volunteer"]
      private var categories = ["Children and Women", "Youth Empowerment","Rape","Housing and Homelessness","Legal Aid", "Widow"]
@@ -43,6 +43,7 @@ import Firebase
     @IBOutlet weak var organizationContactPersonLastName: UITextView!
     @IBOutlet weak var organizationContactPersonPhoneNumber: UITextView!
     @IBOutlet weak var organizationContactPersonEmail: UITextView!
+       private var userDetails: String = Auth.auth().currentUser?.uid ?? ""
         
         private let usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
     
@@ -56,8 +57,36 @@ import Firebase
         organizationCategoryPickerView.delegate = self
         organizationCategoryPickerView.dataSource = self
         imageView.backgroundColor =  #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
+        updateUserInformations()
     }
     
+        private func updateUserInformations(){
+            DatabaseManager.firebaseDataBase.collection(DataBaseKeys.organizationCollectionKey).document(userDetails).addSnapshotListener(includeMetadataChanges: true) { [weak self](snapshot, error) in
+                if let adminInfo = snapshot?.data() {
+                    let admin = Organization.init(dict: adminInfo)
+                    self?.adminFirstName.text = admin.adminFirstName
+                    self?.adminLastName.text =  admin.adminLastame
+                    self?.adminJobTitle = admin.whoAreYou
+                    self?.organizationCategory = admin.organizationCategory
+                    self?.organizationCity.text =  admin.organizationCity
+                    self?.organizationName.text =  admin.organizationName
+                    self?.organizationState.text =  admin.organizationState
+                    self?.organizationStress.text =  admin.organizationStreetAddress
+                    self?.organizationWebsite.text =  admin.organizationWebsite
+                    self?.organizationZipcode.text =  admin.organizationZipCode
+                    self?.organizationPhoneNumber.text = admin.organizationPhoneNumber
+                    self?.organizationGeoPoliticalZone.text =  admin.organizationGeoPoliticalZone
+                    self?.organizationContactPersonEmail.text =  admin.contactPersonEmail
+                     self?.organizationContactPersonLastName.text =  admin.contactPersonLastName
+                     self?.organizationContactPersonFirstName.text =  admin.contactPersonFirstName
+                     self?.organizationContactPersonPhoneNumber.text =  admin.contactPersonPhoneNumber
+                     self?.organizationSecondaryPhoneNumber.text =  admin.organizationSecondaryPhoneNumber
+                    self?.imageView.image = UIImage.init(data: admin.organizationImage!)
+                }
+            }
+        }
+        
+        
     private func setProfilePicture(){
         imageView.isUserInteractionEnabled = true
         tap = UITapGestureRecognizer(target: self, action: #selector(imageLibraryAccess))
@@ -89,7 +118,6 @@ import Firebase
     }
     
     @objc private func saveButtonPressed(){
-        
         let displayName = adminFirstName.text + " " + adminLastName.text
         let user = usersession?.getCurrentUser()
         let request = user?.createProfileChangeRequest()
