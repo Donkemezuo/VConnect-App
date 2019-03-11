@@ -32,7 +32,8 @@ class TimeLineDetailView: UIView {
         let title = UILabel()
         title.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         title.text = "This will be news title"
-        title.font = UIFont.boldSystemFont(ofSize: 20)
+        title.textAlignment = .center
+        title.font = UIFont(name: "AcademyEngravedLetPlain", size: 22)
         title.numberOfLines = 0
         return title
     }()
@@ -40,6 +41,7 @@ class TimeLineDetailView: UIView {
     public lazy var newsDescription: UITextView = {
         let description = UITextView()
         description.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        description.font = UIFont.init(name: "Georgia-Italic", size: 14)
         description.text = "Swift is a high-level programming language developed by Apple and made available in 2014. It is designed for writing apps for Apple platforms, including macOS, iOS, tvOS, and watchOS.The Swift language is based on Objective-C, which was used for NeXTSTEP development in the 1980s, and later macOS and iOS. Swift has similar syntax and maintains the object-oriented features of Objective-C, but provides a more simplified programming experience. For example, Swift code is easier to read and write than Objective-C. It allows several common commands to be combined and does require semicolons (;) at the end of each statement.Additionally, Swift handles several programming obstacles automatically. For example, Swift:initializes variables before they are used handles  (NULL) values explicitly ensures array indices are in bounds prevents integers from overflowing their allotted memory manages memory automatically"
         return description
         

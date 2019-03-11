@@ -13,8 +13,8 @@ class TimelineCollectionViewCell: UICollectionViewCell {
     public lazy var textView:UILabel = {
         let textView = UILabel()
         textView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        textView.font =  UIFont.boldSystemFont(ofSize: 20)
         textView.numberOfLines = 0
+        textView.font = UIFont(name: "AcademyEngravedLetPlain", size: 24)
         textView.layer.borderWidth = 0.5
         return textView
     }()
@@ -33,6 +33,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         label.text = "Source"
         label.sizeToFit()
+        label.font = UIFont(name: "Georgia-Italic", size: 16)
         label.layer.borderWidth = 0.5
         return label
     }()

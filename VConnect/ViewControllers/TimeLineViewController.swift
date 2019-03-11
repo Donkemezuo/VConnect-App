@@ -33,7 +33,8 @@ class TimeLineViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  UIColor.yellow
+       // view.backgroundColor =  #colorLiteral(red: 0, green: 0.2202599049, blue: 0.1758075058, alpha: 1)
+        //view.backgroundColor = UIColor(patternImage: UIImage(named: "iPhone 8")!)
         self.view.addSubview(timelineView)
         timelineView.collectionView.delegate = self
         timelineView.collectionView.dataSource = self
@@ -41,14 +42,14 @@ class TimeLineViewController: UIViewController {
         newsSetup()
         getPost()
         
-        var gradient: CAGradientLayer!
-        
-        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
-        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
-        gradient = CAGradientLayer()
-        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-        gradient.frame = view.bounds
-        view.layer.insertSublayer(gradient, at: 0)
+//        var gradient: CAGradientLayer!
+//
+//        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
+//        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
+//        gradient = CAGradientLayer()
+//        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
+//        gradient.frame = view.bounds
+//        view.layer.insertSublayer(gradient, at: 0)
     }
     
    

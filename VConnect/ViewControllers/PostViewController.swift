@@ -19,35 +19,20 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(postView)
-        setupNavigationBarItems()
         view.backgroundColor =  #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1).withAlphaComponent(0.5)
         postView.postView.delegate = self
         usersession = (UIApplication.shared.delegate as!
             AppDelegate).usersession
-        setupCameraButton()
         setupPostBarButtonItem()
-        
     }
-    
-    private func setupCameraButton(){
-        cameraBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .camera, target: self, action: #selector(cameraButtonPressed))
-    }
-    
-    @objc private func cameraButtonPressed(){
-        
-    }
-    
+
     private func setupPostBarButtonItem(){
          postBarbuttonItem = UIBarButtonItem.init(title: "Post", style: .done, target: self, action: #selector(PostButtonPressed))
         postBarbuttonItem.isEnabled = true
+        navigationItem.rightBarButtonItem = postBarbuttonItem
 
     }
-    
-    private func setupNavigationBarItems(){
-        //self.navigationItem.rightBarButtonItems = [postBarbuttonItem, cameraBarButtonItem]
-        self.navigationItem.setRightBarButtonItems([postBarbuttonItem, cameraBarButtonItem], animated: true)
-    }
-    
+  
     @objc private func PostButtonPressed(){
      
         guard let title = postView.postTitle.text, let postDetails = postView.postView.text,
@@ -58,13 +43,19 @@ class PostViewController: UIViewController {
                 return
         }
         
-        guard let currentUser = usersession?.getCurrentUser(), let postersName = currentUser.displayName else {return}
+        guard let currentUser = usersession?.getCurrentUser(), let postersName = currentUser.displayName else {
+            
+            showAlert(title: "Error", message: "Only users with account can write a post")
+            
+            return}
+        print(postersName)
         let date = Date()
         let formatter = DateFormatter()
         formatter.date(from: "dd.MM.yyyy")
         let postedDate = formatter.string(from: date)
         let adMinPost = Post.init(postedBy: postersName, storyTitle: title, storyDetails: postDetails, postedDate: postedDate)
         DatabaseManager.createApostToDatabase(Post: adMinPost)
+        navigationItem.rightBarButtonItem?.isEnabled = false
         let alert = UIAlertController.init(title: "Success", message: "Successfully created post to the timeline", preferredStyle: .alert)
         let action = UIAlertAction.init(title: "Thank you", style: .default) { (alert) in
             self.navigationController?.popViewController(animated: true)

@@ -32,8 +32,8 @@ class ResourcesViewController: UIViewController {
         resourcesView.collectionView.delegate = self
         getOrganizationData()
         navigationItem.title = "Categories of Organizations"
-        view.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
-        setBackgroundColor()
+        //view.backgroundColor = .red //#colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
+        //setBackgroundColor()
     }
     
     private func setBackgroundColor(){
@@ -85,9 +85,9 @@ extension ResourcesViewController: UICollectionViewDataSource, UICollectionViewD
         let category = categories[indexPath.row]
         cell.label.text = category
         cell.label.numberOfLines = 0
-        cell.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.5)
+        cell.backgroundColor =  #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.5)
         cell.layer.borderWidth = 1
-        cell.layer.borderColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1)
+        cell.layer.borderColor =  #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

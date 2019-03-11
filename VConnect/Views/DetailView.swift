@@ -17,13 +17,12 @@ class DetailView: UIView {
         return organizationImageView
     }()
     
-
-    
     public lazy var organizationAddress: UILabel = {
         let address = UILabel()
-            address.font = UIFont.boldSystemFont(ofSize: 14)
+          // address.font = UIFont.boldSystemFont(ofSize: 14)
+        address.font = UIFont.init(name: "Georgia", size: 16)
             address.textAlignment = .left
-            address.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
+            address.backgroundColor = UIColor.clear
             //address.dataDetectorTypes = .address
             address.layer.cornerRadius = 5.0
             address.numberOfLines = 0
@@ -34,9 +33,10 @@ class DetailView: UIView {
     
     public lazy var contactEmail: UILabel = {
         let email = UILabel()
-            email.font = UIFont.boldSystemFont(ofSize: 14)
+           // email.font = UIFont.boldSystemFont(ofSize: 14)
+        email.font = UIFont.init(name: "Georgia", size: 16)
             email.textAlignment = .left
-            email.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
+            email.backgroundColor = UIColor.clear
            // email.dataDetectorTypes = .all
             email.text = "Email: raymonddonkemezuo@pursuit.org"
             email.layer.cornerRadius = 5.0
@@ -47,11 +47,12 @@ class DetailView: UIView {
     
     public lazy var contactPhoneNumber: UILabel = {
         let phoneNumber = UILabel()
-            phoneNumber.font = UIFont.boldSystemFont(ofSize: 14)
+            phoneNumber.font = UIFont.boldSystemFont(ofSize: 16)
             phoneNumber.textAlignment = .left
-            phoneNumber.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
+            phoneNumber.backgroundColor = UIColor.clear
            // phoneNumber.dataDetectorTypes = .phoneNumber
             phoneNumber.text = "Phone Number: 3129376040"
+        phoneNumber.font = UIFont.init(name: "Georgia", size: 16)
             phoneNumber.layer.cornerRadius = 5.0
             phoneNumber.numberOfLines = 0
         return phoneNumber
@@ -61,9 +62,10 @@ class DetailView: UIView {
     
     public lazy var organizationDescription:UILabel = {
         let description = UILabel()
-        description.backgroundColor = UIColor.green.withAlphaComponent(0.5)
-        description.font = UIFont.boldSystemFont(ofSize: 14)
+        description.backgroundColor = UIColor.clear
+       // description.font = UIFont.boldSystemFont(ofSize: 14)
         description.text = "Organization description and services offered goes here"
+        description.font = UIFont.init(name: "Georgia", size: 16)
         description.layer.cornerRadius = 5.0
         description.numberOfLines = 0
         return description
@@ -73,9 +75,10 @@ class DetailView: UIView {
     public lazy var organizationWebsite:UILabel = {
         let website = UILabel()
         website.text = "website: www.website.com"
-        website.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
+        website.backgroundColor = UIColor.clear
         website.layer.cornerRadius = 5.0
-        website.font = UIFont.boldSystemFont(ofSize: 14)
+        //website.font = UIFont.boldSystemFont(ofSize: 14)
+        website.font = UIFont.init(name: "Georgia", size: 16)
         website.numberOfLines = 0
         return website
     }()

@@ -12,11 +12,13 @@ class TimelineView: UIView {
 
       public lazy var postButton:UILabel = {
         let postButton = UILabel()
-            postButton.text = "Write a post"
+            postButton.text = "Write a Post + "
             postButton.backgroundColor = .white
+            postButton.font = UIFont(name: "AcademyEngravedLetPlain", size: 20)
             postButton.textColor = .gray
             postButton.textAlignment = .center
             postButton.layer.cornerRadius = 10.0
+            postButton.layer.borderWidth = 1.5
         
         return postButton
         

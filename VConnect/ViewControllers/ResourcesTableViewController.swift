@@ -57,6 +57,7 @@ class ResourcesTableViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
         checkLocationServices()
         getDirection()
+        setupLocationManager()
         
     }
     
@@ -140,16 +141,17 @@ class ResourcesTableViewController: UIViewController {
     private func getDirection(){
         guard let location = locationManager.location?.coordinate else {
             showAlert(title: "Location Access needed", message: "Please Authorize location services")
+            print("location here")
             return
         }
         let request = createDirectionsRequest(from: location)
         let directions = MKDirections(request: request)
         resetMapView(withNew: directions)
-        directions.calculate { [unowned self](response, error) in
+        directions.calculate { [weak self](response, error) in
             guard let response = response else {return}
             for route in response.routes {
-                self.resourcesTableView.map.addOverlay(route.polyline)
-                self.resourcesTableView.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                self?.resourcesTableView.map.addOverlay(route.polyline)
+                self?.resourcesTableView.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
         }
     }
@@ -223,6 +225,7 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
         
         cell.textLabel?.text = organizationToSet.organizationName
         cell.textLabel?.textAlignment = .center
+        cell.textLabel?.font = UIFont(name: "Georgia-Bold", size: 20)
         navigationItem.title = organizationToSet.organizationCategory
         cell.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.5)
         cell.layer.borderWidth = 1
@@ -294,7 +297,6 @@ extension ResourcesTableViewController:MKMapViewDelegate {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Callouts")
             annotationView?.canShowCallout = true
             annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
-            
         } else {
             annotationView?.annotation = annotation
         }
@@ -304,15 +306,15 @@ extension ResourcesTableViewController:MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let calloutClicked = view.annotation else {return}
         if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
+            print("Callout button pressed")
                getDirection()
         }
         if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
             self.getDirection()
         }
-        
-        
-     
     }
+    
+    
     
     
 }
