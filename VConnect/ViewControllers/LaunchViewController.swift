@@ -19,14 +19,10 @@ class LaunchViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(lauchView)
         view.backgroundColor = .green
-        //view.backgroundColor = UIColor.init(displayP3Red: #0f0c29, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
         setUpTabView()
     }
     
-   // func getColorFromHex(rgbValue: UInt32) -> UIColor {
-     //   let color1 = CGFloat((rgbValue & #0f0c29)>> 16)/255.0
-    //}
-    
+
     func setUpTabView() {
         lauchView.addminButton.isUserInteractionEnabled = true
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(addminButtonPressed(gesture:)))

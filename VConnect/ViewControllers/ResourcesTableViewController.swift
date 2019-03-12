@@ -226,6 +226,7 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = organizationToSet.organizationName
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.font = UIFont(name: "Georgia-Bold", size: 20)
+        cell.textLabel?.numberOfLines = 0
         navigationItem.title = organizationToSet.organizationCategory
         cell.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.5)
         cell.layer.borderWidth = 1

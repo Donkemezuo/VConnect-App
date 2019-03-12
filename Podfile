@@ -10,6 +10,7 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
+pod 'Toucan'
   # Pods for VConnect
 
 end

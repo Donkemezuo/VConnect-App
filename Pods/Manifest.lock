@@ -114,6 +114,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.6.1)
+  - Toucan (1.1.0)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -121,6 +122,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
+  - Toucan
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -142,6 +144,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - Toucan
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
@@ -162,7 +165,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  Toucan: 8f228fabb21521b9658692df9325fe76e71d74b2
 
-PODFILE CHECKSUM: 201b348d7c8d3f955c289731ad2bfa14f2565b91
+PODFILE CHECKSUM: b122bed98ea4ff236704c019162f11d5be973c1f
 
 COCOAPODS: 1.6.0

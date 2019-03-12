@@ -21,7 +21,7 @@ class LoginView: UIView {
     
     public lazy var imageView: UIImageView = {
         let backgroundImageView = UIImageView()
-        backgroundImageView.image = UIImage.init(named: "logiin")
+        backgroundImageView.image = UIImage.init(named: "loginPix")
         return backgroundImageView
     }()
     
@@ -55,11 +55,10 @@ class LoginView: UIView {
       public lazy var loginButton: UIButton = {
         let login = UIButton()
         login.setTitle("Login", for: .normal)
-        login.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        login.backgroundColor = UIColor.blue.withAlphaComponent(0.7)
         login.layer.cornerRadius = 30.0
         login.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-     
-        
+  
         return login
     }()
     

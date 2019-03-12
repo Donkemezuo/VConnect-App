@@ -49,7 +49,7 @@ final class DatabaseManager {
     static func createApostToDatabase(Post: Post) {
         var ref: DocumentReference? = nil
         ref = firebaseDataBase.collection("Post").document((UserSession.init().getCurrentUser()?.uid)!)
-        ref?.setData(["poster": Post.postedBy, "storyTitle": Post.storyTitle, "storyDetails":Post.storyDetails, "postedDate":Post.postedDate], completion: { (error) in
+        ref?.setData(["postedBy": Post.postedBy, "storyTitle": Post.storyTitle, "storyDetails":Post.storyDetails, "postedDate":Post.postedDate], completion: { (error) in
             if let error = error {
                 print("Error: \(error) encountered while trying to post story. Please try again")
             

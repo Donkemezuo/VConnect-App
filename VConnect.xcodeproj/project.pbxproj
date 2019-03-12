@@ -25,6 +25,8 @@
 		04433A7D2224EEBE009D6646 /* AppErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04433A7C2224EEBE009D6646 /* AppErrors.swift */; };
 		04433A7F2224EEF9009D6646 /* SecretKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04433A7E2224EEF9009D6646 /* SecretKeys.swift */; };
 		04433A812224F89E009D6646 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04433A802224F89E009D6646 /* ImageHelper.swift */; };
+		0446249122374064009AACB7 /* StorageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446249022374064009AACB7 /* StorageServices.swift */; };
+		0446249322374EDC009AACB7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446249222374EDC009AACB7 /* DateExtension.swift */; };
 		0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */; };
 		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
 		04567EBC222CF60C0075A928 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EBB222CF60C0075A928 /* UIView+Extension.swift */; };
@@ -77,6 +79,8 @@
 		04433A7C2224EEBE009D6646 /* AppErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrors.swift; sourceTree = "<group>"; };
 		04433A7E2224EEF9009D6646 /* SecretKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKeys.swift; sourceTree = "<group>"; };
 		04433A802224F89E009D6646 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		0446249022374064009AACB7 /* StorageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServices.swift; sourceTree = "<group>"; };
+		0446249222374EDC009AACB7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDetailViewController.swift; sourceTree = "<group>"; };
 		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
 		04567EBB222CF60C0075A928 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -227,9 +231,11 @@
 				049D8E8A221A16E200BB2AB4 /* HelperMethods.swift */,
 				04567ECB2232C3E40075A928 /* BackgroundColorClass.swift */,
 				0468839E22285D7700FFD91E /* DatabaseManager.swift */,
+				0446249022374064009AACB7 /* StorageServices.swift */,
 				04567EC922318FF70075A928 /* LongAndLatDataManager.swift */,
 				046883A22229E4EC00FFD91E /* DataBaseKeys.swift */,
 				04567EBF222E2B200075A928 /* ZipCodeHelper.swift */,
+				0446249222374EDC009AACB7 /* DateExtension.swift */,
 				04433A732224E8DD009D6646 /* Models */,
 				040AC6D22212158E00778A5A /* Views */,
 				040AC6CF2212152700778A5A /* ViewControllers */,
@@ -362,6 +368,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -375,6 +382,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -413,6 +421,7 @@
 				040AC6E122125F5600778A5A /* TimelineCollectionViewCell.swift in Sources */,
 				0468839D222741C500FFD91E /* Usersession.swift in Sources */,
 				04567EC8222F15760075A928 /* MapViewController.swift in Sources */,
+				0446249122374064009AACB7 /* StorageServices.swift in Sources */,
 				04C6899B220E39C00081355C /* AdminLoginViewController.swift in Sources */,
 				040AC6DD2212286300778A5A /* DetailView.swift in Sources */,
 				04272D642219188900A42EC4 /* PostViewController.swift in Sources */,
@@ -428,6 +437,7 @@
 				04567ECE2232D8CF0075A928 /* PostModel.swift in Sources */,
 				040337762217B58C0063960B /* LaunchViewController.swift in Sources */,
 				04567ECA22318FF70075A928 /* LongAndLatDataManager.swift in Sources */,
+				0446249322374EDC009AACB7 /* DateExtension.swift in Sources */,
 				040AC6DB2212284300778A5A /* DetailViewController.swift in Sources */,
 				049D8E8B221A16E200BB2AB4 /* HelperMethods.swift in Sources */,
 				04567EBC222CF60C0075A928 /* UIView+Extension.swift in Sources */,
