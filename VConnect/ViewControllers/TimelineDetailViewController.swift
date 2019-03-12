@@ -19,17 +19,6 @@ class TimelineDetailViewController: UIViewController {
         view.addSubview(detailView)
         setUpDetailView()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "iPhone 8")!)
-        // view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
-//        
-//        var gradient: CAGradientLayer!
-//        
-//        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
-//        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
-//        gradient = CAGradientLayer()
-//        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-//        gradient.frame = view.bounds
-//        view.layer.insertSublayer(gradient, at: 0)
-
     }
     init(news: News) {
         super.init(nibName: nil, bundle: nil)
@@ -40,9 +29,7 @@ class TimelineDetailViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
-    
+   
     private func newsImage(imageUrl: String,imageView: UIImageView){
         ImageHelper.fetchImage(urlString: imageUrl) { (error, UIImage) in
             if let error = error {

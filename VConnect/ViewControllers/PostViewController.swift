@@ -58,12 +58,13 @@ class PostViewController: UIViewController {
             return}
         let docRef = DatabaseManager.firebaseDataBase.collection(DataBaseKeys.postCollectionKey).document()
         
-        StorageService.postImage(imageData: imageData, imageName: "\(currentUser.uid)/\(docRef.documentID)") {[weak self] (error, imageURL) in
+        StorageService.postImage(imageData: imageData, imageName:PostCollects.imageURL + "\(currentUser.uid) /\(docRef.documentID)") {[weak self] (error, imageURL) in
             if let error = error {
              self?.showAlert(title: "Error: Failed to post image", message: error.localizedDescription)
             } else {
                 if let imageURL = imageURL{
-                    let adminPost = Post.init(postedBy: postersName, storyTitle: postTitle, storyDetails: postDetails, postedDate: Date.getISOTimestamp(), imageURL: imageURL.absoluteString)
+                    let adminPost = Post.init(postedBy: postersName, storyTitle: postTitle, storyDetails: postDetails, postedDate: Date.getISOTimestamp(), imageURL: imageURL.absoluteString, documentID: docRef.documentID)
+                        
                     DatabaseManager.createApostToDatabase(Post: adminPost)
                 }
             }
@@ -88,6 +89,8 @@ class PostViewController: UIViewController {
         if !UIImagePickerController.isSourceTypeAvailable(.camera) {
             cameraBarItem.isEnabled = false
         }
+        postView.postTitle.inputAccessoryView = toolbar
+        postView.postView.inputAccessoryView = toolbar
     }
     
     @objc private func cameraButtonPressed(){

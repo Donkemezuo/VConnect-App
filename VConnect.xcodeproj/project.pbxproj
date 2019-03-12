@@ -27,6 +27,7 @@
 		04433A812224F89E009D6646 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04433A802224F89E009D6646 /* ImageHelper.swift */; };
 		0446249122374064009AACB7 /* StorageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446249022374064009AACB7 /* StorageServices.swift */; };
 		0446249322374EDC009AACB7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446249222374EDC009AACB7 /* DateExtension.swift */; };
+		044624B722381361009AACB7 /* OrganizationCollectionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044624B622381361009AACB7 /* OrganizationCollectionKeys.swift */; };
 		0452D84C2223BAA5003FBF59 /* TimelineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */; };
 		0452D84E2223BAC9003FBF59 /* TimeLineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */; };
 		04567EBC222CF60C0075A928 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04567EBB222CF60C0075A928 /* UIView+Extension.swift */; };
@@ -81,6 +82,7 @@
 		04433A802224F89E009D6646 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		0446249022374064009AACB7 /* StorageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServices.swift; sourceTree = "<group>"; };
 		0446249222374EDC009AACB7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		044624B622381361009AACB7 /* OrganizationCollectionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationCollectionKeys.swift; sourceTree = "<group>"; };
 		0452D84B2223BAA5003FBF59 /* TimelineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDetailViewController.swift; sourceTree = "<group>"; };
 		0452D84D2223BAC9003FBF59 /* TimeLineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineDetailView.swift; sourceTree = "<group>"; };
 		04567EBB222CF60C0075A928 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		04433A732224E8DD009D6646 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				044624B622381361009AACB7 /* OrganizationCollectionKeys.swift */,
 				04567ECD2232D8CF0075A928 /* PostModel.swift */,
 				04433A742224E911009D6646 /* GoogleNewsModel.swift */,
 				04567ED12233196E0075A928 /* NewsModel.swift */,
@@ -421,6 +424,7 @@
 				040AC6E122125F5600778A5A /* TimelineCollectionViewCell.swift in Sources */,
 				0468839D222741C500FFD91E /* Usersession.swift in Sources */,
 				04567EC8222F15760075A928 /* MapViewController.swift in Sources */,
+				044624B722381361009AACB7 /* OrganizationCollectionKeys.swift in Sources */,
 				0446249122374064009AACB7 /* StorageServices.swift in Sources */,
 				04C6899B220E39C00081355C /* AdminLoginViewController.swift in Sources */,
 				040AC6DD2212286300778A5A /* DetailView.swift in Sources */,

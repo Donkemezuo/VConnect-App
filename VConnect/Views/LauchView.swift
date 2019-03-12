@@ -12,17 +12,17 @@ class LauchView: UIView {
     
     public lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-            imageView.image = UIImage.init(named: "iPhone XS")
+            imageView.image = UIImage.init(named: "backgroundimage")
         return imageView
         
     }()
     
     public lazy var addminButton:UILabel = {
         let addminButton = UILabel()
-        addminButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        addminButton.backgroundColor = UIColor.white
         addminButton.text = "Admin"
         addminButton.textAlignment = .center
-        addminButton.textColor = .blue
+        addminButton.textColor = .black
         addminButton.layer.cornerRadius = 30.0
         addminButton.font = UIFont.boldSystemFont(ofSize: 20)
         return addminButton
@@ -33,8 +33,8 @@ class LauchView: UIView {
         let exploreButton = UILabel()
         exploreButton.text = "Explore"
         exploreButton.textAlignment = .center
-        exploreButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        exploreButton.textColor = .red
+        exploreButton.backgroundColor = UIColor.white
+        exploreButton.textColor = .black
         exploreButton.layer.cornerRadius = 30.0
         exploreButton.font = UIFont.boldSystemFont(ofSize: 20)
         

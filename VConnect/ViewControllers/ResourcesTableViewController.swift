@@ -56,7 +56,7 @@ class ResourcesTableViewController: UIViewController {
         makeAnnotations()
         view.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
         checkLocationServices()
-        getDirection()
+//        getDirection()
         setupLocationManager()
         
     }
@@ -147,23 +147,25 @@ class ResourcesTableViewController: UIViewController {
         let request = createDirectionsRequest(from: location)
         let directions = MKDirections(request: request)
         resetMapView(withNew: directions)
+        
         directions.calculate { [weak self](response, error) in
             guard let response = response else {return}
+            
             for route in response.routes {
                 self?.resourcesTableView.map.addOverlay(route.polyline)
                 self?.resourcesTableView.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
+            
         }
+        resourcesTableView.map.reloadInputViews()
     }
-    
     private func resetMapView(withNew directions: MKDirections) {
-        _ = directionsArray.map {$0.cancel()}
          resourcesTableView.map.removeOverlays(resourcesTableView.map.overlays)
         directionsArray.append(directions)
+        _ = directionsArray.map {$0.cancel()}
+
     }
-    
-    
-    
+  
     private func configureLongPress(){
         longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPress.minimumPressDuration = 0.5
@@ -306,13 +308,21 @@ extension ResourcesTableViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let calloutClicked = view.annotation else {return}
-        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
-            print("Callout button pressed")
-               getDirection()
-        }
-        if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
-            self.getDirection()
-        }
+
+        //print(view.annotation)
+//        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
+//            print("Callout button pressed")
+//               getDirection()
+//        }
+//        if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
+//            self.getDirection()
+//        }
+        getDirection()
+        
+        
+
+        
+
     }
     
     

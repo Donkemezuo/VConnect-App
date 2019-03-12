@@ -13,7 +13,6 @@ class PostView: UIView {
     public lazy var postTitle:UITextField = {
         let postTitle = UITextField()
             postTitle.placeholder = "Please Enter a Title"
-            //postTitle.font = UIFont.boldSystemFont(ofSize: 20)
             postTitle.font = UIFont.init(name: "Georgia", size: 20)
             postTitle.textColor = .black
             postTitle.backgroundColor = UIColor.white.withAlphaComponent(0.5)
@@ -23,7 +22,6 @@ class PostView: UIView {
         let postView = UITextView()
         postView.text = "Write a Post"
         postView.textColor = .black
-//        postView.font = UIFont.boldSystemFont(ofSize: 20)
         postView.font = UIFont.init(name: "Georgia", size: 20)
         postView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         return postView
@@ -32,8 +30,8 @@ class PostView: UIView {
     
     public lazy var postImageView: UIImageView = {
         let imageView = UIImageView()
-            imageView.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-            imageView.image = UIImage.init(named: "newsLogo")
+            imageView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            imageView.image = UIImage(named: "placeholder")
         return imageView
     }()
     
@@ -71,16 +69,16 @@ class PostView: UIView {
         postView.topAnchor.constraint(equalTo:postTitle.bottomAnchor, constant: 0.5).isActive = true
         postView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         postView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        postView.heightAnchor.constraint(equalToConstant: 360).isActive = true
+        postView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
     private func setupPostImageView(){
         addSubview(postImageView)
         postImageView.translatesAutoresizingMaskIntoConstraints = false
         postImageView.topAnchor.constraint(equalTo: postView.bottomAnchor).isActive = true
         postImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11).isActive = true
-         postImageView.trailingAnchor.constraint(equalTo: leadingAnchor, constant: -11).isActive = true
-        postImageView.heightAnchor.constraint(equalToConstant: 350).isActive = true
-        postImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+         postImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
+
+        postImageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
 

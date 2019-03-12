@@ -14,23 +14,23 @@ struct Post {
     let storyDetails: String
     let postedDate: String?
     let imageURL: String
-    
-    init(postedBy: String, storyTitle: String, storyDetails: String,postedDate: String, imageURL: String) {
+    let documentID: String
+    init(postedBy: String, storyTitle: String, storyDetails: String,postedDate: String, imageURL: String,documentID: String ) {
         self.postedDate = postedDate
         self.postedBy = postedBy
         self.storyDetails = storyDetails
         self.storyTitle =  storyTitle
         self.imageURL = imageURL
+        self.documentID = documentID
     }
     
     init(dict: [String:Any]){
-        self.postedBy = dict["postedBy"] as? String ?? "no poster name"
-        self.storyDetails = dict["storyDetails"] as? String ?? "No story details"
-        self.storyTitle = dict["storyTitle"] as? String ?? "No story title"
-        self.postedDate = dict["postedDate"] as? String
-        self.imageURL =  dict["imageURL"] as? String ?? "No image url"
-      
-        
+        self.postedBy = dict[PostCollects.postedBy] as? String ?? "no poster name"
+        self.storyDetails = dict[PostCollects.storyDetails] as? String ?? "No story details"
+        self.storyTitle = dict[PostCollects.storyTitle] as? String ?? "No story title"
+        self.postedDate = dict[PostCollects.postedDate] as? String
+        self.imageURL =  dict[PostCollects.imageURL] as? String ?? "No image url"
+        self.documentID = dict[PostCollects.documentID] as? String ?? "No document ID"
     }
 }
 

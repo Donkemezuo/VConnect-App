@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class TimeLineViewController: UIViewController {
     let timelineView = TimelineView()
@@ -33,26 +34,15 @@ class TimeLineViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-       // view.backgroundColor =  #colorLiteral(red: 0, green: 0.2202599049, blue: 0.1758075058, alpha: 1)
-        //view.backgroundColor = UIColor(patternImage: UIImage(named: "iPhone 8")!)
         self.view.addSubview(timelineView)
         timelineView.collectionView.delegate = self
         timelineView.collectionView.dataSource = self
         UserPost()
         newsSetup()
         getPost()
-        
-//        var gradient: CAGradientLayer!
-//
-//        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
-//        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
-//        gradient = CAGradientLayer()
-//        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
-//        gradient.frame = view.bounds
-//        view.layer.insertSublayer(gradient, at: 0)
+        navigationItem.title = "News Feed"
+        backToLaunchScreen()
     }
-    
-   
     
     private func getPost(){
         DatabaseManager.firebaseDataBase.collection(DataBaseKeys.postCollectionKey).addSnapshotListener(includeMetadataChanges: true) {[weak self] (querysnapshot, error) in
@@ -60,12 +50,11 @@ class TimeLineViewController: UIViewController {
                 print("Error: \(error)")
             } else {
                 if let snapshot = querysnapshot {
-                    var postedNews = [Post]()
+                    //var postedNews = [Post]()
                     for document in snapshot.documents {
                         let news = Post.init(dict: document.data())
-                        postedNews.append(news)
-                        
-                        let trendingNews = News.init(title: news.storyTitle, source: news.postedBy, newsImage: "", details: news.storyDetails)
+                       // postedNews.append(news)
+                        let trendingNews = News.init(title: news.storyTitle, source: news.postedBy, newsImage: news.imageURL, details: news.storyDetails)
                         self?.trendingNews.append(trendingNews)
                     }
                 }
@@ -112,6 +101,16 @@ class TimeLineViewController: UIViewController {
         }
         }
     }
+    
+    private func backToLaunchScreen(){
+      
+        barButton = UIBarButtonItem.init(title: "Back", style:.plain, target: self, action: #selector(cancelButtonPressed))
+        navigationItem.leftBarButtonItem = barButton
+    }
+    
+    @objc private func cancelButtonPressed(){
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension TimeLineViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -129,7 +128,6 @@ extension TimeLineViewController: UICollectionViewDataSource, UICollectionViewDe
         } else {
             cell.imageView.image = UIImage.init(named: "newsLogo")
         }
-       
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius =  5.0
         return cell

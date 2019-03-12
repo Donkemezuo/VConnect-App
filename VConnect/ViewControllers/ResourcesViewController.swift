@@ -13,7 +13,7 @@ class ResourcesViewController: UIViewController {
     
     let resourcesView = ResourcesView()
     
-    let categories = ["Children and Women", "Youth Empowerment","Rape","Housing and Homelessness","Legal Aid", "Widow"]
+    let categories = ["Children and Women", "Youth Empowerment","Domestic Abuse","Housing and Homelessness","Legal Aid", "Widow"]
     
     private var organizations = [Organization](){
       
@@ -32,8 +32,6 @@ class ResourcesViewController: UIViewController {
         resourcesView.collectionView.delegate = self
         getOrganizationData()
         navigationItem.title = "Categories of Organizations"
-        //view.backgroundColor = .red //#colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
-        //setBackgroundColor()
     }
     
     private func setBackgroundColor(){
@@ -68,11 +66,6 @@ class ResourcesViewController: UIViewController {
             }
         }
     }
-    
-    
-  
-
-    
 }
 
 extension ResourcesViewController: UICollectionViewDataSource, UICollectionViewDelegate{
