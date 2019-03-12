@@ -15,12 +15,12 @@ class ResourcesTableViewController: UIViewController {
     let resourcesTableView = TableView()
     private var barbuttonItem: UIBarButtonItem!
     private var locationManager = CLLocationManager()
-    //private var coordinateToSearch = CLLocationCoordinate2D(latitude: 9.072264, longitude: 7.491302)
     private var geocoder = CLGeocoder()
     private var annotations = [MKAnnotation]()
-    
+    private var longPress: UILongPressGestureRecognizer!
     private var defaultCoordinate = CLLocationCoordinate2DMake(9.0765, 7.3986)
-    
+    private var directionsArray = [MKDirections]()
+    private var isSearching = false
     private var organizations = [Organization]() {
         didSet {
             DispatchQueue.main.async {
@@ -30,7 +30,19 @@ class ResourcesTableViewController: UIViewController {
         }
     }
     
+    private var userSearchOrganizations = [Organization](){
+        didSet {
+            DispatchQueue.main.async {
+                self.makeAnnotations()
+                self.resourcesTableView.tableView.reloadData()
+            }
+        }
+    }
+    
+    
     private var myCurrentRegion = MKCoordinateRegion()
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(resourcesTableView)
@@ -38,13 +50,26 @@ class ResourcesTableViewController: UIViewController {
         resourcesTableView.tableView.dataSource = self
         resourcesTableView.map.delegate = self
         resourcesTableView.map.showsUserLocation = true
-        view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
+        resourcesTableView.organizationSearchBar.delegate = self
         configureLongPress()
         setupShareButton()
         makeAnnotations()
+        view.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
+        checkLocationServices()
+        getDirection()
+        setupLocationManager()
+        
     }
     
-    private var longPress: UILongPressGestureRecognizer!
+    private func setbackgroundColor(){
+        var gradient: CAGradientLayer!
+        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
+        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
+        gradient = CAGradientLayer()
+        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
+        gradient.frame = view.bounds
+        view.layer.insertSublayer(gradient, at: 0)
+    }
   
     init(organizationsInCategory: [Organization]){
         super.init(nibName: nil, bundle: nil)
@@ -54,11 +79,6 @@ class ResourcesTableViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
          super.init(coder: aDecoder)
     }
-    
-    private func centerViewonMap(){
-        
-    }
-    
     
     private func locationAuthorizationStatus(){
         switch CLLocationManager.authorizationStatus() {
@@ -96,6 +116,52 @@ class ResourcesTableViewController: UIViewController {
             showAlert(title: "Needed", message: "Please Authorize location services")
         }
     }
+    
+    private func getLocation(on map: MKMapView) -> CLLocation {
+        let latitude = resourcesTableView.map.centerCoordinate.latitude
+       
+        let longitude = resourcesTableView.map.centerCoordinate.longitude
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+        let destinationCoordination = getLocation(on: resourcesTableView.map).coordinate
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordination)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        return request
+    }
+
+    
+    private func getDirection(){
+        guard let location = locationManager.location?.coordinate else {
+            showAlert(title: "Location Access needed", message: "Please Authorize location services")
+            print("location here")
+            return
+        }
+        let request = createDirectionsRequest(from: location)
+        let directions = MKDirections(request: request)
+        resetMapView(withNew: directions)
+        directions.calculate { [weak self](response, error) in
+            guard let response = response else {return}
+            for route in response.routes {
+                self?.resourcesTableView.map.addOverlay(route.polyline)
+                self?.resourcesTableView.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+    }
+    
+    private func resetMapView(withNew directions: MKDirections) {
+        _ = directionsArray.map {$0.cancel()}
+         resourcesTableView.map.removeOverlays(resourcesTableView.map.overlays)
+        directionsArray.append(directions)
+    }
+    
     
     
     private func configureLongPress(){
@@ -150,14 +216,21 @@ class ResourcesTableViewController: UIViewController {
 
 extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return organizations.count
+        return isSearching ? userSearchOrganizations.count : organizations.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesTableViewCell", for: indexPath) as? ResourcesTableViewCell else {return UITableViewCell()}
-        cell.textLabel?.text = organizations[indexPath.row].organizationName
+        
+        let organizationToSet = isSearching ? userSearchOrganizations[indexPath.row] : organizations[indexPath.row]
+        
+        cell.textLabel?.text = organizationToSet.organizationName
         cell.textLabel?.textAlignment = .center
-        navigationItem.title = organizations[indexPath.row].organizationCategory
-        cell.backgroundColor = UIColor.brown.withAlphaComponent(0.7)
+        cell.textLabel?.font = UIFont(name: "Georgia-Bold", size: 20)
+        cell.textLabel?.numberOfLines = 0
+        navigationItem.title = organizationToSet.organizationCategory
+        cell.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.5)
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1)
         return cell 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -165,11 +238,26 @@ extension ResourcesTableViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let organization = organizations[indexPath.row]
+        
+        let organization = isSearching ? userSearchOrganizations[indexPath.row] : organizations[indexPath.row]
         let detailedVC = DetailViewController(organizationDetails: organization)
         self.navigationController?.pushViewController(detailedVC, animated: true)
     }
 }
+
+extension ResourcesTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = true
+        resourcesTableView.organizationSearchBar.resignFirstResponder()
+        userSearchOrganizations = organizations.filter{$0.organizationCity == resourcesTableView.organizationSearchBar.text}
+        resourcesTableView.tableView.reloadData()
+        if resourcesTableView.organizationSearchBar.text == "" {
+            isSearching = false
+            resourcesTableView.tableView.reloadData()
+        }
+    }
+}
+
 extension ResourcesTableViewController: CLLocationManagerDelegate {
     
 //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -195,16 +283,39 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
 }
 
 extension ResourcesTableViewController:MKMapViewDelegate {
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is MKUserLocation {return nil}
-//        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "MapView") as? MKMarkerAnnotationView
-//        if annotationView == nil {
-//            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MapView")
-//            annotationView?.canShowCallout = true
-//            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
-//        } else {
-//            annotationView?.annotation = annotation
-//        }
-//        return annotationView
-//    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.yellow.withAlphaComponent(0.2)
+        return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {return nil}
+        
+        var annotationView = resourcesTableView.map.dequeueReusableAnnotationView(withIdentifier: "Callouts") as? MKMarkerAnnotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Callouts")
+            annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let calloutClicked = view.annotation else {return}
+        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
+            print("Callout button pressed")
+               getDirection()
+        }
+        if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
+            self.getDirection()
+        }
+    }
+    
+    
+    
+    
 }

@@ -21,7 +21,7 @@ class LoginView: UIView {
     
     public lazy var imageView: UIImageView = {
         let backgroundImageView = UIImageView()
-        backgroundImageView.image = UIImage.init(named: "logiin")
+        backgroundImageView.image = UIImage.init(named: "loginPix")
         return backgroundImageView
     }()
     
@@ -35,7 +35,8 @@ class LoginView: UIView {
       public lazy var emailTextField: UITextField = {
         let userEmail = UITextField()
             userEmail.placeholder = "  Email"
-            userEmail.font = UIFont.boldSystemFont(ofSize: 20)
+            //userEmail.font = UIFont.boldSystemFont(ofSize: 20)
+            userEmail.font = UIFont.init(name: "Futura-Medium", size: 20)
             userEmail.backgroundColor = .white
             userEmail.layer.cornerRadius = 5.0
         return userEmail
@@ -44,7 +45,8 @@ class LoginView: UIView {
       public lazy var passwordTextField: UITextField = {
         let userPassword = UITextField()
             userPassword.placeholder = "  Password"
-            userPassword.font = UIFont.boldSystemFont(ofSize: 20)
+            //userPassword.font = UIFont.boldSystemFont(ofSize: 20)
+            userPassword.font = UIFont.init(name: "Futura-Medium", size: 20)
             userPassword.backgroundColor = .white
             userPassword.layer.cornerRadius = 5.0
             userPassword.isSecureTextEntry = true 
@@ -53,11 +55,10 @@ class LoginView: UIView {
       public lazy var loginButton: UIButton = {
         let login = UIButton()
         login.setTitle("Login", for: .normal)
-        login.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        login.backgroundColor = UIColor.blue.withAlphaComponent(0.7)
         login.layer.cornerRadius = 30.0
         login.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-     
-        
+  
         return login
     }()
     

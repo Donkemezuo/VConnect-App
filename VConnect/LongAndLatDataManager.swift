@@ -24,6 +24,5 @@ final class LatAndLongDataManager{
        return LatAndLongDataManager()
     }()
     
-//    let latitude = 0.0
-//    let longitude = 0.0
+
 }

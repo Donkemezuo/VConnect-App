@@ -11,13 +11,14 @@ import UIKit
 class SignInView: UIView {
     public lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
+        imageView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        imageView.layer.borderWidth = 5
+        imageView.layer.borderColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
         return imageView
     }()
     
     public lazy var organizationName: UILabel = {
         let label = UILabel()
-        label.text = "Value re-orientation initiative"
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -27,7 +28,6 @@ class SignInView: UIView {
     public lazy var adminName:UILabel = {
         let label = UILabel()
             label.font = UIFont.boldSystemFont(ofSize: 30)
-            label.text = "Raymond Donkemezuo"
             label.textAlignment =  .center
             label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         return label
@@ -35,7 +35,6 @@ class SignInView: UIView {
     
     public lazy var about: UILabel = {
         let button = UILabel()
-            button.text = "About"
             button.textAlignment = .left
             button.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).withAlphaComponent(0.5)
             button.font = UIFont.italicSystemFont(ofSize: 20)
@@ -44,7 +43,6 @@ class SignInView: UIView {
     
     public lazy var adminAddress: UILabel = {
         let address = UILabel()
-        address.text = "Location: New York"
         address.textAlignment = .center
         address.font =  UIFont.boldSystemFont(ofSize: 14)
         return address

@@ -12,7 +12,7 @@ class LauchView: UIView {
     
     public lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-            imageView.image = UIImage.init(named: "iPhone 8")
+            imageView.image = UIImage.init(named: "iPhone XS")
         return imageView
         
     }()

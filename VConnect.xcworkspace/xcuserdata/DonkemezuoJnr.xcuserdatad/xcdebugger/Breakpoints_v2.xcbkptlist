@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VConnect/ViewControllers/PostViewController.swift"
-            timestampString = "573772399.406082"
+            filePath = "VConnect/ViewControllers/ResourcesTableViewController.swift"
+            timestampString = "574057227.765336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "PostButtonPressed()"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "mapView(_:annotationView:calloutAccessoryControlTapped:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

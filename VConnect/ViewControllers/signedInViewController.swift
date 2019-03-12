@@ -25,9 +25,16 @@ class signedInViewController: UIViewController {
         usersession = (UIApplication.shared.delegate as! AppDelegate).usersession
         usersession.userSessionSignOutDelegate = self
          logOut()
-         view.setGradientBackground(colorOne: UIColor.red.withAlphaComponent(0.7), colorTwo: UIColor.blue.withAlphaComponent(0.7), colorThree: UIColor.white.withAlphaComponent(0.7), colorFour: UIColor.brown.withAlphaComponent(0.7))
-        print("current userID: \(userDetails)")
         getCurrentUserInfo()
+        var gradient: CAGradientLayer!
+        
+        let firstColor = UIColor.init(red: 0/255, green: 34/255, blue: 62/255, alpha: 1.0)
+        let secondColor = UIColor.init(red: 255/255, green: 161/255, blue: 127/255, alpha: 1.0)
+        gradient = CAGradientLayer()
+        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
+        gradient.frame = view.bounds
+        view.layer.insertSublayer(gradient, at: 0)
+        
     }
     
     private func getCurrentUserInfo(){
@@ -35,7 +42,7 @@ class signedInViewController: UIViewController {
             if let organizationInfo = snapshot?.data() {
              let adminInfo = Organization.init(dict: organizationInfo)
                 self?.signInPage.adminName.text = "\(adminInfo.adminFirstName) \(adminInfo.adminLastame)"
-                self?.signInPage.organizationName.text = adminInfo.organizationName
+                self?.signInPage.organizationName.text = "Organization Name: \( adminInfo.organizationName)"
                 self?.signInPage.adminAddress.text = "📍Location: \(adminInfo.organizationCity)"
                 self?.signInPage.profileImage.image = UIImage.init(data: adminInfo.organizationImage!)
                 

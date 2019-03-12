@@ -11,7 +11,8 @@ import UIKit
 class ResourcesCollectionViewCell: UICollectionViewCell {
     let label: UILabel = {
     let names = UILabel()
-        names.font = UIFont.italicSystemFont(ofSize: 20)
+        //names.font = UIFont.italicSystemFont(ofSize: 20)
+        names.font = UIFont(name: "Georgia-Bold", size: 24)
         return names
     }()
     override init(frame: CGRect) {

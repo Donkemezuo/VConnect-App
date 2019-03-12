@@ -13,16 +13,17 @@ class TableView: UIView {
     
       public lazy var tableView: UITableView = {
         let resourcesTableView = UITableView()
-        resourcesTableView.backgroundColor = UIColor.green.withAlphaComponent(0.9)
-        
+            resourcesTableView.layer.cornerRadius = 5.0
+            resourcesTableView.backgroundColor = .white
         return resourcesTableView
     }()
     
     
-      public lazy var search: UISearchBar = {
+      public lazy var organizationSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.backgroundColor = UIColor.white.withAlphaComponent(0.2)
         searchBar.layer.cornerRadius = 5.0
+        searchBar.placeholder = "Enter a prefered city name"
         return searchBar
     }()
     
@@ -50,18 +51,18 @@ class TableView: UIView {
     
     private func setConstrains(){
         addSubview(tableView)
-        addSubview(search)
+        addSubview(organizationSearchBar)
         addSubview(map)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        search.translatesAutoresizingMaskIntoConstraints = false
+        organizationSearchBar.translatesAutoresizingMaskIntoConstraints = false
         map.translatesAutoresizingMaskIntoConstraints = false
         
-        search.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        search.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        search.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        organizationSearchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        organizationSearchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        organizationSearchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        map.topAnchor.constraint(equalTo: search.bottomAnchor).isActive = true
+        map.topAnchor.constraint(equalTo: organizationSearchBar.bottomAnchor).isActive = true
         map.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
         map.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         map.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4).isActive = true

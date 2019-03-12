@@ -14,6 +14,7 @@ class MapViewController: UIViewController {
 let locationManager = CLLocationManager()
     private var geocoder = CLGeocoder()
     private var longPress: UILongPressGestureRecognizer!
+    private var previousLocation:CLLocation!
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(locationMapView)
@@ -23,6 +24,7 @@ let locationManager = CLLocationManager()
         locationMapView.mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         configureLongPress()
+        previousLocation = getLocation(on: locationMapView.mapView)
         
     }
     
@@ -46,6 +48,13 @@ let locationManager = CLLocationManager()
                 break
             }
         }
+    }
+    
+    
+    private func getLocation(on map: MKMapView) -> CLLocation {
+        let latitude = locationMapView.mapView.centerCoordinate.latitude
+        let longitude = locationMapView.mapView.centerCoordinate.longitude
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
     
 }
@@ -82,7 +91,7 @@ extension MapViewController: UISearchBarDelegate {
                     self.locationMapView.mapView.addAnnotation(annotation)
                     
                     let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-                    let regionInmeters = MKCoordinateRegion.init(center: coordinate, latitudinalMeters: 9000, longitudinalMeters: 9000)
+                    let regionInmeters = MKCoordinateRegion.init(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
                     self.locationMapView.mapView.setRegion(regionInmeters, animated: true)
                 }
             }
@@ -91,5 +100,22 @@ extension MapViewController: UISearchBarDelegate {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
-}
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = getLocation(on: mapView)
+        guard center.distance(from: previousLocation) > 30 else {return}
+        previousLocation = center
+        geocoder.reverseGeocodeLocation(center) { [weak self](placemark, error) in
+            guard let self = self else {return}
+            if error != nil {
+               return
+            }
+                guard let placemark = placemark?.first else {return}
+            guard let streetNumber = placemark.subThoroughfare, let streetName = placemark.thoroughfare else {return}
+            DispatchQueue.main.async {
+                self.navigationItem.title = "\(streetNumber) \(streetName)"
+            }
+            }
+        
+        }
+    }
+
