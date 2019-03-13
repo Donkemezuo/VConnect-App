@@ -11,7 +11,7 @@ import UIKit
 class TimelineDetailViewController: UIViewController {
     
     private var news: News!
-   
+    private var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     let detailView = TimeLineDetailView()
 
     override func viewDidLoad() {
@@ -19,6 +19,7 @@ class TimelineDetailViewController: UIViewController {
         view.addSubview(detailView)
         setUpDetailView()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "iPhone 8")!)
+        
     }
     init(news: News) {
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +31,21 @@ class TimelineDetailViewController: UIViewController {
         super.init(coder: aDecoder)
     }
    
+    private func startLoading(){
+        activityIndicator.center = detailView.newsImage.center
+        activityIndicator.hidesWhenStopped =  true
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
+        detailView.newsImage.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    private func stopLoading(){
+        activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
+    
+    
     private func newsImage(imageUrl: String,imageView: UIImageView){
         ImageHelper.fetchImage(urlString: imageUrl) { (error, UIImage) in
             if let error = error {
@@ -45,8 +61,10 @@ class TimelineDetailViewController: UIViewController {
     private func setUpDetailView(){
     detailView.newsTitle.text = news.title
     detailView.newsDescription.text = news.details
+        startLoading()
         if let imageurl = news.newsImage {
               newsImage(imageUrl: imageurl, imageView: detailView.newsImage)
+            stopLoading()
 
         } else {
             detailView.newsImage.image = UIImage.init(named: "newslogo")

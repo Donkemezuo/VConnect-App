@@ -21,6 +21,8 @@ class ResourcesTableViewController: UIViewController {
     private var defaultCoordinate = CLLocationCoordinate2DMake(9.0765, 7.3986)
     private var directionsArray = [MKDirections]()
     private var isSearching = false
+    private var startLocation = CLLocationCoordinate2D()
+    private var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     private var organizations = [Organization]() {
         didSet {
             DispatchQueue.main.async {
@@ -42,6 +44,15 @@ class ResourcesTableViewController: UIViewController {
     
     private var myCurrentRegion = MKCoordinateRegion()
    
+    private func startLoading(){
+        activityIndicator.center = resourcesTableView.map.center
+        activityIndicator.hidesWhenStopped =  true
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
+        resourcesTableView.map.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +69,8 @@ class ResourcesTableViewController: UIViewController {
         checkLocationServices()
 //        getDirection()
         setupLocationManager()
+        setDirections()
+       // startLoading()
         
     }
     
@@ -135,6 +148,28 @@ class ResourcesTableViewController: UIViewController {
         request.transportType = .automobile
         request.requestsAlternateRoutes = true
         return request
+    }
+    
+    private func setDirections(){
+            startLocation = locationManager.location?.coordinate ?? defaultCoordinate
+        
+        let destination = resourcesTableView.map.centerCoordinate
+        let startingPointPlaceMark = MKPlacemark(coordinate: startLocation)
+        let destinationPlaceMark = MKPlacemark(coordinate: destination)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: startingPointPlaceMark)
+        directionRequest.destination =  MKMapItem(placemark: destinationPlaceMark)
+        directionRequest.transportType = .automobile
+        directionRequest.requestsAlternateRoutes =  true
+        let detailedDirections = MKDirections(request: directionRequest)
+        detailedDirections.calculate { (response, error) in
+            guard let directionsResponse = response else {return}
+            let route = directionsResponse.routes[0]
+            self.resourcesTableView.map.addOverlay(route.polyline, level: .aboveRoads)
+            let rect = route.polyline.boundingMapRect
+            self.resourcesTableView.map.setVisibleMapRect(rect, animated: true)
+        }
+        
     }
 
     
@@ -287,8 +322,9 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
 extension ResourcesTableViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        let renderer = MKPolygonRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.yellow.withAlphaComponent(0.2)
+        renderer.lineWidth = 4.0
         return renderer
     }
     
@@ -308,6 +344,7 @@ extension ResourcesTableViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let calloutClicked = view.annotation else {return}
+        
 
         //print(view.annotation)
 //        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {

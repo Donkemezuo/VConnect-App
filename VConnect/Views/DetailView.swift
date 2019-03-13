@@ -125,7 +125,7 @@ class DetailView: UIView {
         imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -460).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -420).isActive = true
     
         organizationDescription.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         organizationDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
