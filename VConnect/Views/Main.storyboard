@@ -113,13 +113,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hj0-Wi-YWH">
-                                                    <rect key="frame" x="11" y="10" width="353" height="218.5"/>
+                                                    <rect key="frame" x="10" y="10" width="353" height="218.5"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Hj0-Wi-YWH" secondAttribute="trailing" constant="11" id="FPL-j5-LOn"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hj0-Wi-YWH" secondAttribute="trailing" constant="12" id="FPL-j5-LOn"/>
                                                 <constraint firstAttribute="bottom" secondItem="Hj0-Wi-YWH" secondAttribute="bottom" constant="10" id="FsP-8R-tWm"/>
-                                                <constraint firstItem="Hj0-Wi-YWH" firstAttribute="leading" secondItem="XXP-7z-de9" secondAttribute="leading" constant="11" id="R2p-2Y-vza"/>
+                                                <constraint firstItem="Hj0-Wi-YWH" firstAttribute="leading" secondItem="XXP-7z-de9" secondAttribute="leading" constant="10" id="R2p-2Y-vza"/>
                                                 <constraint firstItem="Hj0-Wi-YWH" firstAttribute="top" secondItem="XXP-7z-de9" secondAttribute="top" constant="10" id="jk4-mL-nm7"/>
                                             </constraints>
                                         </tableViewCellContentView>

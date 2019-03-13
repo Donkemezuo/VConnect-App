@@ -17,74 +17,84 @@ class DetailView: UIView {
         return organizationImageView
     }()
     
-    public lazy var organizationAddress: UILabel = {
-        let address = UILabel()
-          // address.font = UIFont.boldSystemFont(ofSize: 14)
-        address.font = UIFont.init(name: "Georgia", size: 16)
+    public lazy var organizationAddress: UITextView = {
+        let address = UITextView()
+        address.font = UIFont.init(name: "Georgia", size: 20)
             address.textAlignment = .left
             address.backgroundColor = UIColor.clear
-            //address.dataDetectorTypes = .address
             address.layer.cornerRadius = 5.0
-            address.numberOfLines = 0
             address.text = "Address: 1710 Popham avenue, Bronx, New York 10453"
+            address.isEditable =  false
+            address.dataDetectorTypes = [.address, .link, .phoneNumber]
+            address.font = .boldSystemFont(ofSize: 20)
+            address.isSelectable =  false
+            address.isScrollEnabled = false
         
         return address
     }()
     
-    public lazy var contactEmail: UILabel = {
-        let email = UILabel()
-           // email.font = UIFont.boldSystemFont(ofSize: 14)
-        email.font = UIFont.init(name: "Georgia", size: 16)
+    public lazy var contactEmail: UITextView = {
+        let email = UITextView()
+        email.font = UIFont.init(name: "Georgia", size: 20)
             email.textAlignment = .left
             email.backgroundColor = UIColor.clear
-           // email.dataDetectorTypes = .all
             email.text = "Email: raymonddonkemezuo@pursuit.org"
             email.layer.cornerRadius = 5.0
-            email.numberOfLines = 0
+            email.isEditable = false
+            email.isSelectable = false
+            email.dataDetectorTypes = [.link]
+            email.isScrollEnabled = false
+            email.font = .boldSystemFont(ofSize: 20)
         return email
         
     }()
     
-    public lazy var contactPhoneNumber: UILabel = {
-        let phoneNumber = UILabel()
+    public lazy var contactPhoneNumber: UITextView = {
+        let phoneNumber = UITextView()
             phoneNumber.font = UIFont.boldSystemFont(ofSize: 16)
             phoneNumber.textAlignment = .left
             phoneNumber.backgroundColor = UIColor.clear
-           // phoneNumber.dataDetectorTypes = .phoneNumber
+            phoneNumber.dataDetectorTypes = .phoneNumber
             phoneNumber.text = "Phone Number: 3129376040"
-        phoneNumber.font = UIFont.init(name: "Georgia", size: 16)
+            phoneNumber.font = UIFont.init(name: "Georgia", size: 20)
             phoneNumber.layer.cornerRadius = 5.0
-            phoneNumber.numberOfLines = 0
+            phoneNumber.isEditable =  false
+            phoneNumber.isSelectable = false
+            phoneNumber.isScrollEnabled = false
+            phoneNumber.font = .boldSystemFont(ofSize: 20)
         return phoneNumber
         
     }()
     
     
-    public lazy var organizationDescription:UILabel = {
-        let description = UILabel()
+    public lazy var organizationDescription:UITextView = {
+        let description = UITextView()
         description.backgroundColor = UIColor.clear
-       // description.font = UIFont.boldSystemFont(ofSize: 14)
         description.text = "Organization description and services offered goes here"
-        description.font = UIFont.init(name: "Georgia", size: 16)
+        description.font = UIFont.init(name: "Georgia", size: 20)
         description.layer.cornerRadius = 5.0
-        description.numberOfLines = 0
+        description.isEditable = false
+        //description.isSelectable = false
+        //description.isScrollEnabled = false
+        description.font = .boldSystemFont(ofSize: 20)
         return description
         
     }()
     
-    public lazy var organizationWebsite:UILabel = {
-        let website = UILabel()
+    public lazy var organizationWebsite:UITextView = {
+        let website = UITextView()
         website.text = "website: www.website.com"
         website.backgroundColor = UIColor.clear
         website.layer.cornerRadius = 5.0
-        //website.font = UIFont.boldSystemFont(ofSize: 14)
-        website.font = UIFont.init(name: "Georgia", size: 16)
-        website.numberOfLines = 0
+        website.font = UIFont.init(name: "Georgia", size: 20)
+        website.isEditable = false
+        website.dataDetectorTypes = .link
+        website.isSelectable = false
+        website.isScrollEnabled = false
+        website.font = .boldSystemFont(ofSize: 20)
         return website
     }()
-    
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInt()
@@ -115,12 +125,12 @@ class DetailView: UIView {
         imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -460).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -420).isActive = true
     
         organizationDescription.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         organizationDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         organizationDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-        organizationDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -300).isActive = true
+        organizationDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -330).isActive = true
         
         organizationAddress.topAnchor.constraint(equalTo: organizationDescription.bottomAnchor, constant: 5).isActive = true
         organizationAddress.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true

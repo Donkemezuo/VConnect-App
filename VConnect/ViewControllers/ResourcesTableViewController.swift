@@ -21,6 +21,8 @@ class ResourcesTableViewController: UIViewController {
     private var defaultCoordinate = CLLocationCoordinate2DMake(9.0765, 7.3986)
     private var directionsArray = [MKDirections]()
     private var isSearching = false
+    private var startLocation = CLLocationCoordinate2D()
+    private var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     private var organizations = [Organization]() {
         didSet {
             DispatchQueue.main.async {
@@ -42,6 +44,15 @@ class ResourcesTableViewController: UIViewController {
     
     private var myCurrentRegion = MKCoordinateRegion()
    
+    private func startLoading(){
+        activityIndicator.center = resourcesTableView.map.center
+        activityIndicator.hidesWhenStopped =  true
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
+        resourcesTableView.map.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +67,10 @@ class ResourcesTableViewController: UIViewController {
         makeAnnotations()
         view.backgroundColor = #colorLiteral(red: 0.4778711929, green: 0.2743145844, blue: 0.2127175703, alpha: 1).withAlphaComponent(0.4)
         checkLocationServices()
-        getDirection()
+//        getDirection()
         setupLocationManager()
+        setDirections()
+       // startLoading()
         
     }
     
@@ -136,6 +149,28 @@ class ResourcesTableViewController: UIViewController {
         request.requestsAlternateRoutes = true
         return request
     }
+    
+    private func setDirections(){
+            startLocation = locationManager.location?.coordinate ?? defaultCoordinate
+        
+        let destination = resourcesTableView.map.centerCoordinate
+        let startingPointPlaceMark = MKPlacemark(coordinate: startLocation)
+        let destinationPlaceMark = MKPlacemark(coordinate: destination)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: startingPointPlaceMark)
+        directionRequest.destination =  MKMapItem(placemark: destinationPlaceMark)
+        directionRequest.transportType = .automobile
+        directionRequest.requestsAlternateRoutes =  true
+        let detailedDirections = MKDirections(request: directionRequest)
+        detailedDirections.calculate { (response, error) in
+            guard let directionsResponse = response else {return}
+            let route = directionsResponse.routes[0]
+            self.resourcesTableView.map.addOverlay(route.polyline, level: .aboveRoads)
+            let rect = route.polyline.boundingMapRect
+            self.resourcesTableView.map.setVisibleMapRect(rect, animated: true)
+        }
+        
+    }
 
     
     private func getDirection(){
@@ -147,23 +182,25 @@ class ResourcesTableViewController: UIViewController {
         let request = createDirectionsRequest(from: location)
         let directions = MKDirections(request: request)
         resetMapView(withNew: directions)
+        
         directions.calculate { [weak self](response, error) in
             guard let response = response else {return}
+            
             for route in response.routes {
                 self?.resourcesTableView.map.addOverlay(route.polyline)
                 self?.resourcesTableView.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
+            
         }
+        resourcesTableView.map.reloadInputViews()
     }
-    
     private func resetMapView(withNew directions: MKDirections) {
-        _ = directionsArray.map {$0.cancel()}
          resourcesTableView.map.removeOverlays(resourcesTableView.map.overlays)
         directionsArray.append(directions)
+        _ = directionsArray.map {$0.cancel()}
+
     }
-    
-    
-    
+  
     private func configureLongPress(){
         longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
         longPress.minimumPressDuration = 0.5
@@ -285,8 +322,9 @@ extension ResourcesTableViewController: CLLocationManagerDelegate {
 extension ResourcesTableViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        let renderer = MKPolygonRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.yellow.withAlphaComponent(0.2)
+        renderer.lineWidth = 4.0
         return renderer
     }
     
@@ -306,13 +344,22 @@ extension ResourcesTableViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let calloutClicked = view.annotation else {return}
-        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
-            print("Callout button pressed")
-               getDirection()
-        }
-        if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
-            self.getDirection()
-        }
+        
+
+        //print(view.annotation)
+//        if let organization = calloutClicked.title, let _ = (userSearchOrganizations.filter {$0.organizationName == organization}).first {
+//            print("Callout button pressed")
+//               getDirection()
+//        }
+//        if let organization = calloutClicked.subtitle, let _ = (userSearchOrganizations.filter {$0.organizationCity == organization}).first {
+//            self.getDirection()
+//        }
+        getDirection()
+        
+        
+
+        
+
     }
     
     

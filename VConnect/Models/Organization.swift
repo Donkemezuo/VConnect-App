@@ -66,28 +66,28 @@ struct Organization {
     }
     
     init(dict: [String: Any]) {
-        self.adminFirstName =  dict["adminFirstName"] as? String ?? "no admin first name"
-        self.adminLastame = dict["adminLastame"] as? String ?? "no admin last name"
-        self.whoAreYou = dict["whoAreYou"] as? String ?? "no admin job name"
-        self.organizationName = dict["organizationName"] as? String ?? "no organization name"
-        self.organizationPhoneNumber = dict["organizationPhoneNumber"] as? String ?? "no organization phone number"
-        self.organizationSecondaryPhoneNumber =  dict["organizationSecondaryPhoneNumber"] as? String ?? "no organization secondary phone number"
-        self.organizationEmail = dict["organizationEmail"] as? String ?? "no organization email"
-        self.organizationStreetAddress = dict["organizationStreetAddress"] as? String ?? "no organization address"
-        self.organizationCity =  dict["organizationCity"] as? String ?? "no organization city"
-        self.organizationZipCode = dict["organizationZipCode"] as? String ?? "no organization zipcode"
-        self.organizationState = dict["organizationState"] as? String ?? "no organization state"
-        self.organizationGeoPoliticalZone = dict["organizationGeoPoliticalZone"] as? String ?? "no organization geopolitical zone"
-        self.organizationWebsite =  dict["organizationWebsite"] as? String ?? "no organization website"
-        self.organizationServices =  dict["organizationServices"] as? String ?? "no organization services"
-        self.organizationCategory =  dict["organizationCategory"] as? String ?? "no organization category"
-        self.organizationImage =  (dict["organizationImage"] as? Data)
-        self.contactPersonEmail = dict["contactPersonEmail"] as? String ?? "no contact person email"
-        self.contactPersonFirstName = dict["contactPersonFirstName"] as? String ?? "no contact person's first name"
-        self.contactPersonLastName = dict["contactPersonLastName"] as? String ?? "no contact person's last name"
-        self.contactPersonPhoneNumber = dict["contactPersonPhoneNumber"] as? String ?? "no contact person's phone number"
-        self.lat = dict["lat"] as? Double ?? 0.0
-        self.long = dict["long"] as? Double ?? 0.0
+        self.adminFirstName =  dict[OrganizationCollectionKeys.adminFirstName] as? String ?? "no admin first name"
+        self.adminLastame = dict[OrganizationCollectionKeys.adminLastame] as? String ?? "no admin last name"
+        self.whoAreYou = dict[OrganizationCollectionKeys.whoAreYou] as? String ?? "no admin job name"
+        self.organizationName = dict[OrganizationCollectionKeys.organizationName] as? String ?? "no organization name"
+        self.organizationPhoneNumber = dict[OrganizationCollectionKeys.organizationPhoneNumber] as? String ?? "no organization phone number"
+        self.organizationSecondaryPhoneNumber =  dict[OrganizationCollectionKeys.organizationSecondaryPhoneNumber] as? String ?? "no organization secondary phone number"
+        self.organizationEmail = dict[OrganizationCollectionKeys.organizationEmail] as? String ?? "no organization email"
+        self.organizationStreetAddress = dict[OrganizationCollectionKeys.organizationStreetAddress] as? String ?? "no organization address"
+        self.organizationCity =  dict[OrganizationCollectionKeys.organizationCity] as? String ?? "no organization city"
+        self.organizationZipCode = dict[OrganizationCollectionKeys.organizationZipCode] as? String ?? "no organization zipcode"
+        self.organizationState = dict[OrganizationCollectionKeys.organizationState] as? String ?? "no organization state"
+        self.organizationGeoPoliticalZone = dict[OrganizationCollectionKeys.organizationGeoPoliticalZone] as? String ?? "no organization geopolitical zone"
+        self.organizationWebsite =  dict[OrganizationCollectionKeys.organizationWebsite] as? String ?? "no organization website"
+        self.organizationServices =  dict[OrganizationCollectionKeys.organizationServices] as? String ?? "no organization services"
+        self.organizationCategory =  dict[OrganizationCollectionKeys.organizationCategory] as? String ?? "no organization category"
+        self.organizationImage =  (dict[OrganizationCollectionKeys.organizationImage] as? Data)
+        self.contactPersonEmail = dict[OrganizationCollectionKeys.contactPersonEmail] as? String ?? "no contact person email"
+        self.contactPersonFirstName = dict[OrganizationCollectionKeys.contactPersonFirstName] as? String ?? "no contact person's first name"
+        self.contactPersonLastName = dict[OrganizationCollectionKeys.contactPersonLastName] as? String ?? "no contact person's last name"
+        self.contactPersonPhoneNumber = dict[OrganizationCollectionKeys.contactPersonFirstName] as? String ?? "no contact person's phone number"
+        self.lat = dict[OrganizationCollectionKeys.lat] as? Double ?? 0.0
+        self.long = dict[OrganizationCollectionKeys.long] as? Double ?? 0.0
         
     }
     
