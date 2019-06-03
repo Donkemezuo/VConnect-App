@@ -11,6 +11,7 @@
  - Select an NGO in prefered category and see details about the NGO i.e mission statement, contact informations, location etc
  - Search for NGOs in Category using a prefered state or zipCode
  - Search using current location or preferred location using CoreLocation and MKMapkit
+ - Cur
  
 # API's used
 - Firebase as backend
