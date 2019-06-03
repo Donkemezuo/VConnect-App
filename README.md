@@ -1,7 +1,7 @@
 # VConnect-App
-A user - friendly mobile App to connect users to support systems around them in Nigeria.
+# A user - friendly mobile App to connect users to support systems around them in Nigeria.
 
-With #VConnect, Users can
+# With VConnect, Users can
  - See categories of various NGOs
  - Select a prefered category and see NGOs offering services in that selected category
  - Select an NGO in prefered category and see details about the NGO i.e mission statement, contact informations, location etc
